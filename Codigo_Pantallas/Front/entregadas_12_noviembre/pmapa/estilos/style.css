@@ -1,0 +1,35 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: rgba(80, 45, 45, 0.759);
+    text-align: center;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 10px; /* Agrega un relleno para mejorar la apariencia */
+}
+
+.input-group-prepend,
+.input-group-append {
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.search-box {
+    max-width: 600px; /* Ajusta el ancho máximo según sea necesario */
+    width: 100%;
+    margin: 0 auto; /* Centra el cuadro de búsqueda */
+}
