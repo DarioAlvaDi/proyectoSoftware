@@ -27,10 +27,12 @@ body{
     text-align: center;
     font-family: 'Lora', serif;
     font-size: 35px;
+
 }
 
 .Bienvenida h1:hover{
     text-shadow: 5px 5px 6px rgba(124, 28, 13, 0.7);
+
 }
 
 .logo{
