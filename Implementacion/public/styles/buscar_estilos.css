@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+img { 
+    max-width: 100%;
+    height: auto;
+}
+.barra-tareas {
+    background-color: #D5F2E1;
+    color: #000000;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #aaa;
+}
+
+.icono {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.buscador-input {
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    width: 80%;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+#map-container {
+    height: 400px;
+    margin: 20px;
+    /* Agrega más estilos según tus necesidades */
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      #map {
+        height: 100vh;
+      }
+    </style>
+    <!-- Bootstrap CSS library -->
+    <link rel="stylesheet" type="text/css" href="../styles/pantallaPrincipal.css">
+
+    <!-- JavaScript libraries -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <title>Beyamaps</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <!--Barra de navegacion-->
+      <nav class="navbar navColor">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <img src="../imgs/Menu.png" alt="menu">
+          </a>
+
+          <form action="" class="d-flex" role="search">
+            <input type="search" class="form-control me-2" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit">
+              <img src="../imgs/Lupa.png" alt="busqueda">
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <!--Menu de opciones-->
+    <div class="offcanvas offcanvas-end bg-transparent" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header ">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Menú de Opciones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!--Menu de opciones-->
+        <div class="container d-flex flex-column justify-content-center align-items-center">
+          <div class="row m-3">
+            <div class="col">
+              <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+              <div class="d-inline-flex align-items-center">
+                <img src="../imgs/Perfil.png" class="img-fluid me-4" alt="fotoDePefil">
+                <a href="#" class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark">Mi perfil</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col">
+              <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+              <div class="d-inline-flex align-items-center">
+                <img src="../imgs/Favoritos.png" class="img-fluid me-4" alt="Favoritos">
+                <a href="#" class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark">Favoritos</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col">
+              <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+              <div class="d-inline-flex align-items-center">
+                <img src="../imgs/Itinerario.png" class="img-fluid me-4" alt="Itinerario">
+                <a href="#" class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark">Itinerarios</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="d-inline-flex">
+              <div class="col">
+                <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+                <img src="../imgs/Busqueda.png" class="img-fluid" alt="Busqueda">
+              </div>
+              <div class="col">
+                <label for="rangoBusqueda" class="form-label fw-semibold">Distancia de búsqueda</label>
+                <input type="text" class="form-control busquedaColor" id="rangoBusqueda" placeholder="10 Km">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="map"></div>
+    </div>
+
+    <!-- Scripts para Leaflet y mapa -->
+    <script>
+      var map = L.map('map').setView([0, 0], 2);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var userLat = position.coords.latitude;
+        var userLng = position.coords.longitude;
+
+        var userMarker = L.marker([userLat, userLng], { icon: L.divIcon({ className: 'leaflet-div-icon', html: '<div style="background-color: red; width: 10px; height: 10px;"></div>' }) })
+          .addTo(map)
+          .bindPopup('¡Tu ubicación!');
+
+        map.setView([userLat, userLng], 13);
+
+        var radius = 10000; // 10 km
+
+        var museumsLayer = new L.GeoJSON.AJAX('https://www.overpass-api.de/api/interpreter?data=[out:json];node(around:' + radius + ',' + userLat + ',' + userLng + ')["tourism"="museum"];out;', {
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.tags.name || 'Unnamed');
+          },
+          pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, { icon: L.divIcon({ className: 'leaflet-div-icon', html: '<div style="background-color: blue; width: 10px; height: 10px;"></div>' }) });
+          }
+        }).addTo(map);
+      });
+    </script>
+  </body>
+</html>
