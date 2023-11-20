@@ -19,24 +19,24 @@
         </div>
 
         <div class="fsesion">
-            <form action="../pmapa/mapa.html" method="get">
+            <form action="/turistas/login" method="post">
                 <div class="dtslogin">
-                    <input type="email" placeholder="Correo Electronico">
+                    <input autocomplete="current-email" type="email" name="correo" placeholder="Correo Electronico">
                     <br>
                     <br>
-                    <input type="password" placeholder="Contraseña">
+                    <input autocomplete="current-password" type="password" name="pass" placeholder="Contraseña">
                     <br>
                     <br>
-                    <button type="submit" class="textbutton">Iniciar Sesión</button>
+                    <input type="submit" class="textbutton" value="Iniciar Sesion">
+                    <!-- <button type="submit" class="textbutton">Iniciar Sesión</button> -->
                 </div>
             </form>
         </div>
         <h4 class="olvidar"><a href="" id="Ocontra">¿Olvidaste tu Contraseña?</a></h4>
 
-        <a href="bienvenida.html">
+        <a href="/turistas/">
             <img src="../imgs/Imglogin/regresarl.png" alt="" class="regresarl">
         </a>
     </div>
 </body>
-
 </html>
