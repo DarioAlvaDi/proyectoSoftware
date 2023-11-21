@@ -117,11 +117,12 @@ font-weight: bolder;
 
 .textbutton{
     font-size: 15px;
-    color: white;
+    color: black;
 }
 
 .textbutton:hover{
     background-color: rgba(0, 0, 0, 0.734);
+    color: white;
 }
 
 /* Responsivo para pantallas 375px */
