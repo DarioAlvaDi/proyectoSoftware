@@ -9,6 +9,22 @@
     function cancelar() {
             window.location.href = '/turistas/'; // Reemplaza 'tu_pagina_destino.html' con la URL real
         }
+    function validarContraseñas() {
+            var password = document.getElementById('exampleInputPassword1').value;
+            var confirmPassword = document.getElementById('passwordconfirm').value;
+            var mensaje = document.getElementById('mensajeContraseñas');
+            var botonRegistro = document.getElementById('btnRegistro');
+
+            if (password === confirmPassword) {
+                mensaje.innerHTML = 'Las contraseñas coinciden';
+                mensaje.style.color = 'green';
+                botonRegistro.disabled = false; // Habilitar el botón
+            } else {
+                mensaje.innerHTML = 'Las contraseñas no coinciden';
+                mensaje.style.color = 'red';
+                botonRegistro.disabled = true; // Deshabilitar el botón
+            }
+        }
     </script>
     <title>Registro</title>
 </head>
@@ -51,15 +67,18 @@
                         <label for="correo" class="form-label">Correo electrónico</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="alguien@gmail.com" aria-describedby="emailHelp" name="correo">
                         <div id="emailHelp" class="form-text">No compartiremos tu correo con nadie más</div>
-
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="tel" class="form-control" minlength="10" required placeholder="Ingresa tu número telefónico" name="telefono"/><br>
-                        <label for="password" placeholder="****"  class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+
+                        <label for="password" placeholder="***" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" oninput="validarContraseñas()"><br>
+
                         <label for="passwordconfirm" class="form-label">Confirmar Contraseña</label>
-                        <input type="password" class="form-control" placeholder="Confirma tu contraseña." name="pass"><br><br>
+                        <input type="password" class="form-control" placeholde="Confirma tu contraseña" id="passwordconfirm" oninput="validarContraseñas()"><br>
+
                         <div style="text-align: center; margin-top: 20px;">
-                            <input type="submit" class="btn btn-success" value="Registrarse ">
+                            <button type="submit" class="btn btn-success" id="btnRegistro" disabled>Registrarse</button>
+                           <!-- <input type="submit" class="btn btn-success" value="Registrarse "> -->
                             <!-- <button  type="submit" class="btn btn-success">Registrarse</button> -->
                             <!-- <button type="button" class="btn btn-dark" onclick="cancelar()">Cancelar</button> -->
 
