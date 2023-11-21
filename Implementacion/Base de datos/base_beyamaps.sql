@@ -1,7 +1,6 @@
 CREATE DATABASE AD_SISTEMAS;
 USE AD_SISTEMAS;
 
-DROP DATABASE ad_sistemas;
 
 CREATE TABLE Turista (
     Id_Turista INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,7 +58,7 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE Historial_busqueda ADD FOREIGN KEY (Id_Turista) references Turista(Id_Turista) 
 ON DELETE CASCADE ON UPDATE CASCADE;
 
-INSERT INTO Turista (Nombre, A_Paterno, A_Materno, Correo, Telefono, Usuario, Contraseña) 
+INSERT INTO Turista (Nombre, A_Paterno, A_Materno, Correo, Telefono, Usuario, pass) 
 VALUES 
     ('Juan', 'Perez', 'Gomez', 'correo1@gmail.com', '123456789', 'usuario1', 'contraseña1'),
     ('Maria', 'Lopez', 'Martinez', 'correo2@outlook.com', '987654321', 'usuario2', 'contraseña2'),

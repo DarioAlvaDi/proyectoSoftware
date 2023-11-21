@@ -24,5 +24,7 @@ router.get('/preferencias', turistasController.preferencias);
 
 // Ruta para el registro de turistas
 router.post('/registro', turistasController.registrarTurista);
+//Ruta para eliminar turistas
+router.post('/eliminar', turistasController.eliminarTurista);
 
 module.exports = router;

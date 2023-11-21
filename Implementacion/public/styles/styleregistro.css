@@ -134,3 +134,13 @@ font-weight: bolder;
     color: brown;
 }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+    height: 10px;
+    font-weight: bold;
+  }
+
+  .form-control{
+    margin-bottom: 0px;
+  }
