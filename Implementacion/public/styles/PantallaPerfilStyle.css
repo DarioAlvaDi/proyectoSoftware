@@ -1,14 +1,25 @@
+body {
+    margin: 0; /* Elimina el margen predeterminado del body */
+    padding: 0; /* Elimina el relleno predeterminado del body */
+}
+
 .background-image {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../imgs/imgPerfil/image\ 19.jpg');
-    background-size: contain;
+    background-image: url('img/image 19.jpg');
+    background-size: cover; /* Cambiado a cover para cubrir todo el fondo */
     opacity: 0.2;
-    padding: 0;
-    margin: 0;
+    z-index: -1; /* Mover detrás del contenido */
+}
+
+/* Resto del código CSS permanece sin cambios */
+
+
+.regresarl:hover{
+    opacity: 0.65;
 }
 
 .navColor{
