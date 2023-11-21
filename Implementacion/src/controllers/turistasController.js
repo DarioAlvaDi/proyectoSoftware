@@ -11,50 +11,56 @@ const pool = mysql.createPool({
 });
 
 // Controlador para registrar un nuevo turista
-// const registrarTurista = async (req, res) => {
-//   const turista = req.body;
+const registrarTurista = async (req, res) => {
+  const turista = req.body;
 
-//   const sql = `
-//     INSERT INTO Turista (
-//       nombre,
-//       a_paterno,
-//       a_materno,
-//       correo,
-//       telefono,
-//       usuario,
-//       pass
-//     ) VALUES (?, ?, ?, ?, ?, ?, ?)
-//   `;
+  const sql = `
+    INSERT INTO Turista (
+      nombre,
+      a_paterno,
+      a_materno,
+      correo,
+      telefono,
+      usuario,
+      pass
+    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+  `;
 
-//   const values = [
-//     turista.nombre,
-//     turista.a_paterno,
-//     turista.a_materno,
-//     turista.correo,
-//     turista.telefono,
-//     turista.usuario,
-//     turista.pass,
-//   ];
+  const values = [
+    turista.nombre,
+    turista.a_paterno,
+    turista.a_materno,
+    turista.correo,
+    turista.telefono,
+    turista.usuario,
+    turista.pass,
+  ];
 
-//   try {
-//     await new Promise((resolve, reject) => {
-//       pool.query(sql, values, (error, results) => {
-//         if (error) {
-//           console.error('Error al insertar turista:', error);
-//           reject(error);
-//         } else {
-//           console.log('Turista registrado con éxito');
-//           resolve(results);
-//         }
-//       });
-//     });
+  try {
+    // Realizar la inserción en la base de datos
+    const results = await new Promise((resolve, reject) => {
+      pool.query(sql, values, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
 
-//     res.status(201).json({ message: 'Turista registrado con éxito' });
-//   } catch (error) {
-//     console.error('Error en la conexión con la base de datos:', error);
-//     res.status(500).json({ error: 'Error interno del servidor' });
-//   }
-// };
+    // Verificar si se insertaron filas en la base de datos
+    if (results.affectedRows > 0) {
+      // Redirigir a la página de Preferencias si la inserción fue exitosa
+      res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+    } else {
+      // Manejar el caso en que no se insertaron filas
+      res.status(400).json({ error: 'No se pudo registrar al turista' });
+    }
+  } catch (error) {
+    console.error('Error en la conexión con la base de datos:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
 
 // Controlador pantalla de Inicio
 const bienvenida = async (req, res) => {
@@ -150,6 +156,11 @@ const actdatos = async(req,res) => {
   );
 }
 
+//Controlador pantalla preferencias
+const preferencias = async(req,res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+}
+
 module.exports = {
   bienvenida,
   datos,
@@ -158,6 +169,7 @@ module.exports = {
   mapa,
   perfil,
   actualizardatos,
-  actdatos
-  // registrarTurista, 
+  actdatos,
+  registrarTurista,
+  preferencias
 }

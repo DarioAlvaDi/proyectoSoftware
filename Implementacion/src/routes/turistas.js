@@ -18,11 +18,11 @@ router.get('/perfil', turistasController.perfil);
 router.get('/actualizar', turistasController.actualizardatos);
 //Ruta para modificar datos
 router.put('/actdatos', turistasController.actdatos);
+//Ruta de pantalla de preferencias
+router.get('/preferencias', turistasController.preferencias);
 // router.get('/pantalla', turistasController.Inicio);
 
-
-
 // Ruta para el registro de turistas
-// router.post('/registro', turistasController.registrarTurista);
+router.post('/registro', turistasController.registrarTurista);
 
 module.exports = router;
