@@ -60,12 +60,16 @@
 
     <main class="border-top custom-border">
         <div class="container">
-            <form onsubmit="mostrarVentanaEmergente()" action="/turistas/registro" method="POST">
+            <form onsubmit="return validarFormulario()" action="/turistas/registro" method="POST">
                 <div class="mb-3">
                     <div class="mb-3">
+
+                        <span id="Formulario-error" class="error-message-titulo text-center"></span>
+
                         
-                        <label for="usuarioreg" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" required placeholder="Ingresa tu usuario" name="usuario">
+                        <label for="Usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" required placeholder="Ingresa tu usuario" id="Usuario" name="Usuario" onchange="validarUsuario()">
+                        <span id="Usuario-error" class="error-message"></span>
                         <br>
 
                         <label for="Nombre" class="form-label">Nombre(s)</label>
