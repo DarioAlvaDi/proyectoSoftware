@@ -150,7 +150,7 @@ function validarFormulario() {
     return true;
 
   } else {
-    // Hay mensajes de error, no se envía el formulario
+    // Hay mensajes de error, no se envía el formulari o
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
