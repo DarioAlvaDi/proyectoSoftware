@@ -162,7 +162,7 @@ h4,h6{
     transform: translate(-50%, -50%);
     width: 21rem;
     height: 13.75rem;
-    background-color: #000; /* Color de fondo verde, ajusta según tus preferencias */
+    background-color: #000; 
     opacity: 0.95;
     color: #FFF;
     text-align: center;
