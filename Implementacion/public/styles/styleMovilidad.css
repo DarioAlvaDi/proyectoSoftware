@@ -35,21 +35,6 @@ h4,h6{
     z-index: 1; /* Asigna un valor mayor para que esté encima de la imagen de fondo */
   }
 
-  /*
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../imgs/ImgPreferencias/Cenote.jpg');
-    background-size: contain;
-    opacity: 0.2;
-    padding: 0;
-    margin: 0;
-
-}  */
-
 /* Ajusta la altura de las imágenes en pantallas pequeñas */
 .boton-imagen img {
     max-width: 50%;
