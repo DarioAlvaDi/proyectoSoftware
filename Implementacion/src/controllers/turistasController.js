@@ -27,12 +27,12 @@ const registrarTurista = async (req, res) => {
   `;
 
   const values = [
-    turista.nombre,
-    turista.a_paterno,
-    turista.a_materno,
-    turista.correo,
-    turista.telefono,
-    turista.usuario,
+    turista.Nombre,
+    turista.AP,
+    turista.AM,
+    turista.exampleInputEmail1,
+    turista.Teléfono,
+    turista.Usuario,
     turista.pass,
   ];
 
@@ -40,6 +40,7 @@ const registrarTurista = async (req, res) => {
     // Realizar la inserción en la base de datos
     const results = await new Promise((resolve, reject) => {
       pool.query(sql, values, (error, results) => {
+        console.log(turista)
         if (error) {
           reject(error);
         } else {

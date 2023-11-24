@@ -9,21 +9,24 @@
 </head>
 <body>
     
-    <div class="container">
-        <header>
-            <h1>Preferencias</h1>
-        </header>
-        <div class="row">
-                <div class="background-image"></div>
-            <div>
-                <h4>MARCA TUS PREFERENCIAS</h4>
-                <h6>(Al menos 3 de estas)</h6>
-            </div>
+    
+
+        <form onsubmit="return validarPreferencia()" action="" method="post">
+            <div class="container">
+                <header>
+                    <h1>Preferencias</h1>
+                </header>
+                <div class="row">
+                        <div class="background-image"></div>
+                    <div>
+                        <h4>MARCA TUS PREFERENCIAS</h4>
+                        <h6>(Al menos 3 de estas)</h6>
+                    </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefMuseos" value=""/>
+                            <li><input type="checkbox" id="PrefMuseos" value="museum"/>
                                 <label for="PrefMuseos">Museos</label></li>
                             <li><input type="checkbox" id="PrefLugares_Historicos" value=""/>
                                 <label for="PrefLugares_Historicos">Lugares Historicos</label></li>
@@ -107,10 +110,12 @@
                 <div class="contenedor">
                     <div class="number">
                         <label>Coloca tu radio de visualización (Km):</label>
-                        <input type="number" name="radio" min="1" max="10" placeholder="1 ó 1.5" step="0.5"/>
+                        <input type="number" id="radio" name="radio" placeholder="1 ó 1.5" step="0.5" onchange="validarRadio()"/>
                     </div>
                 </div>
+                <nav id="radio-error" class="error-message text-center"></nav>
             </div>
+            <br><br><br><br>
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                 <div class="contenedor">
                     <div class="submit">
@@ -118,6 +123,9 @@
                     </div>
                 </div>
             </div>
+
+        </form>    
+            
         </div>
     </div>
 
@@ -134,7 +142,7 @@
             var contenedor = document.getElementById("miAlert");
             var mensajeElemento = document.getElementById("mensaje");
         
-            mensajeElemento.textContent = mensaje;
+            mensajeElemento.innerHTML = mensaje;
             contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
         
             // Desactiva el botón cuando se muestra el mensaje
@@ -149,21 +157,56 @@
         function validarCheckbox() {
             var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidadCheckbox = checkboxes.length;
-        
+            var esRadioValido = validarRadio();
             var mensaje = "";
         
-            if (cantidadCheckbox >= 3) {
+            if (cantidadCheckbox >= 3 && esRadioValido) {
                 mensaje = "Beyamaps ha guardado tus preferencias ¡Listo para buscar tu lugar deseado!";
-            } else {
-                mensaje = "Selecciona al menos 3 lugares de tu preferencia";
+            }else if(cantidadCheckbox >=3 && !esRadioValido){
+                mensaje = "<br>Ingrese un radio válido";
+            }
+             else {
+                mensaje = "<br>Selecciona al menos 3 lugares de tu preferencia";
             }
         
             mostrarMensaje(mensaje);
             
             // Activa el botón solo cuando se muestra un mensaje
             document.getElementById("btnContinuar").disabled = false;
-        }               
+        }   
+        
+        function validarPreferencia(){
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            var cantidadCheckbox = checkboxes.length;
+            var esRadioValido = validarRadio(); 
+
+            if (cantidadCheckbox >= 3 && esRadioValido) {
+                return true;
+            } else {
+                // Mostrar un mensaje de error si es necesario
+                return false;
+            }
+        }
+
+
+        function validarRadio(){
+            let RadioInput = document.getElementById("radio");
+            let RadioValor = RadioInput.value.trim();
+
+
+
+            if (RadioValor >50 || RadioValor <1) {
+                mostrarError("radio", "El radio debe ser entre 1 y 50km<br>");
+                return false;
+            } else {
+                ocultarError("radio");
+                return true;
+            }
+
+        }
     </script>
+
+    <script src="../js/validaciones.js"></script>
     
 </body>
 </html>

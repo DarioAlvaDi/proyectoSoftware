@@ -15,3 +15,12 @@
 .busquedaColor{
     background-color: #FFC062;
 }
+
+.bg-transparent-1{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.titulo{
+    font-weight: bold;
+    font-size: xx-large;
+}
