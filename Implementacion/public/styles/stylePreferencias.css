@@ -162,7 +162,7 @@ h4,h6{
     transform: translate(-50%, -50%);
     width: 21rem;
     height: 13.75rem;
-    background-color: #000; 
+    background-color: #000; /* Color de fondo verde, ajusta según tus preferencias */
     opacity: 0.95;
     color: #FFF;
     text-align: center;
@@ -190,3 +190,10 @@ h4,h6{
     opacity: 0.5; /* Opacidad reducida cuando el botón está desactivado */
     cursor: not-allowed; /* Cambia el cursor cuando el botón está desactivado */
 }
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    height: 10px;
+    font-weight: bold;
+  }

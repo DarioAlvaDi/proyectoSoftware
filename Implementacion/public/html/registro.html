@@ -60,29 +60,50 @@
 
     <main class="border-top custom-border">
         <div class="container">
-            <form onsubmit="mostrarVentanaEmergente()" action="/turistas/registro" method="POST">
+            <form onsubmit="return validarFormulario()" action="/turistas/registro" method="POST">
                 <div class="mb-3">
                     <div class="mb-3">
-                        <label for="usuarioreg" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" required placeholder="Ingresa tu usuario" name="usuario"><br>
-                        <label for="nombrepers" class="form-label">Nombre(s)</label>
-                        <input type="text" class="form-control" required placeholder="Ingresa tu nombre" name="nombre"><br>
-                        <label for="Apat" class="form-label">Apellido Paterno</label>
-                        <input type="text" class="form-control" placeholder="Ingresa tu apellido paterno" name="a_paterno"><br>
-                        <label for="Amat" class="form-label">Apellido Materno</label>
-                        <input type="text" class="form-control" placeholder="Ingresa tu apellido materno" name="a_materno"><br>
-                        <label for="correo" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="alguien@gmail.com" aria-describedby="emailHelp" name="correo">
-                        <div id="emailHelp" class="form-text">No compartiremos tu correo con nadie más</div>
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" minlength="10" required placeholder="Ingresa tu número telefónico" name="telefono"/><br>
+
+                        <span id="Formulario-error" class="error-message-titulo text-center"></span>
 
                         
+                        <label for="Usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" required placeholder="Ingresa tu usuario" id="Usuario" name="Usuario" onchange="validarUsuario()">
+                        <span id="Usuario-error" class="error-message"></span>
+                        <br>
+
+                        <label for="Nombre" class="form-label">Nombre(s)</label>
+                        <input type="text" class="form-control" required placeholder="Ingresa tu nombre" name="Nombre" id="Nombre"onchange="validarNombre()">
+                        <span id="Nombre-error" class="error-message"></span>
+                        <br>
+                    
+                        <label for="AP" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" placeholder="Ingresa tu apellido paterno" name="AP" id="AP" onchange="validarApellidoPaterno()">
+                        <span id="AP-error" class="error-message"></span>
+                        <br>
+
+                        <label for="AM" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" placeholder="Ingresa tu apellido materno" name="AM" id="AM" onchange="validarApellidoMaterno()">
+                        <span id="AM-error" class="error-message"></span>
+                        <br>
+
+                        <label for="Correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="alguien@gmail.com" aria-describedby="emailHelp" name="exampleInputEmail1" onchange="validarCorreo()">
+                        <div id="emailHelp" class="form-text">No compartiremos tu correo con nadie más</div>
+                        <span id="exampleInputEmail1-error" class="error-message"></span>
+                        <br>
+
+                        <label for="Teléfono" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" required placeholder="Ingresa tu número telefónico" name="Teléfono" id="Teléfono" onchange="validarTelefono()"><br>
+                        <span id="Teléfono-error" class="error-message"></span>
+                        <br>
+                        
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa una contraseña" oninput="validarContraseñas()"><br>
+                        <input type="password" class="form-control" id="exampleInputPassword1" oninput="validarContraseñas()"><br>
     
                         <label for="passwordconfirm" class="form-label">Confirmar Contraseña</label>
                         <input type="password" class="form-control" placeholder="Confirma tu contraseña" id="passwordconfirm" oninput="validarContraseñas()" name="pass"><br>
+                        
     
                         <div id="mensajeContraseñas"></div>
     
@@ -101,5 +122,6 @@
     </main>
     <footer>
     </footer>
+    <script src="../js/validaciones.js"></script>
 </body>
 </html>
