@@ -1,0 +1,21 @@
+/*Importar Bootstrap*/
+@import url(css_bootstrap/bootstrap.css);
+
+.navColor{
+    background-color: #76ADFD;
+}
+
+body {
+    background-image: url(../imgs/itinerarioDia/Fondo.png);
+    background-size: cover;
+}
+
+.titulo{
+    text-align: center;
+    color: #000;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem; 
+}

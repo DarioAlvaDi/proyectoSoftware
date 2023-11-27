@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: antiquewhite;
+}
+
+h1 {
+    text-align: center;
+}
+
+header{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+
+.navColor{
+    background-color: #76ADFD;
+}
+.inicio{text-align: right;}
+
+.inicio img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+
+.regresar{text-align: left;}
+
+.regresar img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+.titulo{
+    text-align: center;
+    color: #000;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem; 
+}  
+.day {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+    background-color: #000;
+}
+
+button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 50px;
+}
+
+button:hover {
+    background-color: #202020;
+}
+
+.container{
+    margin-top: 5rem;
+}
