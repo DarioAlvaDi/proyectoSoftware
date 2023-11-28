@@ -14,7 +14,4 @@ function colorearf() {
     else (color.removeAttribute("fill"));
 }
 
-fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=school&location=19.504835%2C-99.147106&radius=1000&type=shopping_mall&key=YOUR_API_KEY')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
+
