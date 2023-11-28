@@ -9,7 +9,7 @@ const turistasRouter = require('./src/routes/turistas');
 const app = express();
 
 // Middleware para analizar peticiones
-//app.use(morgan("dev"));
+app.use(morgan("dev"));
 // Middleware para analizar solicitudes JSON
 //app.use(express.json());
 // Middleware para analizar solicitudes con datos de formulario
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configura una ruta estática para tus archivos HTML
+// Configurar una ruta estática para los archivos HTML
 app.use('/turistas', express.static(path.join(__dirname, '../public/html')));
 app.use('/turistas/registro', express.static(path.join(__dirname, '../public/html/registro')));
 

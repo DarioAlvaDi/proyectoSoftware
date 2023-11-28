@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -128,9 +128,9 @@ const perfil = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/PantallPerfil.html'));
 }
 
-//Controlador pantalla de perfil
+//Controlador pantalla de actualizar datos
 const actualizardatos = async (req, res) => {
-  res.sendFile(path.join(__dirname, '..'));
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
 }
 
 // Función para realizar cambios en la tabla Turista
@@ -171,10 +171,18 @@ const actdatos = async (req, res) => {
     }
   );
 }
-
+// Controlador pantalla detalles
+const detalles = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/detallesLugar.html'));
+}
 //Controlador pantalla preferencias
 const preferencias = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+}
+
+//Controlador pantalla favoritos
+const favoritos = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaFavoritos.html'));
 }
 
 const eliminarTurista = async (req, res, next) => {
@@ -216,5 +224,7 @@ module.exports = {
   actdatos,
   registrarTurista,
   preferencias,
-  eliminarTurista
+  eliminarTurista,
+  detalles,
+  favoritos
 }
