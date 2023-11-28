@@ -1,0 +1,96 @@
+header {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+
+.inicio {
+    text-align: right;
+}
+
+.inicio img {
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+
+.regresar {
+    text-align: left;
+}
+
+.regresar img {
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+
+.titulo {
+    text-align: center;
+    color: #000;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem;
+}
+
+.navColor {
+    background-color: #DDCC90;
+}
+
+.container{
+    background-color: #ffedab ;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+}
+
+/* Ajustar imágenes al tamaño del contenedor y hacerlas responsivas */
+.carousel-inner img {
+    width: fit-content; /* Ajusta el ancho al 100% del contenedor */
+    height: 25rem; /* Hace que la altura sea automática para mantener la proporción */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    display: block; /* Elimina el espacio adicional por debajo de la imagen */
+}
+
+/* Agregar margen y relleno al contenedor del carrusel */
+.carrusel-container {
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.carrusel-container {
+    margin-top: 5rem;
+    /* Ajusta el espacio según tus necesidades */
+}
+
+
+
+.bopcions {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+#flag {
+    rotate: -35deg;
+}
+
+.espace {
+    margin-top: 10rem;
+}
+
+/* Agrega estilo para el contenedor del carrusel */
+.carrusel-container {
+    margin-top: 5rem;
+    /* Ajusta el espacio según tus necesidades */
+}
+
+/* Resto de tu CSS existente */
+.detallelugar {
+    padding-bottom: 20px;
+}
