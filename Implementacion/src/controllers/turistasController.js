@@ -14,33 +14,13 @@ const pool = mysql.createPool({
 const registrarTurista = async (req, res) => {
   const turista = req.body;
 
-  const sql = `
-    INSERT INTO Turista (
-      nombre,
-      a_paterno,
-      a_materno,
-      correo,
-      telefono,
-      usuario,
-      pass
-    ) VALUES (?, ?, ?, ?, ?, ?, ?)
-  `;
-
-  const values = [
-    turista.Nombre,
-    turista.AP,
-    turista.AM,
-    turista.exampleInputEmail1,
-    turista.Teléfono,
-    turista.Usuario,
-    turista.pass,
-  ];
+  // Verificar si el nombre de usuario ya existe en la base de datos
+  const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
+  const checkUsernameValues = [turista.Usuario];
 
   try {
-    // Realizar la inserción en la base de datos
-    const results = await new Promise((resolve, reject) => {
-      pool.query(sql, values, (error, results) => {
-        console.log(turista)
+    const usernameCheckResult = await new Promise((resolve, reject) => {
+      pool.query(checkUsernameQuery, checkUsernameValues, (error, results) => {
         if (error) {
           reject(error);
         } else {
@@ -49,12 +29,47 @@ const registrarTurista = async (req, res) => {
       });
     });
 
-    // Verificar si se insertaron filas en la base de datos
+    // Si el nombre de usuario ya existe, devolver un error
+    if (usernameCheckResult[0].count > 0) {
+      return res.status(400).json({ error: 'El nombre de usuario ya existe' });
+    }
+
+    // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+    const sql = `
+      INSERT INTO Turista (
+        nombre,
+        a_paterno,
+        a_materno,
+        correo,
+        telefono,
+        usuario,
+        pass
+      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const values = [
+      turista.Nombre,
+      turista.AP,
+      turista.AM,
+      turista.exampleInputEmail1,
+      turista.Teléfono,
+      turista.Usuario,
+      turista.pass,
+    ];
+
+    const results = await new Promise((resolve, reject) => {
+      pool.query(sql, values, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
     if (results.affectedRows > 0) {
-      // Redirigir a la página de Preferencias si la inserción fue exitosa
       res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
     } else {
-      // Manejar el caso en que no se insertaron filas
       res.status(400).json({ error: 'No se pudo registrar al turista' });
     }
   } catch (error) {

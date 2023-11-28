@@ -27,10 +27,10 @@
             }
         }
 
-        function mostrarVentanaEmergente() {
-            alert("¡Tu cuenta ha sido registrada correctamente!");
-            window.location.href = './Preferencias.html';
-        }
+        // function mostrarVentanaEmergente() {
+        //     alert("¡Tu cuenta ha sido registrada correctamente!");
+        //     window.location.href = './Preferencias.html';
+        // }
 
     </script>
     <title>Registro</title>
@@ -99,7 +99,8 @@
                         <br>
                         
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" oninput="validarContraseñas()"><br>
+                        <input type="password" class="form-control" id="exampleInputPassword1" onchange="validarContraseña()">
+                        <span id="exampleInputPassword1-error" class="error-message"></span><br>
     
                         <label for="passwordconfirm" class="form-label">Confirmar Contraseña</label>
                         <input type="password" class="form-control" placeholder="Confirma tu contraseña" id="passwordconfirm" oninput="validarContraseñas()" name="pass"><br>
