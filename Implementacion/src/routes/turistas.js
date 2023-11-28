@@ -21,6 +21,7 @@ router.put('/actdatos', turistasController.actdatos);
 //Ruta de pantalla de preferencias
 router.get('/preferencias', turistasController.preferencias);
 // router.get('/pantalla', turistasController.Inicio);
+router.get('/detalles', turistasController.detalles);
 
 // Ruta para el registro de turistas
 router.post('/registro', turistasController.registrarTurista);

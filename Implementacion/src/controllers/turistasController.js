@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -156,7 +156,10 @@ const actdatos = async (req, res) => {
     }
   );
 }
-
+// Controlador pantalla detalles
+const detalles = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/detallesLugar.html'));
+}
 //Controlador pantalla preferencias
 const preferencias = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
@@ -201,5 +204,6 @@ module.exports = {
   actdatos,
   registrarTurista,
   preferencias,
-  eliminarTurista
+  eliminarTurista,
+  detalles
 }
