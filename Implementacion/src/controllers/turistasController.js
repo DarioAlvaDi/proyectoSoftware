@@ -56,15 +56,17 @@ const registrarTurista = async (req, res) => {
 //Controlador para verficar si existe un usuario previamente en la BD
 const usuario = async (req, res) => {
   const turista = req.body.Usuario;
-  console.log(req.body.Usuario)
+  const correo = req.body.Correo;
+  console.log(req.body.Usuario);
+  console.log(correo);
 
-  // Verificar si el nombre de usuario ya existe en la base de datos
-  const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
-  const checkUsernameValues = [turista];
+  // Verificar si el nombre de usuario o el correo ya existe en la base de datos
+  const checarExistencia = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ? OR correo = ?';
+  const checarExistenciaValores = [turista, correo];
 
   try {
-    const usernameCheckResult = await new Promise((resolve, reject) => {
-      pool.query(checkUsernameQuery, checkUsernameValues, (error, results) => {
+    const checarExistenciaResultado = await new Promise((resolve, reject) => {
+      pool.query(checarExistencia, checarExistenciaValores, (error, results) => {
         if (error) {
           reject(error);
         } else {
@@ -73,17 +75,58 @@ const usuario = async (req, res) => {
       });
     });
 
-    console.log(usernameCheckResult[0])
-    // Si el nombre de usuario ya existe, devolver un error
-    if (usernameCheckResult[0].count > 0) {
-      res.status(200).json({ exists: true }); // Usuario existe
+    console.log(checarExistenciaResultado[0]);
+    // Si el nombre de usuario o el correo ya existe, devolver un false
+    if (checarExistenciaResultado[0].count > 0) {
+      let type = '';
+      if (await checkUsernameExists(turista)) {
+        type = 'usuario';
+      } else if (await checkCorreoExists(correo)) {
+        type = 'correo';
+      }
+
+      res.status(200).json({ exists: true, type });
     } else {
-      res.status(201).json({ exists: false }); // Usuario no existe
+      res.status(201).json({ exists: false, type: '' });
     }
-  }catch (error) {
-      console.error('Error en la conexión con la base de datos:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-    }
+  } catch (error) {
+    console.error('Error en la conexión con la base de datos:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+async function checkUsernameExists(username) {
+  const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
+  const checkUsernameValues = [username];
+
+  const usernameCheckResult = await new Promise((resolve, reject) => {
+    pool.query(checkUsernameQuery, checkUsernameValues, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  return usernameCheckResult[0].count > 0;
+}
+
+async function checkCorreoExists(correo) {
+  const checkCorreoQuery = 'SELECT COUNT(*) as count FROM Turista WHERE correo = ?';
+  const checkCorreoValues = [correo];
+
+  const correoCheckResult = await new Promise((resolve, reject) => {
+    pool.query(checkCorreoQuery, checkCorreoValues, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  return correoCheckResult[0].count > 0;
 }
 
 // Controlador pantalla de Inicio
