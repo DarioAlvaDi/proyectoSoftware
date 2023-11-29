@@ -27,6 +27,8 @@ router.get('/detalles', turistasController.detalles);
 router.get('/favoritos', turistasController.favoritos);
 // Ruta para el registro de turistas
 router.post('/registro', turistasController.registrarTurista);
+//Ruta para valdiacion de que el usuario no este en la BD
+router.post('/usuario', turistasController.usuario);
 //Ruta para eliminar turistas
 router.post('/eliminar', turistasController.eliminarTurista);
 

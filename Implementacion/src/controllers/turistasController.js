@@ -6,34 +6,13 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
 // Controlador para registrar un nuevo turista
 const registrarTurista = async (req, res) => {
   const turista = req.body;
-
-  // Verificar si el nombre de usuario ya existe en la base de datos
-  const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
-  const checkUsernameValues = [turista.Usuario];
-
-  try {
-    const usernameCheckResult = await new Promise((resolve, reject) => {
-      pool.query(checkUsernameQuery, checkUsernameValues, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-
-    // Si el nombre de usuario ya existe, devolver un error
-    if (usernameCheckResult[0].count > 0) {
-      return res.status(400).json({ error: 'El nombre de usuario ya existe' });
-    }
-
     // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
     const sql = `
       INSERT INTO Turista (
@@ -72,11 +51,40 @@ const registrarTurista = async (req, res) => {
     } else {
       res.status(400).json({ error: 'No se pudo registrar al turista' });
     }
-  } catch (error) {
-    console.error('Error en la conexión con la base de datos:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
-};
+  } 
+
+//Controlador para verficar si existe un usuario previamente en la BD
+const usuario = async (req, res) => {
+  const turista = req.body.Usuario;
+  console.log(req.body.Usuario)
+
+  // Verificar si el nombre de usuario ya existe en la base de datos
+  const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
+  const checkUsernameValues = [turista];
+
+  try {
+    const usernameCheckResult = await new Promise((resolve, reject) => {
+      pool.query(checkUsernameQuery, checkUsernameValues, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    console.log(usernameCheckResult[0])
+    // Si el nombre de usuario ya existe, devolver un error
+    if (usernameCheckResult[0].count > 0) {
+      res.status(200).json({ exists: true }); // Usuario existe
+    } else {
+      res.status(201).json({ exists: false }); // Usuario no existe
+    }
+  }catch (error) {
+      console.error('Error en la conexión con la base de datos:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
 
 // Controlador pantalla de Inicio
 const bienvenida = async (req, res) => {
@@ -226,5 +234,6 @@ module.exports = {
   preferencias,
   eliminarTurista,
   detalles,
-  favoritos
+  favoritos,
+  usuario
 }

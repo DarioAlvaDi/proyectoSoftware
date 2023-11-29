@@ -125,8 +125,8 @@ function validarContraseña() {
 
 
 /*Función para validar que no hay mensajes de error en el formulario y poder enviarlo */
-function validarFormulario() {
-
+async function validarFormulario(event) {
+  event.preventDefault()
   var usuarioValido = validarUsuario();
   var nombreValido = validarNombre();
   var apellidoPaternoValido = validarApellidoPaterno();
@@ -134,20 +134,52 @@ function validarFormulario() {
   var telefonoValido = validarTelefono();
   var correoValido = validarCorreo();
   var contraseñaValida = validarContraseña();
+
   // Verificar si hay mensajes de error
-  if (
-    usuarioValido &&
-    nombreValido &&
-    apellidoPaternoValido &&
-    apellidoMaternoValido &&
-    telefonoValido &&
-    correoValido &&
-    contraseñaValida
-  ) {
-    // No hay mensajes de error, se puede enviar el formulario
-    mostrarVentanaEmergente();
-    ocultarError("Formulario")
-    return true;
+  if (usuarioValido && nombreValido && apellidoPaternoValido && apellidoMaternoValido && telefonoValido && correoValido && contraseñaValida) {
+
+    try {
+      const usuarioInput = document.getElementById('Usuario');
+      const valorUsuario = usuarioInput.value;
+
+      const response = await fetch('/turistas/usuario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          Usuario: valorUsuario
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.exists) {
+
+        // El nombre de usuario ya existe, mostrar error
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+
+        mostrarError('Formulario', '<br>El nombre de usuario ya existe<br><br>');
+        return false;
+
+      } else {
+
+        // No hay mensajes de error, se puede enviar el formulario
+        // mostrarVentanaEmergente();
+        ocultarError('Formulario');
+        document.forms[0].submit();
+
+      }
+    } catch (error) {
+
+      console.error('Error al realizar la solicitud fetch:', error);
+      // Manejar el error según tus necesidades
+      return false;
+
+    }
 
   } else {
     // Hay mensajes de error, no se envía el formulari o
@@ -159,3 +191,4 @@ function validarFormulario() {
     return false;
   }
 }
+document.forms[0].addEventListener('submit', validarFormulario);
