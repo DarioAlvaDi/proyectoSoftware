@@ -258,23 +258,21 @@
                     </div>
                 </div>
             </div>
-        </div>
-    
-        <script>
-            function mostrarMensaje() {
-                var contenedor = document.getElementById("miAlert");
-                contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
-    
-                // Desactiva el botón cuando se muestra el mensaje
-                //document.getElementById("btnContinuar").disabled = true;
-            }
-    
-            function ocultarMensaje() {
-                var contenedor = document.getElementById("miAlert");
-                contenedor.style.display = "none";
-            }
-        </script>
-        
-        
+        </div>     
     </body>
+
+    <script>
+        function mostrarMensaje() {
+            var contenedor = document.getElementById("miAlert");
+            contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
+
+            // Desactiva el botón cuando se muestra el mensaje
+            //document.getElementById("btnContinuar").disabled = true;
+        }
+
+        function ocultarMensaje() {
+            var contenedor = document.getElementById("miAlert");
+            contenedor.style.display = "none";
+        }
+    </script>
 </html>
