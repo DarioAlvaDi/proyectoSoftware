@@ -18,6 +18,8 @@
         crossorigin="anonymous"></script>
 
     <script src="../js/detalles_lugar.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
+    
     <title>Detalles del lugar</title>
 </head>
 
@@ -198,7 +200,57 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    let autocomplete;
+      function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'),
+          {
+            types:['establishment'],
+            fields:['place_id', 'geometry', 'name'],
+            componentRestrictions: { country: ["mx"] }
+          });
+        autocomplete.addListener('place_changed', onPlaceChanged);
+      }
+      function onPlaceChanged() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          
+        }else{
+          console.log(place.name, place.place_id)
+          console.log(place.geometry.location.lat(),place.geometry.location.lat())
+        }
+      }
 
+      function initialize() {
+        let lat, lng;
+        navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitud;
+            lng = position.coords.longitude;
+            var ubi = new google.maps.LatLng(-33.8665433,151.1956316);
+
+
+            var request = {
+                location: ubi,
+                radius: '500',
+                type: ['restaurant']
+            };
+
+            service = new google.maps.places.PlacesService();
+            service.nearbySearch(request, callback);
+
+        })
+        
+        }
+
+        function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+            }
+        }
+        }
+    </script>
 </body>
 
 </html>
