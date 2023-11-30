@@ -6,6 +6,7 @@
                
         <!-- Bootstrap CSS library -->
         <link rel="stylesheet" type="text/css" href="../styles/itinerarioDia.css">
+        <link rel="stylesheet" href="../styles/styleMovilidad.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <!-- JavaScript library -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -135,7 +136,7 @@
 
 
                     <div class="col text-center">
-                        <button type="button" class="btn btn-dark rounded-4">
+                        <button type="button" onclick="mostrarMensaje()" class="btn btn-dark rounded-4">
                             Generar ruta
                         </button>
 
@@ -210,6 +211,69 @@
             </div>
             </div>
         </div>
+
+        <!--Mensaje emergente de movilidad-->
+
+        <div id="miAlert" class="mi-alert">
+            <div class="boton-regresar">
+                <button id="botonRegresar" onclick="ocultarMensaje()" class="boton-regresar">
+                    <img src="../imgs/imgMovilidad/boton-de-retorno.png" alt="Regresar" />
+                </button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="background-image"></div>
+                    <div class="my-2">
+                        <h4>Seleccione su medio de transporte</h4>
+                    </div>
+    
+                    <div class="container mt-4">
+                        <div class="row text-center">
+                            <!-- Centra los elementos verticalmente -->
+    
+                            <div class="mb-4 pt-4 mx-auto">
+                                <div class="boton-imagen">
+                                    <a href="#">
+                                        <img src="../imgs/imgMovilidad/carro.png" alt="Carro" />
+                                    </a>
+                                    <p class="etiquetaTransporte">Carro</p>
+                                </div>
+                                
+                                <div class="boton-imagen">
+                                    <a href="#">
+                                        <img src="../imgs/imgMovilidad/caminando.png" alt="Caminando" />
+                                    </a>
+                                    <p class="etiquetaTransporte">Caminando</p>
+                                </div>
+    
+                                <div class="boton-imagen">
+                                    <a href="#">
+                                        <img src="../imgs/imgMovilidad/transportePublico.png" alt="TransportePublico" />
+                                    </a>
+                                    <p class="etiquetaTransporte">Transporte Público</p>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            function mostrarMensaje() {
+                var contenedor = document.getElementById("miAlert");
+                contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
+    
+                // Desactiva el botón cuando se muestra el mensaje
+                //document.getElementById("btnContinuar").disabled = true;
+            }
+    
+            function ocultarMensaje() {
+                var contenedor = document.getElementById("miAlert");
+                contenedor.style.display = "none";
+            }
+        </script>
         
         
     </body>
