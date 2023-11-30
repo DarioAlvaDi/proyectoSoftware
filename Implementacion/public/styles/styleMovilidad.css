@@ -30,7 +30,7 @@ h4,h6{
     z-index: 0; /* Asigna un valor menor para que esté detrás de los demás elementos */
   }
   
-  .container {
+.container {
     position: relative;
     z-index: 1; /* Asigna un valor mayor para que esté encima de la imagen de fondo */
   }
