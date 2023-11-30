@@ -9,9 +9,9 @@ const turistasRouter = require('./src/routes/turistas');
 const app = express();
 
 // Middleware para analizar peticiones
-app.use(morgan("dev"));
+ app.use(morgan("dev"));
 // Middleware para analizar solicitudes JSON
-//app.use(express.json());
+app.use(express.json());
 // Middleware para analizar solicitudes con datos de formulario
 app.use(express.urlencoded({ extended: true }));
 

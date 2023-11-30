@@ -125,7 +125,8 @@ function validarContraseña() {
 
 
 /*Función para validar que no hay mensajes de error en el formulario y poder enviarlo */
-function validarFormulario() {
+async function validarFormulario(event) {
+  event.preventDefault();
 
   var usuarioValido = validarUsuario();
   var nombreValido = validarNombre();
@@ -134,6 +135,7 @@ function validarFormulario() {
   var telefonoValido = validarTelefono();
   var correoValido = validarCorreo();
   var contraseñaValida = validarContraseña();
+
   // Verificar si hay mensajes de error
   if (
     usuarioValido &&
@@ -144,18 +146,62 @@ function validarFormulario() {
     correoValido &&
     contraseñaValida
   ) {
-    // No hay mensajes de error, se puede enviar el formulario
-    mostrarVentanaEmergente();
-    ocultarError("Formulario")
-    return true;
+    try {
+      const usuarioInput = document.getElementById('Usuario');
+      const valorUsuario = usuarioInput.value;
+      const correoInput = document.getElementById('exampleInputEmail1');
+      const valorCorreo = correoInput.value;
 
+      const response = await fetch('/turistas/usuario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          Usuario: valorUsuario,
+          Correo: valorCorreo, 
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.exists) {
+        // Verificar si el usuario o el correo ya está en uso
+        if (data.type === 'usuario') {
+          // El nombre de usuario ya existe, mostrar error
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+          mostrarError('Usuario', 'El nombre de usuario ya está en uso<br>');
+        } else if (data.type === 'correo') {
+          // El correo electrónico ya existe, mostrar error
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+          mostrarError('exampleInputEmail1', 'El correo electrónico ya tiene una cuenta asociada<br>');
+        }
+
+        return false;
+      } else {
+        // No hay mensajes de error, se puede enviar el formulario
+        ocultarError('Formulario');
+        document.forms[0].submit();
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud fetch:', error);
+      return false;
+    }
   } else {
-    // Hay mensajes de error, no se envía el formulari o
+    // Hay mensajes de error, no se envía el formulario
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
-    mostrarError("Formulario", "<br>Completar correctamente todos los campos <br><br>");
+    mostrarError('Formulario', '<br>Completar correctamente todos los campos <br><br>');
     return false;
   }
 }
+
+document.forms[0].addEventListener('submit', validarFormulario);
