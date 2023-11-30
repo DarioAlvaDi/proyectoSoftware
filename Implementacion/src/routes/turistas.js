@@ -21,9 +21,14 @@ router.put('/actdatos', turistasController.actdatos);
 //Ruta de pantalla de preferencias
 router.get('/preferencias', turistasController.preferencias);
 // router.get('/pantalla', turistasController.Inicio);
+router.get('/detalles', turistasController.detalles);
 
+//Ruta de pantalla de Favoritos
+router.get('/favoritos', turistasController.favoritos);
 // Ruta para el registro de turistas
 router.post('/registro', turistasController.registrarTurista);
+//Ruta para valdiacion de que el usuario no este en la BD
+router.post('/usuario', turistasController.usuario);
 //Ruta para eliminar turistas
 router.post('/eliminar', turistasController.eliminarTurista);
 

@@ -16,6 +16,9 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.js"></script>
     <script src="../js/bootstrap.js"></script>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete">
+</script>
     <title>Beyamaps</title>
   </head>
 
@@ -29,7 +32,7 @@
           </a>
 
           <form action="" class="d-flex" role="search">
-            <input type="search" class="form-control me-2" placeholder="Search" aria-label="Search">
+            <input type="text" id="autocomplete" class="form-control me-2" placeholder="Search" aria-label="Search">
             <button class="btn" type="submit">
               <img src="../imgs/Lupa.png" alt="busqueda">
             </button>
@@ -62,7 +65,7 @@
               <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
               <div class="d-inline-flex align-items-center">
                 <img src="../imgs/Favoritos.png" class="img-fluid me-4" alt="Favoritos">
-                <a href="#" class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark">Favoritos</a>
+                <a href="/turistas/favoritos" class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark">Favoritos</a>
               </div>
             </div>
           </div>
@@ -126,6 +129,30 @@
           }
         }).addTo(map);
       });
+      //locationBiaslocationBiaslocationBiaslocationBiaslocationBias
+      let autocomplete;
+      function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById('autocomplete'),
+          {
+            types:['establishment'],
+            fields:['place_id', 'geometry', 'name'],
+            componentRestrictions: { country: ["mx"] }
+          });
+        autocomplete.addListener('place_changed', onPlaceChanged);
+      }
+      function onPlaceChanged() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          
+        }else{
+          console.log(place.name, place.place_id)
+          console.log(place.geometry.location.lat(),place.geometry.location.lat())
+        }
+      }
+
+
+
     </script>
   </body>
 </html>

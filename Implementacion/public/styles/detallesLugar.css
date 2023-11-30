@@ -1,0 +1,59 @@
+@import url(css_bootstrap/bootstrap.css);
+
+header{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+
+.inicio{text-align: right;}
+
+.inicio img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+
+.regresar{text-align: left;}
+
+.regresar img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+.titulo{
+    text-align: center;
+    color: #000;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem; 
+}    
+
+.navColor{
+    background-color: #DDCC90;
+}
+
+.bopcions{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+#flag{
+rotate: -35deg;
+}
+
+.espace{
+    margin-top: 10rem;
+}
+
+/* Agrega estilo para el contenedor del carrusel */
+.carrusel-container {
+    margin-top: 5rem; /* Ajusta el espacio según tus necesidades */
+}
+
+/* Resto de tu CSS existente */

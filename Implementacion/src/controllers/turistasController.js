@@ -6,41 +6,38 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'said153',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
 // Controlador para registrar un nuevo turista
 const registrarTurista = async (req, res) => {
   const turista = req.body;
+    // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+    const sql = `
+      INSERT INTO Turista (
+        nombre,
+        a_paterno,
+        a_materno,
+        correo,
+        telefono,
+        usuario,
+        pass
+      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
 
-  const sql = `
-    INSERT INTO Turista (
-      nombre,
-      a_paterno,
-      a_materno,
-      correo,
-      telefono,
-      usuario,
-      pass
-    ) VALUES (?, ?, ?, ?, ?, ?, ?)
-  `;
+    const values = [
+      turista.Nombre,
+      turista.AP,
+      turista.AM,
+      turista.exampleInputEmail1,
+      turista.Teléfono,
+      turista.Usuario,
+      turista.pass,
+    ];
 
-  const values = [
-    turista.Nombre,
-    turista.AP,
-    turista.AM,
-    turista.exampleInputEmail1,
-    turista.Teléfono,
-    turista.Usuario,
-    turista.pass,
-  ];
-
-  try {
-    // Realizar la inserción en la base de datos
     const results = await new Promise((resolve, reject) => {
       pool.query(sql, values, (error, results) => {
-        console.log(turista)
         if (error) {
           reject(error);
         } else {
@@ -49,19 +46,88 @@ const registrarTurista = async (req, res) => {
       });
     });
 
-    // Verificar si se insertaron filas en la base de datos
     if (results.affectedRows > 0) {
-      // Redirigir a la página de Preferencias si la inserción fue exitosa
       res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
     } else {
-      // Manejar el caso en que no se insertaron filas
       res.status(400).json({ error: 'No se pudo registrar al turista' });
+    }
+  } 
+
+//Controlador para verficar si existe un usuario previamente en la BD
+const usuario = async (req, res) => {
+  const turista = req.body.Usuario;
+  const correo = req.body.Correo;
+  console.log(req.body.Usuario);
+  console.log(correo);
+
+  // Verificar si el nombre de usuario o el correo ya existe en la base de datos
+  const checarExistencia = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ? OR correo = ?';
+  const checarExistenciaValores = [turista, correo];
+
+  try {
+    const checarExistenciaResultado = await new Promise((resolve, reject) => {
+      pool.query(checarExistencia, checarExistenciaValores, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    console.log(checarExistenciaResultado[0]);
+    // Si el nombre de usuario o el correo ya existe, devolver un false
+    if (checarExistenciaResultado[0].count > 0) {
+      let type = '';
+      if (await checkUsernameExists(turista)) {
+        type = 'usuario';
+      } else if (await checkCorreoExists(correo)) {
+        type = 'correo';
+      }
+
+      res.status(200).json({ exists: true, type });
+    } else {
+      res.status(201).json({ exists: false, type: '' });
     }
   } catch (error) {
     console.error('Error en la conexión con la base de datos:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
+
+async function checkUsernameExists(username) {
+  const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
+  const checkUsernameValues = [username];
+
+  const usernameCheckResult = await new Promise((resolve, reject) => {
+    pool.query(checkUsernameQuery, checkUsernameValues, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  return usernameCheckResult[0].count > 0;
+}
+
+async function checkCorreoExists(correo) {
+  const checkCorreoQuery = 'SELECT COUNT(*) as count FROM Turista WHERE correo = ?';
+  const checkCorreoValues = [correo];
+
+  const correoCheckResult = await new Promise((resolve, reject) => {
+    pool.query(checkCorreoQuery, checkCorreoValues, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  return correoCheckResult[0].count > 0;
+}
 
 // Controlador pantalla de Inicio
 const bienvenida = async (req, res) => {
@@ -113,9 +179,9 @@ const perfil = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/PantallPerfil.html'));
 }
 
-//Controlador pantalla de perfil
+//Controlador pantalla de actualizar datos
 const actualizardatos = async (req, res) => {
-  res.sendFile(path.join(__dirname, '..'));
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
 }
 
 // Función para realizar cambios en la tabla Turista
@@ -156,10 +222,18 @@ const actdatos = async (req, res) => {
     }
   );
 }
-
+// Controlador pantalla detalles
+const detalles = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/detallesLugar.html'));
+}
 //Controlador pantalla preferencias
 const preferencias = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+}
+
+//Controlador pantalla favoritos
+const favoritos = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaFavoritos.html'));
 }
 
 const eliminarTurista = async (req, res, next) => {
@@ -201,5 +275,8 @@ module.exports = {
   actdatos,
   registrarTurista,
   preferencias,
-  eliminarTurista
+  eliminarTurista,
+  detalles,
+  favoritos,
+  usuario
 }
