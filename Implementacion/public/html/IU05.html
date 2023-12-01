@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="IU15estilo.css">
+    <title>IU05 Reestablecer Contraseña</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif; 
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif; 
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Evita que el contenido adicional cree barras de desplazamiento */
+            position: relative;
+            background-color: #FFF9E3; /* Color de fondo */
+        }
+
+        #backgroundImage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(10px); /* Ajusta el valor del difuminado según sea necesario */
+            z-index: -1; /* Coloca la imagen detrás del contenido */
+        }
+
+        #container {
+            position: relative; /* Asegura que los elementos hijos se posicionen en relación con este contenedor */
+            z-index: 2; /* Asegura que esté encima de la imagen de fondo */
+        }
+
+        #exitButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            max-width: 50px;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+            z-index: 3; /* Asegura que esté encima del contenido */
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+            margin-top: 80px; /* Ajusta el margen superior según sea necesario */
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejor contraste */
+        }
+
+        input[type="password"], input[type="button"] {
+            border-radius: 20px; /* Ajusta el radio del borde para hacerlos redondos */
+            width: 30%;
+        }
+
+        img.button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            max-width: 50px;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+        }
+
+        button#cornerButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        button#cornerButton img {
+            max-width: 50px;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+        }
+
+        img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+        }
+
+        input {
+            font-size: 16px;
+            padding: 8px;
+            display: block;
+            margin: 10px auto;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        input[type="button"] {
+            width: 80%;
+            font-size: 20px;
+            background-color: black;
+            color: white;
+            display: block;
+            margin: 10px auto;
+            border-radius: 20px; /* Ajusta el radio del borde para hacerlo redondo */
+            width: 20%;
+        }
+
+        #mensajeContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #mensajeBox {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="backgroundImage" src="IU15.png" alt="background">
+
+    <div id="container" class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Reestablecer<br>Contraseña</h1>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="password" placeholder="Nueva contraseña" id="ingresoContraseña" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="password" placeholder="Confirma contraseña" id="confirmoContraseña" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="button" value="Guardar" onclick="validarContraseña()" class="btn btn-dark">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="mensajeContainer" onclick="volverIngresar()">
+                    <div id="mensajeBox" class="bg-white p-4 rounded text-center"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function validarContraseña() {
+            var contraseña = document.getElementById("ingresoContraseña").value;
+            var confirmarContraseña = document.getElementById("confirmoContraseña").value;
+            var mensajeContainer = document.getElementById("mensajeContainer");
+            var mensajeBox = document.getElementById("mensajeBox");
+
+            if (contraseña === confirmarContraseña) {
+                mensajeBox.innerHTML = "Contraseña validada correctamente. ¡Bienvenido!";
+                setTimeout(function () {
+                    window.location.href = "otra_pagina.html";
+                }, 2000);
+            } else {
+                mensajeBox.innerHTML = "Las contraseñas no coinciden. Toca para volver a ingresar.";
+                console.log("Validar contraseña");
+            }
+
+            mensajeContainer.style.display = "flex";
+            
+            // Verificar si los campos de contraseña están vacíos
+            if (contraseña.trim() === "" || confirmarContraseña.trim() === "") {
+                mensajeBox.innerHTML = "Ingresa las contraseñas correspondientes.";
+                setTimeout(function () {
+                    window.location.href = "IU05.html";
+                }, 2000);
+            } else if (contraseña === confirmarContraseña) {
+                mensajeBox.innerHTML = "Contraseña validada correctamente. ¡Bienvenido!";
+                setTimeout(function () {
+                    window.location.href = "otra_pagina.html";
+                }, 2000);
+            } else {
+                mensajeBox.innerHTML = "Las contraseñas no coinciden. Toca para volver a ingresar.";
+                console.log("Validar contraseña");
+            }
+
+            mensajeContainer.style.display = "flex";
+        }
+
+        function volverIngresar() {
+            document.getElementById("mensajeContainer").style.display = "none";
+            document.getElementById("ingresoContraseña").value = "";
+            document.getElementById("confirmoContraseña").value = "";
+            console.log("Volver a ingresar");
+        }
+
+    </script>
+
+</body>
+
+</html>

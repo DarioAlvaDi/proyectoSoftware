@@ -1,3 +1,16 @@
+body{
+    
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: 100% 99.5vh;
+    background-position: center;
+}
+
+
+h1 {
+    text-align: center;
+}
+
 header{
     z-index: 1000;
     position: fixed;
@@ -12,11 +25,15 @@ header{
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../imgs/imgActualizarDatos/image\ 19.jpg');
+    background-image: url('img/TorreLatino.png');
     background-size: contain;
     opacity: 0.2;
     padding: 0;
     margin: 0;
+}
+
+.busqueda{
+    z-index: 10;
 }
 
 .navColor{
@@ -45,57 +62,23 @@ header{
     font-style: normal;
     font-weight: 900;
     line-height: 1.875rem; 
-}    
-
-
-.center-items {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-
-
-
-.botones input[type=button] {
-    width: 9.4375rem;
-    height: 2.3125rem;
-    background: #000000;
-    border: 1px solid #000000;
-    border-radius: 25px;
-    color: #FFFFFF;
-    transition: .2s all ease;
-    padding: 8px 12px;
-    margin-bottom: 2.5%;
-    margin-right: 1.5%;
-    margin-left: 1.5%;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 0.9375rem;
-    font-style: normal;
-    font-weight: 900;
+}  
+.day {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+    background-color: #000;
 }
 
-.botones input[type=button]:hover{
-    background: #0000009c;
-    color: #FFFFFF;
-}
-
-.boton2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-}
-
-.boton2 input[type=button] {
+#eliminarbtn{
     width: 11.5rem;
     height: 2.3125rem;
-    background: #000000;
+    background: #D9D9D9;
     border: 1px solid #000000;
     border-radius: 25px;
-    color: #FFFFFF;
+    color: #000;
     transition: .2s all ease;
     padding: 8px 12px;
     margin-bottom: 0.75rem;
@@ -106,95 +89,156 @@ header{
     font-weight: 700;
 }
 
-.boton2 input[type=button]:hover{
-    background: #0000009c;
-    color: #FFFFFF;
+button:hover {
+    background-color: #202020;
 }
 
-.foto{
-    height: 7.75rem; 
+.container{
+    margin-top: 5rem;
+}
+
+.nameSitio{
+    color: #000;
     text-align: center;
-    z-index: 1;
-    margin-top: 90px;
-}
-
-.foto img{
-    height: 7.75rem; 
-    width: 7.75rem; 
-    border-radius: 7.75rem;
-}
-
-.subirImg{
-    z-index: 1;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.subirImg label{
-    color: #000;
-    font-family: Roboto;
-    font-size: 0.8rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Inter;
+    font-size: 0.875rem;
     font-style: normal;
+    font-weight: 600;
+    line-height: 1.75rem; /* 200% */
 }
 
-.subirImg input[type=file]{
-    display: none;
-}
-
-.subirImg img{
-    height: 0.8rem; 
+.contenedorSitio{
+    background-color: #ABFFB4;
     z-index: 1;
-    margin-right: 3px;
 }
 
-.edit{
-    margin-right: 1.9rem;
+
+.detalles{
+    width: 8rem;
+    height: 2rem;
+    color: #000;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Inter;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.8125rem;
+    border: 1px solid #000000;
+    border-radius: 25px;
+    margin-top:1rem;
 }
 
-.cuadrado {
-    border: 2px solid #000;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: left; /* Alinea el texto a la izquierda */
+.boton-redondo{
+    padding: 5px 10px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 50%; /* Esto hace que el botón sea redondo */
+    background-color: #ABFFB4;
+    border: none;
+    outline: none;    
 }
 
-.cuadrado img {
-    max-width: 100%;
-    height: auto;
-    margin-right: 20px; /* Ajusta el espacio entre la imagen y el texto */
+.boton-redondo svg{
+    margin-bottom: 0.5rem;
 }
 
-.leyenda {
+.boton-redondo:hover {
+    background-color: #ABFFB4;
+}
+
+.resize{
+    margin-top: -3rem;
+}
+
+.modal-content{
+    border-radius: 1.25rem;
+    border: 1px solid #000;
+    background: #8AEC94;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content div p{
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem;
+    margin-bottom: 2.12rem;
+}
+
+.modal-content div button{
+    width: 18.625rem;
+    height: 2.9375rem;
+    border-radius: 1.875rem;
+    border: 1px solid #000;
+    background: #D9D9D9;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 1.25rem;
+    font-family: Roboto;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 900;
     color: #000;
 }
 
-.botones-derecha {
-    margin-top: 10px;
+.iconConfirm{
+    text-align: left;
 }
-img {
-    height: 14.2857vh; /* 1/7 de la altura de la pantalla */
-    max-width: 100%; /* Para asegurarse de que la imagen no sea más ancha que el contenedor */
+.iconConfirm svg{
+    margin-right: 30%;
+}
+.iconConfirm2{
+    text-align: left;
+}
+.iconConfirm2 svg{
+    margin-right: 15%;
+}
+.iconCancel{
+    text-align: left;
+}
+.iconCancel svg{
+    margin-right: 30%;
 }
 
-.col-md-6 img {
-    height: 14.2857vh;
-    max-width: 100%;
+.historial-container{
+    max-width: 17rem;
+    max-height: 10rem;
+    min-height: 10rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: white;
+    z-index: 2;
+    border-radius: 25px;
 }
 
+.historial-empty{
+    text-align:center;
+    color:#777;
+}
+
+.historial-empty p{
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem; 
+    margin-top: 10%;
+}
 .boton-en-fondo {
     position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    background: transparent; /* Fondo transparente para que se vea la imagen de fondo */
+    background: transparent ; /* Fondo transparente para que se vea la imagen de fondo */
     border: none; /* Sin borde */
-    padding: 10px 20px; /* Ajusta el relleno según sea necesario */
+    padding: 10px 50px; /* Ajusta el relleno según sea necesario */
     cursor: pointer;
-}
-
-.boton-en-fondo img {
-    width: 50px; /* Ancho deseado para la imagen del botón */
-    height: auto; /* Altura automática para mantener la proporción original */
 }
