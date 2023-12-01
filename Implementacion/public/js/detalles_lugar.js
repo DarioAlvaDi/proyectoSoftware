@@ -14,17 +14,3 @@ function colorearf() {
     else (color.removeAttribute("fill"));
 }
 
-fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAUvlCB-hBLbxN1Li2d8HwDANi4yLgmQ8I&location=-33.8670522,151.1957362&radius=5000&type=restaurant', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'text/plain',
-        'Access-Control-Allow-Origin': '*'
-    }
-})
-    .then(data => {
-        return data.json()
-    }).then(jsonData => {
-        console.log(jsonData.results)
-    }).catch(error => {
-        console.log(error);
-    }) 
