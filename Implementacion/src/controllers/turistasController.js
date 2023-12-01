@@ -1,3 +1,4 @@
+const { Session } = require('inspector');
 const mysql = require('mysql')
 const path = require('path');
 
@@ -47,7 +48,20 @@ const registrarTurista = async (req, res) => {
     });
 
     if (results.affectedRows > 0) {
-      res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+          const sqlUltimoTurista = `
+            SELECT Id_Turista
+            FROM Turista
+            ORDER BY Id_Turista DESC
+            LIMIT 1
+          `;
+          pool.query(sqlUltimoTurista, (errorUltimoTurista, resultadosUltimoTurista) => {
+        if (errorUltimoTurista) {
+          res.status(400).json({ error: 'No se pudo obtener el último Id_Turista' });
+        } else {
+          req.session.Id_Turista = resultadosUltimoTurista[0].Id_Turista;
+          res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+        }
+      })
     } else {
       res.status(400).json({ error: 'No se pudo registrar al turista' });
     }
@@ -144,7 +158,7 @@ const login = (req, res, next) => {
   console.log('Recibiendo solicitud de login...');
   const turista = req.body;
 
-  const sql = 'SELECT * FROM Turista WHERE correo = ? AND pass = ?';
+  const sql = 'SELECT Id_Turista FROM Turista WHERE correo = ? AND pass = ?';
   const values = [turista.correo, turista.pass];
 
   pool.query(sql, values, (error, results) => {
@@ -155,7 +169,13 @@ const login = (req, res, next) => {
     }
 
     if (results.length > 0) {
+      //Pasamos el turistaId
+      const turistaId=results[0].Id_Turista
+      req.session.Id_Turista=turistaId
+
+      console.log(turistaId)
       console.log('Turista encontrado');
+
       res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
     } else {
       console.log('Turista no encontrado');
@@ -178,6 +198,42 @@ const pedirdatos = async (req, res) => {
 const perfil = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/PantallPerfil.html'));
 }
+
+// Controlador para la página de perfil
+const informacionPerfil = async (req, res) => {
+  try {
+    // Obtener el Id_Turista de la variable de sesión
+    const turistaId = req.session.Id_Turista;
+
+    // Consulta para obtener la información del turista
+    const turistaInfo = await obtenerInformacionTurista(turistaId);
+    console.log(turistaInfo)
+    // Enviar la información del turista como respuesta JSON
+    res.json(turistaInfo);
+
+  } catch (error) {
+    console.error('Error en el controlador de perfil:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// Función para obtener la información del turista desde la base de datos
+const obtenerInformacionTurista = (turistaId) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Nombre, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
+    const values = [turistaId];
+
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else if (results.length > 0) {
+        resolve(results[0]);
+      } else {
+        reject(new Error('Turista no encontrado'));
+      }
+    });
+  });
+};
 
 //Controlador pantalla de actualizar datos
 const actualizardatos = async (req, res) => {
@@ -233,20 +289,8 @@ const preferencias = async (req, res) => {
 
 // Controlador para insertar Preferencias en BD
 const registrarPreferencias = async (req, res) => {
-  // Consulta para obtener el último Id_Turista
-  const sqlUltimoTurista = `
-    SELECT Id_Turista
-    FROM Turista
-    ORDER BY Id_Turista DESC
-    LIMIT 1
-  `;
-
-  pool.query(sqlUltimoTurista, (errorUltimoTurista, resultadosUltimoTurista) => {
-    if (errorUltimoTurista) {
-      res.status(400).json({ error: 'No se pudo obtener el último Id_Turista' });
-    } else {
-      const turistaId = resultadosUltimoTurista[0].Id_Turista;
-
+      const turistaId = req.session.Id_Turista;
+  console.log(turistaId)
       const preferencia = req.body.preferencias || [];
       console.log(preferencia);
       // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
@@ -262,8 +306,7 @@ const registrarPreferencias = async (req, res) => {
           if (err) throw err;
         });
       });
-      res.redirect('/turistas/mapa');    }
-  });
+      res.redirect('/turistas/mapa');    
 };
 
 //Controlador pantalla favoritos
@@ -314,5 +357,6 @@ module.exports = {
   detalles,
   favoritos,
   usuario,
-  registrarPreferencias
+  registrarPreferencias,
+  informacionPerfil
 }

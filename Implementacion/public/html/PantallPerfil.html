@@ -28,9 +28,9 @@
         <div class="row">
             <div class="col-12 background-image"></div>
             <div class="col-12 foto"><img src="../imgs/imgPerfil/Ellipse 3.png" alt=""></div>
-            <div class="col-12 center-items"><label>Nombre</label></div>
-            <div class="col-12 center-items"><label>Correo</label></div>
-            <div class="col-12 center-items"><label>Teléfono</label></div>
+            <div class="col-12 center-items" ><label id="Nombre">Nombre: </label></div>
+            <div class="col-12 center-items"><label id="Correo">Correo: </label></div>
+            <div class="col-12 center-items"><label  id="Telefono">Teléfono: </label></div>
             <div class="botones">
                 <div class="col-12 center-items">
                     <input type="button" value="Actualizar datos" id="actualizarBtn" onclick="redireccionar('/turistas/actualizar')">
@@ -66,5 +66,22 @@
             }
         }
     </script>
+    <script>
+        // Hacer una solicitud al servidor para obtener la información del turista
+        fetch('/turistas/informacionPerfil')
+          .then(response =>{
+            if (!response.ok) {
+            throw new Error('Error en la solicitud fetch: ' + response.status);
+            }
+            return response.json();
+        })
+          .then(turistaInfo => {
+            // Actualizar el contenido de los contenedores con la información del turista
+            document.getElementById('Nombre').innerHTML += turistaInfo.Nombre;
+            document.getElementById('Correo').innerHTML += turistaInfo.Correo;
+            document.getElementById('Telefono').innerHTML += turistaInfo.Telefono;
+          })
+          .catch(error => console.error('Error al obtener información del turista:', error));
+      </script>
 </body>
 </html>

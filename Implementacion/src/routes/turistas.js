@@ -14,6 +14,8 @@ router.get('/mapa', turistasController.mapa);
 router.get('/formulario', turistasController.pedirdatos);
 //Ruta de pantalla para mostrar perfil
 router.get('/perfil', turistasController.perfil);
+//Ruta para sacar infromacion para pantalla perfil
+router.get('/informacionPerfil', turistasController.informacionPerfil);
 //Ruta de pantalla para modificar datos
 router.get('/actualizar', turistasController.actualizardatos);
 //Ruta para modificar datos
