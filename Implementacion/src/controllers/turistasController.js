@@ -192,6 +192,7 @@ const logout = async (req, res) => {
       console.error('Error al cerrar sesión:', err);
       res.status(500).send('Error interno del servidor');
     } else {
+      console.log('Sesion destruida')
       res.redirect('/turistas');
     }
   });
