@@ -1,0 +1,133 @@
+body {
+    background-color: blanchedalmond;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden; /* Evita la barra de desplazamiento horizontal */
+}
+
+.contenedor{
+    position: relative;
+}
+
+.imglogin{
+    width: 100%;
+    height: 99.5vh;
+    opacity: 0.3;
+    padding: 0;
+    margin: 0;
+}
+
+.Bienvenida{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Asegura que el texto esté por encima de la imagen */
+    text-align: center;
+}
+
+.logo{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Asegura que el texto esté por encima de la imagen */
+    text-align: center;
+
+}
+
+.imglogo{
+    width: 90px;
+    margin-bottom: 2vh;
+}
+
+.fsesion{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Asegura que el texto esté por encima de la imagen */
+    text-align: center;
+}
+
+.dtslogin input{
+    border-radius: 20px;
+    height: 25px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.fregistro label{
+    border-width:c 4px;
+    border-style: ridge;
+    border-color: rgb(0, 0, 0);
+    width: 50%;
+}
+
+.fregistro input{
+    border-radius: 20px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.fsesion button{
+    border-radius: 20px;
+    height: 28px;
+    width: 150px;
+    margin-top: 20px;
+
+    background-color: black;
+}
+
+.fsesion button:hover{
+    cursor: pointer;
+    
+}
+
+label{
+    font-weight: bold;
+}
+
+.olvidar{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Asegura que el texto esté por encima de la imagen */
+    text-align: center;
+}
+
+.regresarl{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Asegura que el texto esté por encima de la imagen */
+    text-align: center;
+    width: 70px;
+    margin-top: 25px;
+}
+
+.regresarl:hover{
+    opacity: 0.65;
+}
+
+/*.fsesion a{
+    color: rgb(255, 255, 255);
+}
+
+.fsesion a:hover{
+font-weight: bolder;
+}
+*/
+
+.textbutton{
+    font-size: 15px;
+    color: white;
+}
+
+.textbutton:hover{
+    background-color: rgba(0, 0, 0, 0.734);
+}
