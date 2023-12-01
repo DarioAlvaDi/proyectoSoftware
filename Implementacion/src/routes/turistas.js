@@ -20,6 +20,8 @@ router.get('/actualizar', turistasController.actualizardatos);
 router.put('/actdatos', turistasController.actdatos);
 //Ruta de pantalla de preferencias
 router.get('/preferencias', turistasController.preferencias);
+//Ruta para registrar Preferencias
+router.post('/registrarPreferencias', turistasController.registrarPreferencias);
 // router.get('/pantalla', turistasController.Inicio);
 router.get('/detalles', turistasController.detalles);
 

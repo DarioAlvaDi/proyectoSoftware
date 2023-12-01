@@ -9,9 +9,10 @@
 </head>
 <body>
     
+    <script src="../js/validaciones.js"></script>
     
 
-        <form onsubmit="return validarPreferencia()" action="" method="post">
+        <form onsubmit="return validarPreferencia()" action="/turistas/registrarPreferencias" method="POST">
             <div class="container">
                 <header>
                     <h1>Preferencias</h1>
@@ -26,13 +27,11 @@
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefMuseos" value="museum"/>
+                            <li><input type="checkbox" name="preferencias" id="PrefMuseos" value="museum"/>
                                 <label for="PrefMuseos">Museos</label></li>
-                            <li><input type="checkbox" id="Pref
-                                ParqueAtr" value="amusement_park
-                                "/>
+                            <li><input type="checkbox"name="preferencias" id="PrefParqueAtr" value="amusement_park"/>
                                 <label for="PrefParqueAtr">Parque de diversiones</label></li>
-                            <li><input type="checkbox" id="PrefParques" value="park"/>
+                            <li><input type="checkbox"name="preferencias" id="PrefParques" value="park"/>
                                 <label for="PrefParques">Parques</label></li>
                         </ul> 
                     </div>
@@ -42,11 +41,11 @@
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefAcuario" value="aquarium"/>
-                                <label for="PrefAcuario"></label></li>
-                            <li><input type="checkbox" id="PrefMercArtesanales" value=""/>
-                                <label for="PrefMercArtesanales">Mercados artesanales</label></li>
-                            <li><input type="checkbox" id="PrefIglesias" value="church"/>
+                            <li><input type="checkbox"name="preferencias" id="PrefAcuario" value="aquarium"/>
+                                <label for="PrefAcuario">Acuario</label></li>
+                            <li><input type="checkbox"name="preferencias" id="PrefGalerias" value="art_gallery"/>
+                                <label for="PrefGalerias">Galerias de Arte</label></li>
+                            <li><input type="checkbox" name="preferencias" id="PrefIglesias" value="church"/>
                                 <label for="PrefIglesias">Iglesias</label></li>
                         </ul> 
                     </div>
@@ -56,11 +55,11 @@
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefRestaurantes" value="restaurant"/>
+                            <li><input type="checkbox" name="preferencias" id="PrefRestaurantes" value="restaurant"/>
                                 <label for="PrefRestaurantes">Restaurantes</label></li>
-                            <li><input type="checkbox" id="PrefAtracNaturales" value=""/>
-                                <label for="PrefAtracNaturales">Atracciones naturales</label></li>
-                            <li><input type="checkbox" id="PrefZoologicos" value="zoo"/>
+                            <li><input type="checkbox" name="preferencias" id="PrefBoliches" value="bowling_alley"/>
+                                <label for="PrefBoliches">Boliches</label></li>
+                            <li><input type="checkbox" name="preferencias" id="PrefZoologicos" value="zoo"/>
                                 <label for="PrefZoologicos">Zoologicos</label></li>
                         </ul> 
                     </div>
@@ -70,12 +69,12 @@
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefPlayas" value=""/>
-                                <label for="PrefPlayas">Playas</label></li>
-                            <li><input type="checkbox" id="PrefEstadios" value=""/>
-                                <label for="PrefEstadios">Estadios</label></li>
-                            <li><input type="checkbox" id="PrefTeatros" value=""/>
-                                <label for="PrefTeatros">Teatros</label></li>
+                            <li><input type="checkbox"name="preferencias" id="PrefCafe" value="cafe"/>
+                                <label for="PrefCafe">Cafeterias</label></li>
+                            <li><input type="checkbox" name="preferencias" id="PrefBiblioteca" value="library"/>
+                                <label for="PrefBiblioteca">Bibliotecas</label></li>
+                            <li><input type="checkbox" name="preferencias" id="PrefCentrosNocturnos" value="night_club"/>
+                                <label for="PrefCentrosNocturnos">Centros Nocturnos</label></li>
                         </ul> 
                     </div>
                 </div> 
@@ -84,11 +83,11 @@
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefBares" value=""/>
+                            <li><input type="checkbox" name="preferencias" id="PrefBares" value="bar"/>
                                 <label for="PrefBares" >Bares</label></li>
-                            <li><input type="checkbox" id="PrefCines" value=""/>
+                            <li><input type="checkbox" name="preferencias" id="PrefCines" value="movie_theater"/>
                                 <label for="PrefCines">Cines</label></li>
-                            <li><input type="checkbox" id="PrefCentrosComerciales" value=""/>
+                            <li><input type="checkbox" name="preferencias" id="PrefCentrosComerciales" value="shopping_mall"/>
                                 <label for="PrefCentrosComerciales">Centros comerciales</label></li>
                         </ul> 
                     </div>
@@ -98,12 +97,12 @@
                 <div class="contenedor">
                     <div class="checkbox">
                         <ul>
-                            <li><input type="checkbox" id="PrefBalneario" value=""/>
-                                <label for="PrefBalneario">Balneario</label></li>
-                            <li><input type="checkbox" id="PrefCasino" value=""/>
+                            <li><input type="checkbox" name="preferencias" id="PrefSpa" value="spa"/>
+                                <label for="PrefSpa">Spas</label></li>
+                            <li><input type="checkbox" name="preferencias" id="PrefCasino" value="casino"/>
                                 <label for="PrefCasino">Casinos</label></li>
-                            <li><input type="checkbox" id="PrefCentRecrativo" value=""/>
-                                <label for="PrefCentRecrativo">Centros recreativos</label></li>
+                            <li><input type="checkbox" name="preferencias" id="PrefEstadios" value="stadium"/>
+                                <label for="PrefEstadios">Estadios</label></li>
                         </ul> 
                     </div>
                 </div> 
@@ -113,6 +112,7 @@
                     <div class="number">
                         <label>Coloca tu radio de visualización (Km):</label>
                         <input type="number" id="radio" name="radio" placeholder="1 ó 1.5" step="0.5" onchange="validarRadio()"/>
+                        <input type="hidden" name="idTurista" id="idTurista" value="<%= turistaId %>">
                     </div>
                 </div>
                 <nav id="radio-error" class="error-message text-center"></nav>
@@ -157,6 +157,7 @@
         }
         
         function validarCheckbox() {
+            console.log("Validating checkboxes...");
             var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidadCheckbox = checkboxes.length;
             var esRadioValido = validarRadio();
@@ -181,11 +182,12 @@
             var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidadCheckbox = checkboxes.length;
             var esRadioValido = validarRadio(); 
+            console.log("Cantidad de checkboxes:", cantidadCheckbox);
+    console.log("¿Radio válido?", esRadioValido);
 
             if (cantidadCheckbox >= 3 && esRadioValido) {
                 return true;
             } else {
-                // Mostrar un mensaje de error si es necesario
                 return false;
             }
         }
@@ -208,7 +210,6 @@
         }
     </script>
 
-    <script src="../js/validaciones.js"></script>
     
 </body>
 </html>

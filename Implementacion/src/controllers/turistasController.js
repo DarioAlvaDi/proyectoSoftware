@@ -231,6 +231,41 @@ const preferencias = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
 }
 
+// Controlador para insertar Preferencias en BD
+const registrarPreferencias = async (req, res) => {
+  // Consulta para obtener el último Id_Turista
+  const sqlUltimoTurista = `
+    SELECT Id_Turista
+    FROM Turista
+    ORDER BY Id_Turista DESC
+    LIMIT 1
+  `;
+
+  pool.query(sqlUltimoTurista, (errorUltimoTurista, resultadosUltimoTurista) => {
+    if (errorUltimoTurista) {
+      res.status(400).json({ error: 'No se pudo obtener el último Id_Turista' });
+    } else {
+      const turistaId = resultadosUltimoTurista[0].Id_Turista;
+
+      const preferencia = req.body.preferencias || [];
+      console.log(preferencia);
+      // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+      const sql = `
+        INSERT INTO Preferencias (
+          Nombre,
+          Id_Turista
+        ) VALUES (?, ?)
+      `;
+
+      preferencia.forEach((preference) => {
+        pool.query(sql, [preference, turistaId], (err, result) => {
+          if (err) throw err;
+        });
+      });
+      res.redirect('/turistas/mapa');    }
+  });
+};
+
 //Controlador pantalla favoritos
 const favoritos = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/PantallaFavoritos.html'));
@@ -278,5 +313,6 @@ module.exports = {
   eliminarTurista,
   detalles,
   favoritos,
-  usuario
+  usuario,
+  registrarPreferencias
 }
