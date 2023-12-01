@@ -176,7 +176,8 @@ const login = (req, res, next) => {
       console.log(turistaId)
       console.log('Turista encontrado');
 
-      res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
+      // res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
+      res.redirect('/turistas/mapa')
     } else {
       console.log('Turista no encontrado');
       res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
@@ -184,6 +185,17 @@ const login = (req, res, next) => {
   });
 };
 
+// Controlador para logout y destruye las variables de sesion
+const logout = async (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Error al cerrar sesión:', err);
+      res.status(500).send('Error interno del servidor');
+    } else {
+      res.redirect('/turistas');
+    }
+  });
+}
 // Controlador pantalla de Registro
 const mapa = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
@@ -220,7 +232,7 @@ const informacionPerfil = async (req, res) => {
 // Función para obtener la información del turista desde la base de datos
 const obtenerInformacionTurista = (turistaId) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT Nombre, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
+    const sql = 'SELECT Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
     const values = [turistaId];
 
     pool.query(sql, values, (error, results) => {
@@ -358,5 +370,6 @@ module.exports = {
   favoritos,
   usuario,
   registrarPreferencias,
-  informacionPerfil
+  informacionPerfil,
+  logout
 }

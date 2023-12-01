@@ -8,6 +8,8 @@ router.get('/', turistasController.bienvenida);
 router.get('/datos', turistasController.datos);
 //Ruta para obtener datos de Inicio de Sesion
 router.post('/login', turistasController.login);
+//Ruta para hacer logout
+router.get('/logout', turistasController.logout);
 //Ruta para mostrar el mapa despues del login
 router.get('/mapa', turistasController.mapa);
 //Ruta de pantalla de registro

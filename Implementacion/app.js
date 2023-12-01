@@ -26,7 +26,7 @@ app.use(session({
   secret: secret,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Configuración de la cookie, ajusta según tus necesidades
+  cookie: { secure: false }
 }));
 
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'

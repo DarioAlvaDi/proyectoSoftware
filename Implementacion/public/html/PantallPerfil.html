@@ -58,8 +58,14 @@
         function confirmarLogout() {
             var confirmacion = confirm("¿Estás seguro de cerrar sesión?");
             if (confirmacion) {
-                // Si el usuario confirma, redirige a la nueva página
-                redireccionar('/turistas/');
+                fetch('/turistas/logout', { method: 'GET' })
+                .then(response => {
+                    if (response.redirected) {
+                    // Redirigir a la página de inicio después de cerrar sesión
+                    window.location.href = response.url;
+                    }
+                })
+                .catch(error => console.error('Error al cerrar sesión:', error));
             } else {
                 // Si el usuario cancela, no hace nada o puedes mostrar un mensaje
                 // alert("Operación cancelada");
@@ -77,7 +83,7 @@
         })
           .then(turistaInfo => {
             // Actualizar el contenido de los contenedores con la información del turista
-            document.getElementById('Nombre').innerHTML += turistaInfo.Nombre;
+            document.getElementById('Nombre').innerHTML += turistaInfo.Nombre +' '+ turistaInfo.A_Paterno+' '+ turistaInfo.A_Materno;
             document.getElementById('Correo').innerHTML += turistaInfo.Correo;
             document.getElementById('Telefono').innerHTML += turistaInfo.Telefono;
           })

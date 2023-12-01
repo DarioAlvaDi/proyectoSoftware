@@ -157,7 +157,6 @@
         }
         
         function validarCheckbox() {
-            console.log("Validating checkboxes...");
             var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidadCheckbox = checkboxes.length;
             var esRadioValido = validarRadio();
@@ -182,8 +181,6 @@
             var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidadCheckbox = checkboxes.length;
             var esRadioValido = validarRadio(); 
-            console.log("Cantidad de checkboxes:", cantidadCheckbox);
-    console.log("¿Radio válido?", esRadioValido);
 
             if (cantidadCheckbox >= 3 && esRadioValido) {
                 return true;
