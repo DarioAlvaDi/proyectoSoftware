@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contrase&ntildea</title>
     <link rel="stylesheet" href="../styles/styleRecuperarContrasenia.css">
-    <link rel="stylesheet" href="../styles/styleMovilidad.css"/>
 </head>
 
     <body>
@@ -18,9 +17,9 @@
             <div class="logo">
                 <img src="../imgs/Imgbienvenida/image-20@2x.png" alt="" class="imglogo">
             </div>
-            <div class="freenviar">
+            <div class="fboton">
                 <a href="/turistas/datos">
-                    <button onclick="mostrarMensaje()" class="reenviar">
+                    <button onclick="mostrarMensaje()" class="boton">
                         Reenviar link
                         <div class="arrow-wrapper">
                             <div class="arrow"></div>
@@ -42,21 +41,22 @@
                 <div class="row">
                     <div class="background-image"></div>
                     <div class="my-2">
-                        <h4>Contrase&ntildea reenviada</h4>
+                        <h4>Link reenviado</h4>
                     </div>
     
                     <div class="container mt-4">
                         <div class="row text-center">
                             <!-- Centra los elementos verticalmente -->
     
-                            <div class="mb-4 pt-4 mx-auto">
-                                <div class="boton-imagen">
-                                    <a href="#">
-                                        <img src="../imgs/imgMovilidad/carro.png" alt="Carro" />
-                                    </a>
-                                    <p class="etiquetaTransporte">Carro</p>
-                                </div>
-                                
+                            <div class="fboton">
+                                <a href="restablecerContraseña.hmtl">
+                                    <button class="boton">
+                                        Continuar
+                                        <div class="arrow-wrapper">
+                                            <div class="arrow"></div>
+                                        </div>
+                                    </button>
+                                </a>
                             </div>
     
                         </div>
@@ -69,9 +69,6 @@
         function mostrarMensaje() {
             var contenedor = document.getElementById("miAlert");
             contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
-
-            // Desactiva el botón cuando se muestra el mensaje
-            //document.getElementById("btnContinuar").disabled = true;
         }
 
         function ocultarMensaje() {
