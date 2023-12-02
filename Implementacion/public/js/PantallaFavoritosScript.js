@@ -38,13 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="container rounded-pill border border-3 border-dark p-3 contenedorSitio">
         <div class="row">
             <div class="col text-center">
-                <img src="img/Xochimilco.png" alt="busqueda" style="width:50%; height: 6rem">
+                <img src="../imgs/imgFavoritos/Xochimilco.png" alt="busqueda" style="width:50%; height: 6rem">
             </div>
             <div class="col">
                 <div class="row text-center">
                     <div class="col">
                         <p class="fw-bold nameSitio">`+favoritos[num].nombre+`</p>
-                        <button class="detalles" onclick="window.location.href = '../PantallaActualizarDatos/PantallaActulizarDatos.html'">Detalles</button>
+                        <button class="detalles" onclick="window.location.href = '../html/detallesLugar.html'">Detalles</button>
                     </div>
                     <div class="col-3">
                     <button id="eliminar`+num+`" class="boton-redondo">

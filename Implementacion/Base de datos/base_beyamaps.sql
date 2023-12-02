@@ -10,7 +10,7 @@ CREATE TABLE Turista (
     Correo VARCHAR(50) NOT NULL, 
     Telefono VARCHAR(50) NOT NULL,
     Usuario VARCHAR(50) NOT NULL,
-    pass VARCHAR(15) NOT NULL
+    pass VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE Preferencias(

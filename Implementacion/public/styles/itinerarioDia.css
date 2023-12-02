@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url(/itinerarioDia/Fondo.png);
+    background-image: url(../imgs/imgItinerarioDia/Fondo.png);
     background-size: 100% 99.5vh;
     background-repeat: no-repeat;
     background-attachment: fixed; 
@@ -21,4 +21,4 @@ body {
     font-style: normal;
     font-weight: 900;
     line-height: 1.875rem; 
-}
+}   

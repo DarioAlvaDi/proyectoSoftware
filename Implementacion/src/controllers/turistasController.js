@@ -1,6 +1,8 @@
 const { Session } = require('inspector');
 const mysql = require('mysql')
 const path = require('path');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // Configuración de la conexión a MySQL con piscina de conexiones
 const pool = mysql.createPool({
@@ -26,6 +28,7 @@ const registrarTurista = async (req, res) => {
         pass
       ) VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
+    const hashedPass= await bcrypt.hash(turista.pass, saltRounds);
 
     const values = [
       turista.Nombre,
@@ -34,7 +37,7 @@ const registrarTurista = async (req, res) => {
       turista.exampleInputEmail1,
       turista.Teléfono,
       turista.Usuario,
-      turista.pass,
+      hashedPass,
     ];
 
     const results = await new Promise((resolve, reject) => {
@@ -154,36 +157,49 @@ const datos = async (req, res) => {
 }
 
 // AUTENTICACION DE USUARIO(LOGIN)
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   console.log('Recibiendo solicitud de login...');
   const turista = req.body;
 
-  const sql = 'SELECT Id_Turista FROM Turista WHERE correo = ? AND pass = ?';
-  const values = [turista.correo, turista.pass];
+  const sql = 'SELECT * FROM Turista WHERE correo = ?';
+  const values = [turista.correo];
 
-  pool.query(sql, values, (error, results) => {
-    if (error) {
-      console.error('Error en la consulta:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
+  try {
+    const results = await new Promise((resolve, reject) => {
+      pool.query(sql, values, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
 
     if (results.length > 0) {
-      //Pasamos el turistaId
       const turistaId=results[0].Id_Turista
       req.session.Id_Turista=turistaId
-
+      const storedHashedPass = results[0].pass;
       console.log(turistaId)
-      console.log('Turista encontrado');
+      // Comparar la contraseña ingresada con la contraseña almacenada en la base de datos
+      const match = await bcrypt.compare(turista.pass, storedHashedPass);
 
-      // res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
-      res.redirect('/turistas/mapa')
+      if (match) {
+        console.log('Turista encontrado');
+        res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
+      } else {
+        console.log('Contraseña incorrecta');
+        res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+      }
     } else {
       console.log('Turista no encontrado');
       res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
     }
-  });
+  } catch (error) {
+    console.error('Error en la consulta:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
+
 
 // Controlador para logout y destruye las variables de sesion
 const logout = async (req, res) => {
@@ -328,7 +344,7 @@ const favoritos = async (req, res) => {
 }
 
 const eliminarTurista = async (req, res, next) => {
-  const turistaId = req.body.id;
+  const turistaId = req.session.Id_Turista;
   console.log(turistaId);
   const sql = `
     DELETE FROM Turista
@@ -348,12 +364,27 @@ const eliminarTurista = async (req, res, next) => {
       });
     });
 
-    res.status(200).json({ message: 'Turista eliminado con éxito' });
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error('Error en la conexión con la base de datos:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    res.status(500).json({ success: false,error: 'Error interno del servidor' });
   }
 };
+
+//Controlador pantalla recuperar contraseña
+const recuperar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/recuperarContrasenia.html'));
+}
+
+//Controlador pantalla recuperar contraseña
+const historial = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/pantallaHistorial.html'));
+}
+
+//Controlador pantalla itinerario
+const itinerario = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
+}
 
 module.exports = {
   bienvenida,
@@ -372,5 +403,8 @@ module.exports = {
   usuario,
   registrarPreferencias,
   informacionPerfil,
-  logout
+  logout,
+  recuperar,
+  historial,
+  itinerario
 }
