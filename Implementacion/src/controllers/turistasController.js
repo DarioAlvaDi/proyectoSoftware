@@ -16,8 +16,8 @@ const pool = mysql.createPool({
 // Controlador para registrar un nuevo turista
 const registrarTurista = async (req, res) => {
   const turista = req.body;
-    // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
-    const sql = `
+  // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+  const sql = `
       INSERT INTO Turista (
         nombre,
         a_paterno,
@@ -28,47 +28,47 @@ const registrarTurista = async (req, res) => {
         pass
       ) VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
-    const hashedPass= await bcrypt.hash(turista.pass, saltRounds);
+  const hashedPass = await bcrypt.hash(turista.pass, saltRounds);
+  console.log(hashedPass);
+  const values = [
+    turista.Nombre,
+    turista.AP,
+    turista.AM,
+    turista.exampleInputEmail1,
+    turista.Teléfono,
+    turista.Usuario,
+    hashedPass,
+  ];
 
-    const values = [
-      turista.Nombre,
-      turista.AP,
-      turista.AM,
-      turista.exampleInputEmail1,
-      turista.Teléfono,
-      turista.Usuario,
-      hashedPass,
-    ];
-
-    const results = await new Promise((resolve, reject) => {
-      pool.query(sql, values, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
+  const results = await new Promise((resolve, reject) => {
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
     });
+  });
 
-    if (results.affectedRows > 0) {
-          const sqlUltimoTurista = `
+  if (results.affectedRows > 0) {
+    const sqlUltimoTurista = `
             SELECT Id_Turista
             FROM Turista
             ORDER BY Id_Turista DESC
             LIMIT 1
           `;
-          pool.query(sqlUltimoTurista, (errorUltimoTurista, resultadosUltimoTurista) => {
-        if (errorUltimoTurista) {
-          res.status(400).json({ error: 'No se pudo obtener el último Id_Turista' });
-        } else {
-          req.session.Id_Turista = resultadosUltimoTurista[0].Id_Turista;
-          res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
-        }
-      })
-    } else {
-      res.status(400).json({ error: 'No se pudo registrar al turista' });
-    }
-  } 
+    pool.query(sqlUltimoTurista, (errorUltimoTurista, resultadosUltimoTurista) => {
+      if (errorUltimoTurista) {
+        res.status(400).json({ error: 'No se pudo obtener el último Id_Turista' });
+      } else {
+        req.session.Id_Turista = resultadosUltimoTurista[0].Id_Turista;
+        res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+      }
+    })
+  } else {
+    res.status(400).json({ error: 'No se pudo registrar al turista' });
+  }
+}
 
 //Controlador para verficar si existe un usuario previamente en la BD
 const usuario = async (req, res) => {
@@ -176,8 +176,8 @@ const login = async (req, res, next) => {
     });
 
     if (results.length > 0) {
-      const turistaId=results[0].Id_Turista
-      req.session.Id_Turista=turistaId
+      const turistaId = results[0].Id_Turista
+      req.session.Id_Turista = turistaId
       const storedHashedPass = results[0].pass;
       console.log(turistaId)
       // Comparar la contraseña ingresada con la contraseña almacenada en la base de datos
@@ -318,24 +318,24 @@ const preferencias = async (req, res) => {
 
 // Controlador para insertar Preferencias en BD
 const registrarPreferencias = async (req, res) => {
-      const turistaId = req.session.Id_Turista;
+  const turistaId = req.session.Id_Turista;
   console.log(turistaId)
-      const preferencia = req.body.preferencias || [];
-      console.log(preferencia);
-      // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
-      const sql = `
+  const preferencia = req.body.preferencias || [];
+  console.log(preferencia);
+  // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+  const sql = `
         INSERT INTO Preferencias (
           Nombre,
           Id_Turista
         ) VALUES (?, ?)
       `;
 
-      preferencia.forEach((preference) => {
-        pool.query(sql, [preference, turistaId], (err, result) => {
-          if (err) throw err;
-        });
-      });
-      res.redirect('/turistas/mapa');    
+  preferencia.forEach((preference) => {
+    pool.query(sql, [preference, turistaId], (err, result) => {
+      if (err) throw err;
+    });
+  });
+  res.redirect('/turistas/mapa');
 };
 
 //Controlador pantalla favoritos
@@ -367,7 +367,7 @@ const eliminarTurista = async (req, res, next) => {
     res.status(200).json({ success: true });
   } catch (error) {
     console.error('Error en la conexión con la base de datos:', error);
-    res.status(500).json({ success: false,error: 'Error interno del servidor' });
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
 

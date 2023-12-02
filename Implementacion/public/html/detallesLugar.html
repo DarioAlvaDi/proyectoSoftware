@@ -30,7 +30,7 @@
     <script src="../js/detalles_lugar.js"></script>
     <script
       async
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANMYiLDcbxuCPffAu1CvxhAxd4DJAZ198&libraries=places"
+      src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"
     ></script>
 
     <title>Detalles del lugar</title>
@@ -63,44 +63,7 @@
         class="carousel slide d-md-flex"
         data-bs-ride="carousel"
       >
-        <div class="carousel-inner d-md-flex">
-          <div class="carousel-item active">
-            <img
-              src="../imgs/detalles_lugar_imgs/escudoESCOM.png"
-              class="d-block img-fluid"
-              alt="Imagen 1"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../imgs/detalles_lugar_imgs/capri1.jpg"
-              class="d-block img-fluid"
-              alt="Imagen 2"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../imgs/detalles_lugar_imgs/homero.png"
-              class="d-block img-fluid"
-              alt="Imagen 3"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../imgs/detalles_lugar_imgs/joker.jpg"
-              class="d-block img-fluid"
-              alt="Imagen 4"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../imgs/detalles_lugar_imgs/capri2.jpg"
-              class="d-block img-fluid"
-              alt="Imagen 5"
-            />
-          </div>
-          <!-- Puedes agregar más elementos 'carousel-item' según sea necesario -->
-        </div>
+        <div id="carrusel" class="carousel-inner d-md-flex"></div>
         <button
           class="carousel-control-prev"
           type="button"
@@ -281,13 +244,13 @@
           </div>
           <div class="modal-body">
             <ul>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-              <li>7</li>
+              <li id="lunes"></li>
+              <li id="martes"></li>
+              <li id="miercoles"></li>
+              <li id="jueves"></li>
+              <li id="viernes"></li>
+              <li id="sabado"></li>
+              <li id="domingo"></li>
             </ul>
           </div>
         </div>
@@ -297,29 +260,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      let autocomplete;
-      window.onload = function () {
-        service = new google.maps.places.PlacesService(
-          document.createElement("div")
-        );
-        var request = {
-          placeId: "ChIJlR9uy-Dj0YURVQrI3KBA_Ys",
-          language: "es",
-          fields: ["name", "rating", "opening_hours", "geometry", "photo"]
-        };
-
-        service.getDetails(request, callback);
-
-        function callback(place, status) {
-          if (status == google.maps.places.PlacesServiceStatus.OK) {
-            console.log(place);
-            console.log(
-              place.photos[0].getUrl({ maxWidth: 350, maxHeight: 350 })
-            );
-          }
-        }
-      };
-    </script>
   </body>
 </html>
