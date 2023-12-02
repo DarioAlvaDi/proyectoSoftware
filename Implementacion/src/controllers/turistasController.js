@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'said153',
   database: 'AD_SISTEMAS'
 });
 
@@ -369,6 +369,21 @@ const eliminarTurista = async (req, res, next) => {
   }
 };
 
+//Controlador pantalla recuperar contraseña
+const recuperar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/recuperarContrasenia.html'));
+}
+
+//Controlador pantalla recuperar contraseña
+const historial = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/pantallaHistorial.html'));
+}
+
+//Controlador pantalla itinerario
+const itinerario = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
+}
+
 module.exports = {
   bienvenida,
   datos,
@@ -386,5 +401,8 @@ module.exports = {
   usuario,
   registrarPreferencias,
   informacionPerfil,
-  logout
+  logout,
+  recuperar,
+  historial,
+  itinerario
 }

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="container rounded-pill border border-3 border-dark text-bg-dark p-3 m-3 mx-auto">
             <div class="row">
                 <div class="col text-center">
-                    <img src="/itinerarioDia/FotoLugar.png" alt="busqueda">
+                    <img src="../imgs/itinerarioDia/FotoLugar.png" alt="busqueda">
                 </div>
 
                 <div class="col">
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="col-3">
 
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalElemento" id="eliminar">
-                                <img src="/itinerarioDia/BotonEliminar.png" alt="botonEliminar">
+                                <img src="../imgs/itinerarioDia/BotonEliminar.png" alt="botonEliminar">
 
                             </button>
                         </div>
@@ -96,14 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <div class="row m-3">
                         <button type="button"  data-bs-toggle="modal" data-bs-target="#modalElemento" class="btn btn-danger rounded-4" id="eliminar`+num+`">
-                            <img src="/itinerarioDia/BoteBasura.png" alt="eliminar">
+                            <img src="../imgs/itinerarioDia/BoteBasura.png" alt="eliminar">
                             Confirmar eliminación
                         </button>
                     </div>
 
                     <div class="row m-3">
                         <button type="button" class="btn btn-secondary rounded-4" data-bs-toggle="modal" data-bs-target="#modalElemento">
-                            <img src="/itinerarioDia/BotonEliminar.png" alt="eliminar">
+                            <img src="../imgs/itinerarioDia/BotonEliminar.png" alt="eliminar">
                             Cancelar
                         </button>
 

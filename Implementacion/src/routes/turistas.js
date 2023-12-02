@@ -27,8 +27,8 @@ router.get('/preferencias', turistasController.preferencias);
 //Ruta para registrar Preferencias
 router.post('/registrarPreferencias', turistasController.registrarPreferencias);
 // router.get('/pantalla', turistasController.Inicio);
+//Ruta de pantalla de Detalles
 router.get('/detalles', turistasController.detalles);
-
 //Ruta de pantalla de Favoritos
 router.get('/favoritos', turistasController.favoritos);
 // Ruta para el registro de turistas
@@ -37,5 +37,11 @@ router.post('/registro', turistasController.registrarTurista);
 router.post('/usuario', turistasController.usuario);
 //Ruta para eliminar turistas
 router.post('/eliminar', turistasController.eliminarTurista);
+//Ruta de pantalla de recuperar contraseña
+router.get('/recuperar', turistasController.recuperar);
+//Ruta de pantalla de Historial
+router.get('/historial', turistasController.historial);
+//Ruta de pantalla de Itinerario
+router.get('/itinerario', turistasController.itinerario);
 
 module.exports = router;
