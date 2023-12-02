@@ -36,7 +36,7 @@ router.post('/registro', turistasController.registrarTurista);
 //Ruta para valdiacion de que el usuario no este en la BD
 router.post('/usuario', turistasController.usuario);
 //Ruta para eliminar turistas
-router.post('/eliminar', turistasController.eliminarTurista);
+router.delete('/eliminar', turistasController.eliminarTurista);
 //Ruta de pantalla de recuperar contraseña
 router.get('/recuperar', turistasController.recuperar);
 //Ruta de pantalla de Historial

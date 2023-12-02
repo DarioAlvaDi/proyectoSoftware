@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'said153',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
@@ -176,8 +176,10 @@ const login = async (req, res, next) => {
     });
 
     if (results.length > 0) {
+      const turistaId=results[0].Id_Turista
+      req.session.Id_Turista=turistaId
       const storedHashedPass = results[0].pass;
-
+      console.log(turistaId)
       // Comparar la contraseña ingresada con la contraseña almacenada en la base de datos
       const match = await bcrypt.compare(turista.pass, storedHashedPass);
 
@@ -342,7 +344,7 @@ const favoritos = async (req, res) => {
 }
 
 const eliminarTurista = async (req, res, next) => {
-  const turistaId = req.body.id;
+  const turistaId = req.session.Id_Turista;
   console.log(turistaId);
   const sql = `
     DELETE FROM Turista
@@ -362,10 +364,10 @@ const eliminarTurista = async (req, res, next) => {
       });
     });
 
-    res.status(200).json({ message: 'Turista eliminado con éxito' });
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error('Error en la conexión con la base de datos:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    res.status(500).json({ success: false,error: 'Error interno del servidor' });
   }
 };
 
