@@ -1,6 +1,4 @@
 header{
-    background-color: #D5F2E1; 
-    text-align: center;
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -9,7 +7,7 @@ header{
 }
 
 h4{
-    margin-top: 55px;
+    margin-top: 100px;
 }
 
 h4,h6{
@@ -38,6 +36,40 @@ h4,h6{
     }
 }*/
 
+.navColor{
+    background-color: #9adfce;
+}
+.inicio{text-align: right;}
+
+.inicio img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+
+.regresar{text-align: left;}
+
+.regresar img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+.titulo{
+    text-align: center;
+    color: #000;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem; 
+}    
+
+
+.center-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .contenedor {
     display: flex;
