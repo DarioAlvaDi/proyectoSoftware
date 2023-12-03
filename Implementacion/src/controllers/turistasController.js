@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'said153',
   database: 'AD_SISTEMAS'
 });
 
@@ -373,7 +373,7 @@ const eliminarTurista = async (req, res, next) => {
 
 //Controlador pantalla recuperar contraseña
 const recuperar = async (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/html/recuperarContrasenia.html'));
+  res.sendFile(path.join(__dirname, '../../public/html/correoRestaurarContraseña.html'));
 }
 
 //Controlador pantalla recuperar contraseña
