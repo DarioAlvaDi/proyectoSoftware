@@ -68,6 +68,12 @@ body{
     width: 155px;
 }
 
+.boton2{
+    margin: 35px;
+    height: 40px;
+    width: 125px;
+}
+
 button {
     --primary-color: #8C493E;
     --secondary-color: #fff;
