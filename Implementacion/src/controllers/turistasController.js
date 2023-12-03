@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120maniesf',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -373,7 +373,7 @@ const eliminarTurista = async (req, res, next) => {
 
 //Controlador pantalla recuperar contraseña
 const recuperar = async (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/html/recuperarContrasenia.html'));
+  res.sendFile(path.join(__dirname, '../../public/html/correoRestaurarContraseña.html'));
 }
 
 //Controlador pantalla recuperar contraseña
@@ -441,6 +441,10 @@ const eliminarHistorialIndividual = async (req, res, next) => {
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
+//Controlador pantalla validar contraseña
+const validar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
+}
 
 module.exports = {
   bienvenida,
@@ -462,5 +466,6 @@ module.exports = {
   logout,
   recuperar,
   historial,
-  itinerario
+  itinerario,
+  validar
 }

@@ -43,5 +43,7 @@ router.get('/recuperar', turistasController.recuperar);
 router.get('/historial', turistasController.historial);
 //Ruta de pantalla de Itinerario
 router.get('/itinerario', turistasController.itinerario);
+//Ruta de pantalla para validar contraseña
+router.get('/validar', turistasController.validar);
 
 module.exports = router;

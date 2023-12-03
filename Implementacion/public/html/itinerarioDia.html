@@ -16,6 +16,7 @@
     </head>
 
     <body>
+
         <header class="header">
             <!--Barra de navegacion-->
                 <nav class="navbar navColor">
@@ -68,7 +69,7 @@
 
 
                     <div class="col text-center">
-                        <button type="button" class="btn btn-dark rounded-4">
+                        <button type="button" onclick="mostrarMensaje()" class="btn btn-dark rounded-4">
                             Generar ruta
                         </button>
 
@@ -112,7 +113,86 @@
             </div>
         </div>
 
-              
-        
+        <!--Movilidad-->
+
+        <div id="miAlert" class="mi-alert">
+            <div class="boton-regresar">
+                <button id="botonRegresar" onclick="ocultarMensaje()" class="boton-regresar">
+                    <img src="../imgs/imgMovilidad/boton-de-retorno.png" alt="Regresar" />
+                </button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="background-image"></div>
+                    <div class="my-2">
+                        <h4>Seleccione su medio de transporte</h4>
+                    </div>
+
+                    <div class="container mt-4">
+                        <div class="row text-center">
+                            <!-- Centra los elementos verticalmente -->
+
+                            <div class="mb-4 pt-4 mx-auto">
+                                <div class="boton-imagen">
+                                    <a href="#" onclick="mostrarMensaje2('Haz seleccionado carro')">
+                                        <img src="../imgs/imgMovilidad/carro.png" alt="Carro" />
+                                    </a>
+                                    <p class="etiquetaTransporte">Carro</p>
+                                </div>
+                                
+                                <div class="boton-imagen">
+                                    <a href="#" onclick="mostrarMensaje2('Haz seleccionado caminando')">
+                                        <img src="../imgs/imgMovilidad/caminando.png" alt="Caminando" />
+                                    </a>
+                                    <p class="etiquetaTransporte">Caminando</p>
+                                </div>
+
+                                <div class="boton-imagen">
+                                    <a href="#" onclick="mostrarMensaje2('Haz seleccionado transporte público')">
+                                        <img src="../imgs/imgMovilidad/transportePublico.png" alt="TransportePublico" />
+                                    </a>
+                                    <p class="etiquetaTransporte">Transporte Público</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+        <!-- Mensaje de confirmacion -->
+
+        <div id="miAlert2" class="mi-alert2">
+            <span id="mensaje"></span>
+            <button id="btnContinuar" onclick="ocultarMensaje()">Continuar</button>
+        </div>
+
     </body>
+
+    <script>
+        function mostrarMensaje() {
+            var contenedor = document.getElementById("miAlert");
+            contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
+
+            // Desactiva el botón cuando se muestra el mensaje
+            //document.getElementById("btnContinuar").disabled = true;
+        }
+
+        function ocultarMensaje() {
+            var contenedor = document.getElementById("miAlert");
+            var contenedor2 = document.getElementById("miAlert2");
+            contenedor.style.display = "none";
+            contenedor2.style.display = "none";
+        }
+
+        function mostrarMensaje2(mensaje) {
+            var contenedor = document.getElementById("miAlert2");
+            var mensajeElemento = document.getElementById("mensaje");
+        
+            mensajeElemento.innerHTML = mensaje;
+            contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
+        }
+      
+    </script>
 </html>
