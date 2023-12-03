@@ -22,3 +22,53 @@ body {
     font-weight: 900;
     line-height: 1.875rem; 
 }   
+
+.etiquetaTransporte {
+    font-size: 110%;
+    margin-top: 0.001rem;  
+}
+
+.mi-alert {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 26rem;
+    width: 20rem;
+    max-width: 600px; /* Establece un máximo de 600px para evitar que se extienda demasiado */
+    background-color: #FFF; /* Color de fondo verde, ajusta según tus preferencias */
+    opacity: 0.95;
+    color: #000;
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 15px;
+    border: 0.75px solid #000; /* Agregar un borde de 2px de ancho con color #48ACD7 */
+    box-sizing: border-box; /* Incluye el borde en el cálculo del tamaño total del elemento */
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-direction: column; /* Alinear elementos verticalmente */
+}
+
+.container {
+    position: relative;
+}
+
+/* Ajusta la altura de las imágenes en pantallas pequeñas */
+.boton-imagen img {
+    max-width: 1.5rem;
+    height: auto;
+}
+
+.boton-regresar {
+    display: flex;
+}
+
+.boton-regresar img {
+    max-width: 20px; /* Tamaño máximo de la imagen */
+    height: auto;
+}
