@@ -23,14 +23,10 @@
         <div class="container mt-5"> <!-- Agregamos la clase mt-4 para separación -->
             <div class="row ">
                 <div class="fsesion">
-                    <form action="mapa.html" method="get">
+                    <form action="/turistas/validarcontra" method="post">
                         <div class="dtslogin">
                             <label for="contraseña">Contraseña</label><br>
-                            <input type="password" placeholder="Escribe tu contraseña">
-                            <br>
-                            <br>
-                            <label for="contraseconf">Reescribe tu contraseña</label><br>
-                            <input type="password" placeholder="Confirma tu contraseña">
+                            <input type="password" placeholder="Escribe tu contraseña" name="pass">
                             <br>
                             <br>
                             <button type="submit" class="textbutton">Validar</button>
@@ -38,7 +34,7 @@
                     </form>
                 </div>
             </div>
-                <a href="bienvenida.html">
+                <a href="/turistas/perfil">
                     <img src="../imgs/imgValidarcontraseña/regresarl.png" alt="" class="regresarl">
                 </a>
             
