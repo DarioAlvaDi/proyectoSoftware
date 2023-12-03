@@ -53,6 +53,8 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE Historial_busqueda(
 	Id_Historial INT AUTO_INCREMENT PRIMARY KEY,
 	Id_Lugar INT NOT NULL,
+    Fecha INT,
+    Hora INT,
     Id_Turista INT NOT NULL
 );
 ALTER TABLE Historial_busqueda ADD FOREIGN KEY (Id_Lugar) references Lugar(Id_Lugar) 
