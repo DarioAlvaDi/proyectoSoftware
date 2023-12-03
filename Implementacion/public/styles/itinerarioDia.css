@@ -72,3 +72,40 @@ body {
     max-width: 20px; /* Tamaño máximo de la imagen */
     height: auto;
 }
+
+.mi-alert2 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 21rem;
+    height: 13.75rem;
+    background-color: #000; /* Color de fondo verde, ajusta según tus preferencias */
+    opacity: 0.95;
+    color: #FFF;
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-direction: column; /* Alinear elementos verticalmente */
+}
+
+#btnContinuar {
+    margin-top: 2.5rem; /* Espacio entre el mensaje y el botón */
+    padding: 0; /* Elimina el espaciado interno del botón */
+    background-color: transparent; /* Color de fondo transparente */
+    color: #48ACD7; /* Color de texto del botón */
+    border: none; /* Elimina el borde del botón */
+    cursor: pointer;
+}
+
+#btnContinuar:disabled {
+    opacity: 0.5; /* Opacidad reducida cuando el botón está desactivado */
+    cursor: not-allowed; /* Cambia el cursor cuando el botón está desactivado */
+}
