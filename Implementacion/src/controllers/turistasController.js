@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'said153',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -403,6 +403,61 @@ const itinerario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
 }
 
+const eliminarHistorialCompleto = async (req, res, next) => {
+  const turistaId = req.session.Id_Turista;
+  console.log(turistaId);
+  const sql = `
+    DELETE FROM Historial_busqueda
+    WHERE Id_Turista = ?
+  `;
+
+  try {
+    await new Promise((resolve, reject) => {
+      pool.query(sql, [turistaId], (error, results) => {
+        if (error) {
+          console.error('Error al eliminar historial:', error);
+          reject(error);
+        } else {
+          console.log('Historial eliminado con éxito');
+          resolve(results);
+        }
+      });
+    });
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error en la conexión con la base de datos:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+};
+
+const eliminarHistorialIndividual = async (req, res, next) => {
+  const turistaId = req.session.Id_Turista;
+  console.log(turistaId);
+  const sql = `
+    DELETE FROM Historial_busqueda
+    WHERE Id_Turista = ?
+  `;
+
+  try {
+    await new Promise((resolve, reject) => {
+      pool.query(sql, [turistaId], (error, results) => {
+        if (error) {
+          console.error('Error al eliminar historial:', error);
+          reject(error);
+        } else {
+          console.log('Historial eliminado con éxito');
+          resolve(results);
+        }
+      });
+    });
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error en la conexión con la base de datos:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+};
 //Controlador pantalla validar contraseña
 const validar = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));

@@ -1,88 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/pantallaHistorialStyle.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../styles/pantallaHistorialStyle.css" />
     <title>Historial</title>
-</head>
-<!-- En tu_nueva_pantalla.html -->
+  </head>
+  <!-- En tu_nueva_pantalla.html -->
 
-<body id="body">
+  <body id="body">
     <header>
-        <nav class="navbar navbar-expand-lg navColor">
-            <div class="container-fluid">
-                <div class="col-3 regresar">
-                    <a href="/turistas/perfil"><img src="../imgs/imgHistorial/image 29.png" alt=""></a>
-                </div>
-                <div class="col-6 titulo">
-                    HISTORIAL
-                </div>
-                <div class="col-3 inicio">
-                    <a><img src="../imgs/imgHistorial/image 30.png" alt=""></a>
-                </div>
-            </div>
-        </nav>
+      <nav class="navbar navbar-expand-lg navColor">
+        <div class="container-fluid">
+          <div class="col-3 regresar">
+            <a href="/turistas/perfil"
+              ><img src="../imgs/imgHistorial/image 29.png" alt=""
+            /></a>
+          </div>
+          <div class="col-6 titulo">HISTORIAL</div>
+          <div class="col-3 inicio">
+            <a><img src="../imgs/imgHistorial/image 30.png" alt="" /></a>
+          </div>
+        </div>
+      </nav>
     </header>
     <div class="background-image"></div>
     <main>
-        <div class="container">
-            
-            <div class="row"> 
-            <!-- Agrega este div para mostrar la información del día seleccionado -->
-            <div class="container-fluid" style="margin-bottom: -1rem; margin-top: -1rem">
-                <form  action="" class="d-flex rounded-pill border border-3 border-dark m-4 p-2 text-bg-light busqueda bg-white" role="search" style="opacity: 0.6;">
-                    <input type="search" class="form-control text-bg-light busqueda bg-white" placeholder="Buscar en el itinerario" aria-label="Search">
-                    <button class="btn busqueda" type="submit">
-                        <img src="../imgs/imgHistorial/Lupa.png" alt="busqueda">
-                    </button>
-                </form>
-            </div>
-                <div class="col-12 center-items" style="margin-top: 0.5rem; z-index: 2" id="contenido">
-                    <div id="selectedDayInfo"></div>
-                    <div id="historial"></div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row">
+          <!-- Agrega este div para mostrar la información del día seleccionado -->
+          <div
+            class="container-fluid"
+            style="margin-bottom: -1rem; margin-top: -1rem"
+          >
+            <form
+              action=""
+              class="d-flex rounded-pill border border-3 border-dark m-4 p-2 text-bg-light busqueda bg-white"
+              role="search"
+              style="opacity: 0.6"
+            >
+              <input
+                type="search"
+                class="form-control text-bg-light busqueda bg-white"
+                placeholder="Buscar en el itinerario"
+                aria-label="Search"
+              />
+              <button class="btn busqueda" type="submit">
+                <img src="../imgs/imgHistorial/Lupa.png" alt="busqueda" />
+              </button>
+            </form>
+          </div>
+          <div
+            class="col-12 center-items"
+            style="margin-top: 0.5rem; z-index: 2"
+            id="contenido"
+          >
+            <div id="selectedDayInfo"></div>
+            <div id="historial"></div>
+          </div>
         </div>
-        <!--Ventana de confirmacion para eliminar el historial-->
-        <div class="modal fade " id="modalEliminarHistorial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <p>¿Está seguro de eliminar el historial?</p>
-                        <div class="center-items">
-                            <button type="button" class="btn btn-primary iconConfirm" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#modalConfirm"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                              </svg>Confirmar</button><!--aqui se elimina todo el historial-->
-                        </div>
-                        <div class="center-items">
-                            <button type="button" class="btn btn-secondary iconCancel" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
-                              </svg>Cancelar</button>
-                        </div>
-                    </div>
-                </div>
+      </div>
+      <!--Ventana de confirmacion para eliminar el historial-->
+      <div
+        class="modal fade"
+        id="modalEliminarHistorial"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <p>¿Está seguro de eliminar el historial?</p>
+              <div class="center-items">
+                <button
+                  type="button"
+                  class="btn btn-primary iconConfirm"
+                  id="deleteBtn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalConfirm"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="25"
+                    fill="green"
+                    class="bi bi-check-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+                    /></svg
+                  >Confirmar</button
+                ><!--aqui se elimina todo el historial-->
+              </div>
+              <div class="center-items">
+                <button
+                  type="button"
+                  class="btn btn-secondary iconCancel"
+                  data-bs-dismiss="modal"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="25"
+                    fill="red"
+                    class="bi bi-x-circle-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
+                    /></svg
+                  >Cancelar
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </main>
 
     <footer class="fixed-bottom navColor">
-        <div class="container-fluid " style="margin-bottom: 2.5rem">
-            <div class="row"> 
-            <div class="col-12 text-center"><button id="eliminarbtn" data-bs-toggle="modal" data-bs-target="#modalEliminarHistorial"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16" style="margin-right: 10%">
-                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-              </svg>Eliminar historial</button></div>    
-            </div>
+      <div class="container-fluid" style="margin-bottom: 2.5rem">
+        <div class="row">
+          <div class="col-12 text-center">
+            <button
+              id="eliminarbtn"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEliminarHistorial"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash-fill"
+                viewBox="0 0 16 16"
+                style="margin-right: 10%"
+              >
+                <path
+                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"
+                /></svg
+              >Eliminar historial
+            </button>
+          </div>
         </div>
+      </div>
     </footer>
 
     <script src="../js/pantallHistorialScript.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous">
-    </script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
