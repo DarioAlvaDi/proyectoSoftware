@@ -386,6 +386,11 @@ const itinerario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
 }
 
+//Controlador pantalla validar contraseña
+const validar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
+}
+
 module.exports = {
   bienvenida,
   datos,
@@ -406,5 +411,6 @@ module.exports = {
   logout,
   recuperar,
   historial,
-  itinerario
+  itinerario,
+  validar
 }
