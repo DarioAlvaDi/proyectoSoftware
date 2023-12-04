@@ -40,6 +40,14 @@ router.get('/historial', turistasController.historial);
 router.get('/itinerario', turistasController.itinerario);
 //Ruta de pantalla para validar contraseña
 router.get('/validar', turistasController.validar);
+//Ruta para agrregar datos de historial
+router.post('/agregarHistorial', turistasController.agregarHistorial);
+//Ruta para obtener datos de historial
+router.get('/consultarHistorial', turistasController.consultarHistorial);
+//Ruta para eliminar registros de historial
+router.post('/eliminarHistorialIndividual', turistasController.eliminarHistorialIndividual);
+//Ruta eliminar un historial completo
+router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCompleto);
 //Ruta para validar contraseña
 router.post('/validarcontra', turistasController.validacioncontraseña);
 //Ruta para preferencia
