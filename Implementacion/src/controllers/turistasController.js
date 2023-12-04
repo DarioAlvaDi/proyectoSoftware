@@ -112,6 +112,7 @@ const usuario = async (req, res) => {
   }
 };
 
+//Controlador para verificar si el user existe
 async function checkUsernameExists(username) {
   const checkUsernameQuery = 'SELECT COUNT(*) as count FROM Turista WHERE usuario = ?';
   const checkUsernameValues = [username];
@@ -129,6 +130,7 @@ async function checkUsernameExists(username) {
   return usernameCheckResult[0].count > 0;
 }
 
+//Controlador para verificar si el correo existe
 async function checkCorreoExists(correo) {
   const checkCorreoQuery = 'SELECT COUNT(*) as count FROM Turista WHERE correo = ?';
   const checkCorreoValues = [correo];
@@ -200,7 +202,6 @@ const login = async (req, res, next) => {
   }
 };
 
-
 // Controlador para logout y destruye las variables de sesion
 const logout = async (req, res) => {
   req.session.destroy(err => {
@@ -264,49 +265,64 @@ const obtenerInformacionTurista = (turistaId) => {
   });
 };
 
-//Controlador pantalla de actualizar datos
-const actualizardatos = async (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
-}
-
 // Función para realizar cambios en la tabla Turista
 const actdatos = async (req, res) => {
-  // Cambios en el campo `Nombre`
-  connection.query(
-    'ALTER TABLE Turista MODIFY COLUMN Nombre VARCHAR(100) NOT NULL',
-    (err, results) => {
-      if (err) {
-        console.error('Error al modificar el campo Nombre:', err);
-      } else {
-        console.log('Campo Nombre modificado correctamente');
-      }
-    }
-  );
+  const { Id_Turista, NuevoNombre, NuevoTelefono } = req.body; // Asegúrate de tener los datos adecuados
 
-  // Cambios en el campo `Telefono`
-  connection.query(
-    'ALTER TABLE Turista MODIFY COLUMN Telefono VARCHAR(15) NOT NULL',
-    (err, results) => {
-      if (err) {
-        console.error('Error al modificar el campo Telefono:', err);
-      } else {
-        console.log('Campo Telefono modificado correctamente');
-      }
-    }
-  );
+  try {
+    // Actualizar el campo `Nombre`
+    await new Promise((resolve, reject) => {
+      connection.query(
+        'UPDATE Turista SET Nombre = ? WHERE Id_Turista = ?',
+        [NuevoNombre, Id_Turista],
+        (err, results) => {
+          if (err) {
+            console.error('Error al actualizar el campo Nombre:', err);
+            reject(err);
+          } else {
+            console.log('Campo Nombre actualizado correctamente');
+            resolve(results);
+          }
+        }
+      );
+    });
 
-  // Cambios en el campo `pass`
-  connection.query(
-    'ALTER TABLE Turista MODIFY COLUMN pass VARCHAR(20) NOT NULL',
-    (err, results) => {
-      if (err) {
-        console.error('Error al modificar el campo pass:', err);
-      } else {
-        console.log('Campo pass modificado correctamente');
-      }
-    }
-  );
+    // Actualizar el campo `Telefono`
+    await new Promise((resolve, reject) => {
+      connection.query(
+        'UPDATE Turista SET Telefono = ? WHERE Id_Turista = ?',
+        [NuevoTelefono, Id_Turista],
+        (err, results) => {
+          if (err) {
+            console.error('Error al actualizar el campo Telefono:', err);
+            reject(err);
+          } else {
+            console.log('Campo Telefono actualizado correctamente');
+            resolve(results);
+          }
+        }
+      );
+    });
+
+    res.status(200).json({ message: 'Datos actualizados correctamente' });
+  } catch (error) {
+    console.error('Error en la actualización de datos:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+
+  // // Cambios en el campo `pass`
+  // connection.query(
+  //   'ALTER TABLE Turista MODIFY COLUMN pass VARCHAR(20) NOT NULL',
+  //   (err, results) => {
+  //     if (err) {
+  //       console.error('Error al modificar el campo pass:', err);
+  //     } else {
+  //       console.log('Campo pass modificado correctamente');
+  //     }
+  //   }
+  // );
 }
+
 // Controlador pantalla detalles
 const detalles = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/detallesLugar.html'));
@@ -343,6 +359,7 @@ const favoritos = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/PantallaFavoritos.html'));
 }
 
+//Controlador para eliminar Turista
 const eliminarTurista = async (req, res, next) => {
   const turistaId = req.session.Id_Turista;
   console.log(turistaId);
@@ -519,6 +536,82 @@ const validar = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
 }
 
+//Controlador para eliminar Favoritos
+const eliminarfavoritos = async (req, res) => {
+  const turistaId = req.session.Id_Turista;
+  console.log(turistaId);
+  const sql = `
+    DELETE FROM Favoritos
+    WHERE Id_Turista = ?
+  `;
+
+  try {
+    await new Promise((resolve, reject) => {
+      pool.query(sql, [turistaId], (error, results) => {
+        if (error) {
+          console.error('Error al eliminar favoritos del turista:', error);
+          reject(error);
+        } else {
+          console.log('Favorito eliminado de turistas');
+          resolve(results);
+        }
+      });
+    });
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error en la conexión con la base de datos:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+}
+
+//Controlador para la validacion de contraseña
+const validacioncontraseña = async (req, res, next) => {
+  const turistaId = req.session.Id_Turista;
+  console.log(turistaId);
+
+  // Asegúrate de tener 'pool' correctamente configurado
+  const sql = 'SELECT pass FROM Turista WHERE Id_Turista = ?';
+
+  try {
+    const results = await new Promise((resolve, reject) => {
+      // Utiliza consultas preparadas para prevenir inyección SQL
+      pool.query(sql, [turistaId], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    if (results.length > 0) {
+      const storedHashedPass = results[0].pass;
+      console.log(turistaId);
+
+      try {
+        // Corrige el uso de 'turista.pass'
+        const match = await bcrypt.compare(req.body.pass, storedHashedPass);
+
+        if (match) {
+          console.log('Turista encontrado');
+          res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+        } else {
+          console.log('Contraseña incorrecta');
+          res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
+        }
+      } catch (error) {
+        console.error('Error al comparar contraseñas:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+      }
+    }
+  } catch (error) {
+    console.error('Error en la consulta:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+
 module.exports = {
   bienvenida,
   datos,
@@ -526,7 +619,6 @@ module.exports = {
   login,
   mapa,
   perfil,
-  actualizardatos,
   actdatos,
   registrarTurista,
   preferencias,
@@ -544,5 +636,7 @@ module.exports = {
   eliminarHistorialCompleto,
   eliminarHistorialIndividual,
   consultarHistorial,
-  agregarHistorial
+  agregarHistorial,
+  eliminarfavoritos,
+  validacioncontraseña
 }
