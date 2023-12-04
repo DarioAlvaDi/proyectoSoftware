@@ -437,6 +437,7 @@ const agregarHistorial = async (req, res) => {
     res.status(400).json({ error: 'No se pudo registrar en el historial' });
   }
 }
+
 // Controlador para la página de perfil
 const consultarHistorial = async (req, res) => {
   try {
@@ -531,6 +532,7 @@ const eliminarHistorialIndividual = async (req, res, next) => {
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
+
 //Controlador pantalla validar contraseña
 const validar = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
