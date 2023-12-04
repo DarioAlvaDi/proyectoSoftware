@@ -1,3 +1,5 @@
+
+
 function colorear() {
     var color = document.getElementById('favorite');
     if (color.getAttribute("fill") !== "gold") {
@@ -12,8 +14,23 @@ function colorearf() {
         color.setAttribute("fill", "rgb(19, 126, 176)");
     }
     else (color.removeAttribute("fill"));
+    agregarHistorial()
 }
+function agregarHistorial() {
+    const urlParams = new URLSearchParams(window.location.search);
 
+    const id = urlParams.get('id')
+    let data = { id: id }
+    fetch('/turistas/agregarHistorial',
+        {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    )
+}
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
 

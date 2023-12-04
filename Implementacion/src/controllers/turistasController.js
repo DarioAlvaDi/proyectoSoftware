@@ -376,7 +376,7 @@ const recuperar = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/correoRestaurarContraseña.html'));
 }
 
-//Controlador pantalla recuperar contraseña
+//Controlador para ruta de historial
 const historial = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/pantallaHistorial.html'));
 }
@@ -385,10 +385,81 @@ const historial = async (req, res) => {
 const itinerario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
 }
+// Controlador para registrar un nuevo turista
+const agregarHistorial = async (req, res) => {
+  const turista = req.session.Id_Turista;
+  // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+  const sql = `
+      INSERT INTO Historial_busqueda (
+        Id_google,
+        Fecha,
+        Hora,
+        Id_Turista
+      ) VALUES (?, ?, ?, ?)
+    `;
+  const values = [
+    req.body.id,
+    null,
+    null,
+    turista,
+  ];
+
+  const results = await new Promise((resolve, reject) => {
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  if (results.affectedRows > 0) {
+    console.log('Historial registrado correctamente');
+  } else {
+    res.status(400).json({ error: 'No se pudo registrar en el historial' });
+  }
+}
+// Controlador para la página de perfil
+const consultarHistorial = async (req, res) => {
+  try {
+    // Obtener el Id_Turista de la variable de sesión
+    const turistaId = req.session.Id_Turista;
+
+    // Consulta para obtener la información del turista
+    const infoHistorial = await obtenerHistorial(turistaId);
+    console.log(infoHistorial)
+    // Enviar la información del turista como respuesta JSON
+    res.json(infoHistorial);
+
+  } catch (error) {
+    console.error('Error en el controlador de perfil:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// Función para obtener la información del turista desde la base de datos
+const obtenerHistorial = (turistaId) => {
+
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM Historial_busqueda WHERE Id_Turista = ?';
+    const values = [turistaId];
+
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else if (results.length > 0) {
+        resolve(results);
+      } else {
+        reject(new Error('Historial no encontrado'));
+      }
+    });
+  });
+};
+
 
 const eliminarHistorialCompleto = async (req, res, next) => {
   const turistaId = req.session.Id_Turista;
-  console.log(turistaId);
   const sql = `
     DELETE FROM Historial_busqueda
     WHERE Id_Turista = ?
@@ -416,20 +487,22 @@ const eliminarHistorialCompleto = async (req, res, next) => {
 
 const eliminarHistorialIndividual = async (req, res, next) => {
   const turistaId = req.session.Id_Turista;
+  const Id_Historial = req.body.id;
   console.log(turistaId);
   const sql = `
     DELETE FROM Historial_busqueda
-    WHERE Id_Turista = ?
+    WHERE Id_Turista = ? 
+    AND Id_Historial = ?
   `;
 
   try {
     await new Promise((resolve, reject) => {
-      pool.query(sql, [turistaId], (error, results) => {
+      pool.query(sql, [turistaId, Id_Historial], (error, results) => {
         if (error) {
-          console.error('Error al eliminar historial:', error);
+          console.error('Error al eliminar registro del historial:', error);
           reject(error);
         } else {
-          console.log('Historial eliminado con éxito');
+          console.log('Registro del historial eliminado con éxito');
           resolve(results);
         }
       });
@@ -467,5 +540,9 @@ module.exports = {
   recuperar,
   historial,
   itinerario,
-  validar
+  validar,
+  eliminarHistorialCompleto,
+  eliminarHistorialIndividual,
+  consultarHistorial,
+  agregarHistorial
 }
