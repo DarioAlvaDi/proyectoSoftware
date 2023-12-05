@@ -95,10 +95,10 @@ function validarTelefono() {
 function validarCorreo() {
   let CorreoInput = document.getElementById("exampleInputEmail1");
   let CorreoValor = CorreoInput.value.trim();
-  let CorreoRegex = /^[\w._]+@[a-z]+\.[\a-z.]+$/;
+  let CorreoRegex = /^[\w._]+@gmail\.com+$/;
 
   if (!CorreoRegex.test(CorreoValor)) {
-    mostrarError("exampleInputEmail1", "El correo ingresada no es válido<br>");
+    mostrarError("exampleInputEmail1", "El correo ingresada no es válido. Ingresar solo correo gmail<br>");
     return false;
   } else {
     ocultarError("exampleInputEmail1");
