@@ -52,5 +52,7 @@ router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCom
 router.post('/validarcontra', turistasController.validacioncontraseña);
 //Ruta para preferencia
 router.post('/pref', turistasController.registrarPreferencias);
+//Ruta para enviar correo
+router.post('/enviarCorreo', turistasController.enviarCorreo);
 
 module.exports = router;

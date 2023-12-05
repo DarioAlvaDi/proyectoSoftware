@@ -3,6 +3,7 @@ const mysql = require('mysql')
 const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const nodemailer = require("nodemailer");
 
 // Configuración de la conexión a MySQL con piscina de conexiones
 const pool = mysql.createPool({
@@ -611,6 +612,38 @@ const validacioncontraseña = async (req, res, next) => {
   }
 };
 
+//Controlador pantalla validar contraseña
+const enviarCorreo = async (req, res) => {
+  const codigo = req.body.codigo;
+  const correo = req.body.correo;
+  console.log(req.body);
+  const config = {
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+      user: 'ledesma.ramirez.jose.emiliano@gmail.com',
+      pass: 'fums ozuy asmz lfst'
+    }
+  }
+
+  const mensaje = {
+    from: 'ledesma.ramirez.jose.emiliano@gmail.com',
+    to: correo,
+    subject: 'Hola, adiós',
+    text: 'El código de verificación es ' + codigo + '.'
+  }
+
+  const transport = nodemailer.createTransport(config);
+
+  try {
+    const info = await transport.sendMail(mensaje);
+    console.log("Correo enviado:", info);
+    res.send("test")
+  } catch (error) {
+    console.error("Error al enviar el correo:", error);
+  }
+
+}
 
 module.exports = {
   bienvenida,
@@ -638,5 +671,6 @@ module.exports = {
   consultarHistorial,
   agregarHistorial,
   eliminarfavoritos,
-  validacioncontraseña
+  validacioncontraseña,
+  enviarCorreo
 }

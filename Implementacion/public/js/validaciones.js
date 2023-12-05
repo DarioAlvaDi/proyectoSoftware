@@ -1,4 +1,6 @@
-/*Función que hace aparecer el mensaje de Error en los Inputs del formulario a los que se le haya ingresado un valor no válido */
+let codigo;
+
+;/*Función que hace aparecer el mensaje de Error en los Inputs del formulario a los que se le haya ingresado un valor no válido */
 function mostrarError(elementId, message) {
   var errorElement = document.getElementById(elementId + "-error");
   errorElement.innerHTML = message;
@@ -159,7 +161,7 @@ async function validarFormulario(event) {
         },
         body: JSON.stringify({
           Usuario: valorUsuario,
-          Correo: valorCorreo, 
+          Correo: valorCorreo,
         }),
       });
 
