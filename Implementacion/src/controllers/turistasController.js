@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'said153',
   database: 'AD_SISTEMAS'
 });
 
@@ -268,14 +268,14 @@ const obtenerInformacionTurista = (turistaId) => {
 
 // Función para realizar cambios en la tabla Turista
 const actdatos = async (req, res) => {
-  const { Id_Turista, NuevoNombre, NuevoTelefono } = req.body; // Asegúrate de tener los datos adecuados
+  const { Id_Turista, Nombre, Telefono } = req.body; // Asegúrate de tener los datos adecuados
 
   try {
     // Actualizar el campo `Nombre`
     await new Promise((resolve, reject) => {
       connection.query(
         'UPDATE Turista SET Nombre = ? WHERE Id_Turista = ?',
-        [NuevoNombre, Id_Turista],
+        [Nombre, Id_Turista],
         (err, results) => {
           if (err) {
             console.error('Error al actualizar el campo Nombre:', err);
@@ -292,7 +292,7 @@ const actdatos = async (req, res) => {
     await new Promise((resolve, reject) => {
       connection.query(
         'UPDATE Turista SET Telefono = ? WHERE Id_Turista = ?',
-        [NuevoTelefono, Id_Turista],
+        [Telefono, Id_Turista],
         (err, results) => {
           if (err) {
             console.error('Error al actualizar el campo Telefono:', err);
@@ -438,6 +438,7 @@ const agregarHistorial = async (req, res) => {
     res.status(400).json({ error: 'No se pudo registrar en el historial' });
   }
 }
+
 // Controlador para la página de perfil
 const consultarHistorial = async (req, res) => {
   try {
@@ -532,6 +533,7 @@ const eliminarHistorialIndividual = async (req, res, next) => {
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
+
 //Controlador pantalla validar contraseña
 const validar = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
