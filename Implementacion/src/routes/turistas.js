@@ -54,5 +54,6 @@ router.post('/validarcontra', turistasController.validacioncontraseña);
 router.post('/pref', turistasController.registrarPreferencias);
 //Ruta para enviar correo
 router.post('/enviarCorreo', turistasController.enviarCorreo);
-
+//Ruta para obtener datos de historial
+router.get('/consultarPreferencias', turistasController.consultarPreferencias);
 module.exports = router;

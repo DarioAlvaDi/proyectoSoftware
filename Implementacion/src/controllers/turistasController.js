@@ -647,6 +647,44 @@ const enviarCorreo = async (req, res) => {
 
 }
 
+const consultarPreferencias = async (req, res) => {
+  try {
+    // Obtener el Id_Turista de la variable de sesión
+    const turistaId = req.session.Id_Turista;
+
+    // Consulta para obtener la información del turista
+    const preferencias = await obtenerPreferencias(turistaId);
+    console.log(preferencias)
+    // Enviar la información del turista como respuesta JSON
+    res.json(preferencias);
+
+  } catch (error) {
+    console.error('Error en el controlador de perfil:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// Función para obtener la información del turista desde la base de datos
+const obtenerPreferencias = (turistaId) => {
+
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM Preferencias WHERE Id_Turista = ?';
+    const values = [turistaId];
+
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else if (results.length > 0) {
+        resolve(results);
+      } else {
+        reject(new Error('Preferencias no encontrado'));
+      }
+    });
+  });
+};
+
+
+
 module.exports = {
   bienvenida,
   datos,
@@ -674,5 +712,7 @@ module.exports = {
   agregarHistorial,
   eliminarfavoritos,
   validacioncontraseña,
-  enviarCorreo
+  enviarCorreo,
+  recuperarPreferencias,
+  consultarPreferencias
 }
