@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'said153',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -668,7 +668,7 @@ const consultarPreferencias = async (req, res) => {
 const obtenerPreferencias = (turistaId) => {
 
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM Preferencias WHERE Id_Turista = ?';
+    const sql = 'SELECT Nombre FROM Preferencias WHERE Id_Turista = ?';
     const values = [turistaId];
 
     pool.query(sql, values, (error, results) => {
@@ -713,6 +713,5 @@ module.exports = {
   eliminarfavoritos,
   validacioncontraseña,
   enviarCorreo,
-  recuperarPreferencias,
   consultarPreferencias
 }
