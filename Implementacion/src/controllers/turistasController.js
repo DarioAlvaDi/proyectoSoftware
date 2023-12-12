@@ -188,21 +188,22 @@ const login = async (req, res, next) => {
 
       if (match) {
         console.log('Turista encontrado');
-        res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
+        res.status(200).json({ message: 'Autenticación exitosa' });
       } else {
         console.log('Contraseña incorrecta');
-        res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+        // Enviar respuesta JSON indicando que la autenticación falló
+        res.status(401).json({ message: 'Contraseña incorrecta' });
       }
     } else {
       console.log('Turista no encontrado');
-      res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+      // Enviar respuesta JSON indicando que el turista no fue encontrado
+      res.status(404).json({ message: 'Turista no encontrado' });
     }
   } catch (error) {
     console.error('Error en la consulta:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
-
 // Controlador para logout y destruye las variables de sesion
 const logout = async (req, res) => {
   req.session.destroy(err => {
@@ -251,7 +252,7 @@ const informacionPerfil = async (req, res) => {
 // Función para obtener la información del turista desde la base de datos
 const obtenerInformacionTurista = (turistaId) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
+    const sql = 'SELECT Usuario, Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
     const values = [turistaId];
 
     pool.query(sql, values, (error, results) => {
@@ -402,6 +403,12 @@ const historial = async (req, res) => {
 const itinerario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
 }
+
+//Controlador pantalla itinerario
+const actualizar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+}
+
 // Controlador para registrar un nuevo turista
 const agregarHistorial = async (req, res) => {
   const turista = req.session.Id_Turista;
@@ -597,10 +604,10 @@ const validacioncontraseña = async (req, res, next) => {
 
         if (match) {
           console.log('Turista encontrado');
-          res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+          res.status(200).json({ message: "Contraseña correcta" });
         } else {
           console.log('Contraseña incorrecta');
-          res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
+          res.status(500).json({ message: "Contraseña incorrecta" });
         }
       } catch (error) {
         console.error('Error al comparar contraseñas:', error);
@@ -712,5 +719,6 @@ module.exports = {
   eliminarfavoritos,
   validacioncontraseña,
   enviarCorreo,
-  consultarPreferencias
+  consultarPreferencias,
+  actualizar
 }

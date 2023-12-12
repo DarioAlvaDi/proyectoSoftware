@@ -50,6 +50,8 @@ router.post('/eliminarHistorialIndividual', turistasController.eliminarHistorial
 router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCompleto);
 //Ruta para validar contraseña
 router.post('/validarcontra', turistasController.validacioncontraseña);
+//Ruta para pantalla Actualizar Datos
+router.get('/actualizar', turistasController.actualizar);
 //Ruta para preferencia
 router.post('/pref', turistasController.registrarPreferencias);
 //Ruta para enviar correo

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
     <link rel="stylesheet" href="../styles/stylelogin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
         </div>
 
         <div class="fsesion">
-            <form action="/turistas/login" method="post">
+            <form id="loginForm">
                 <div class="dtslogin"><br><br>
                     <label><strong>Correo Electronico</strong></label><br>
                     <input autocomplete="current-email" type="email" name="correo" placeholder="Correo Electronico">
@@ -42,5 +43,43 @@
             <img src="../imgs/Imglogin/regresarl.png" alt="" class="regresarl">
         </a>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); 
+
+    const correo = document.querySelector('input[name="correo"]').value;
+    const pass = document.querySelector('input[name="pass"]').value;
+
+    try {
+        const response = await fetch('/turistas/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ correo, pass }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                    }).then(() => {
+                        window.location.href='/turistas/mapa'
+                    });
+        } else {
+            Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+        }
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+    }
+});
+    </script>
+
 </body>
 </html>

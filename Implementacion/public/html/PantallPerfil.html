@@ -118,6 +118,7 @@
         })
         .then((turistaInfo) => {
           // Actualizar el contenido de los contenedores con la información del turista
+          document.getElementById("Nombreusuario").innerHTML += turistaInfo.Usuario;
           document.getElementById("Nombre").innerHTML +=
             turistaInfo.Nombre +
             " " +
