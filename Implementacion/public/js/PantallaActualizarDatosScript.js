@@ -95,3 +95,5 @@ function openFileSelector() {
         icono3.setAttribute("fill", "currentColor");
     }
   }
+
+
