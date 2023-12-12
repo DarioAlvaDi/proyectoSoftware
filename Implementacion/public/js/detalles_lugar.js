@@ -9,11 +9,27 @@ function colorear() {
 }
 
 function colorearf() {
-    var color = document.getElementById('flag');
+    const color = document.getElementById('flag');
+    const modal1 = new bootstrap.Modal(document.getElementById('modal1'));
+    //const modal1 = new bootstrap.Modal('#modal1');
+    const modal2 = new bootstrap.Modal(document.getElementById('modal2'));
+    //const modal2 = new bootstrap.Modal('#modal2');
+
     if (color.getAttribute("fill") !== "rgb(19, 126, 176)") {
         color.setAttribute("fill", "rgb(19, 126, 176)");
+        modal1.toggle();
+
+        setTimeout(() => {
+            modal1.hide();
+        }, 2000);
     }
-    else (color.removeAttribute("fill"));
+    else {
+        color.removeAttribute("fill");
+        modal2.toggle();
+        setTimeout(() => {
+            modal2.hide();
+        }, 2000);
+    }
     agregarHistorial()
 }
 function agregarHistorial() {

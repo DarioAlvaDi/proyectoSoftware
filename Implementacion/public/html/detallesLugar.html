@@ -194,6 +194,7 @@
             </div>
           </div>
 
+          <!-- Boton historial -->
           <div class="col">
             <div class="row">
               <h6>Marcar como visitado</h6>
@@ -201,7 +202,7 @@
 
             <div class="row">
               <a href="#" class="">
-                <button class="bopcions mb-3" onclick="colorearf()">
+                <button class="bopcions mb-3" onclick="colorearf(); notificacion();" >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"
@@ -256,6 +257,41 @@
         </div>
       </div>
     </div>
+
+
+    <!-- Notificaciones -->
+    <div
+            class="modal fade"
+            id="modal1"
+            tabindex="-1"
+            aria-labelledby="ModalLabel"
+            aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-body navColor">
+            <p>Este lugar se ha agregado a tu historial</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+            class="modal fade"
+            id="modal2"
+            tabindex="-1"
+            aria-labelledby="ModalLabel"
+            aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-body navColor">
+            <p>Este lugar se ha eliminado de tu historial</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
