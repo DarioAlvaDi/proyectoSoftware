@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
@@ -268,62 +268,53 @@ const obtenerInformacionTurista = (turistaId) => {
   });
 };
 
-// Función para realizar cambios en la tabla Turista
-const actdatos = async (req, res) => {
-  const { Id_Turista, Nombre, Telefono } = req.body; // Asegúrate de tener los datos adecuados
 
+// Actdatos function
+async function actdatos(req, res) {
+  const Id_Turista = req.session.Id_Turista;
   try {
-    // Actualizar el campo `Nombre`
-    await new Promise((resolve, reject) => {
-      connection.query(
-        'UPDATE Turista SET Nombre = ? WHERE Id_Turista = ?',
-        [Nombre, Id_Turista],
-        (err, results) => {
-          if (err) {
-            console.error('Error al actualizar el campo Nombre:', err);
-            reject(err);
-          } else {
-            console.log('Campo Nombre actualizado correctamente');
-            resolve(results);
-          }
-        }
-      );
-    });
+    console.log('Datos recibidos:', req.body);
+    const { Nombre, Telefono, contrasena, confirmarContrasena } = req.body;
 
-    // Actualizar el campo `Telefono`
-    await new Promise((resolve, reject) => {
-      connection.query(
-        'UPDATE Turista SET Telefono = ? WHERE Id_Turista = ?',
-        [Telefono, Id_Turista],
-        (err, results) => {
-          if (err) {
-            console.error('Error al actualizar el campo Telefono:', err);
-            reject(err);
-          } else {
-            console.log('Campo Telefono actualizado correctamente');
-            resolve(results);
-          }
-        }
-      );
-    });
+    // Verifica que al menos uno de los campos (Nombre, Telefono, contrasena) se proporciona
+    if (!Nombre && !Telefono && !contrasena) {
+      return res.status(400).json({ error: "Al menos uno de los campos (Nombre, Telefono, Contraseña) debe proporcionarse." });
+    }
 
-    res.status(200).json({ message: 'Datos actualizados correctamente' });
+    // Validar que la contraseña y la confirmación coincidan
+    if (contrasena !== confirmarContrasena) {
+      return res.status(400).json({ error: "La contraseña y la confirmación de la contraseña no coinciden." });
+    }
+
+    // Inicializa hashedPass
+    let hashedPass;
+
+    // Construye dinámicamente la parte SET de la consulta SQL en función de los campos proporcionados
+    const sets = [];
+    if (Nombre) {
+      sets.push('usuario = ?');
+    }
+    if (Telefono) {
+      sets.push('telefono = ?');
+    }
+    if (contrasena) {
+      // Utiliza bcrypt para cifrar la contraseña
+      hashedPass = await bcrypt.hash(contrasena, saltRounds);
+      sets.push('pass = ?');
+    }
+
+    // Junta las partes SET con comas
+    const setsString = sets.join(', ');
+
+    // Construye y ejecuta la consulta SQL
+    const result = await pool.query(`UPDATE Turista SET ${setsString} WHERE Id_Turista = ?`, [...(Nombre ? [Nombre] : []), ...(Telefono ? [Telefono] : []), ...(contrasena ? [hashedPass] : []), Id_Turista]);
+    console.log(result);
+
+    res.json({ message: 'Datos actualizados correctamente' });
+
   } catch (error) {
-    console.error('Error en la actualización de datos:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    console.error('Error al actualizar datos:', error);
   }
-
-  // // Cambios en el campo `pass`
-  // connection.query(
-  //   'ALTER TABLE Turista MODIFY COLUMN pass VARCHAR(20) NOT NULL',
-  //   (err, results) => {
-  //     if (err) {
-  //       console.error('Error al modificar el campo pass:', err);
-  //     } else {
-  //       console.log('Campo pass modificado correctamente');
-  //     }
-  //   }
-  // );
 }
 
 // Controlador pantalla detalles
