@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'Ledesma160403',
   database: 'AD_SISTEMAS'
 });
 
