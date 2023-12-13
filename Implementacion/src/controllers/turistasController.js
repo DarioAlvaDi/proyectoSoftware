@@ -354,7 +354,6 @@ const registrarPreferencias = async (req, res) => {
       if (err) throw err;
     });
   });
-  res.redirect('/turistas/mapa');
 };
 
 //Controlador pantalla favoritos
