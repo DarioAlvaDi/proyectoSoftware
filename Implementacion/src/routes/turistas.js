@@ -51,7 +51,7 @@ router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCom
 //Ruta para validar contraseña
 router.post('/validarcontra', turistasController.validacioncontraseña);
 //Ruta para pantalla Actualizar Datos
-//Esta linea generaba error: router.get('/actualizar', turistasController.actualizar);
+router.get('/actualizar', turistasController.actualizar);
 //Ruta para preferencia
 router.post('/pref', turistasController.registrarPreferencias);
 //Ruta para enviar correo

@@ -405,6 +405,10 @@ const historial = async (req, res) => {
 const itinerario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
 }
+//Controlador pantalla itinerario
+const actualizar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+}
 // Controlador para registrar un nuevo turista
 const agregarHistorial = async (req, res) => {
   const turista = req.session.Id_Turista;
@@ -600,10 +604,10 @@ const validacioncontraseña = async (req, res, next) => {
 
         if (match) {
           console.log('Turista encontrado');
-          res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+          res.status(200).json({ message: "Contraseña correcta" });
         } else {
           console.log('Contraseña incorrecta');
-          res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
+          res.status(500).json({ message: "Contraseña incorrecta" });
         }
       } catch (error) {
         console.error('Error al comparar contraseñas:', error);
@@ -813,6 +817,7 @@ module.exports = {
   validacioncontraseña,
   enviarCorreo,
   consultarPreferencias,
+  actualizar,
   agregarFavorito,
   consultarFavoritos,
   eliminarFavoritosIndividual
