@@ -112,5 +112,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function eliminar(id) {
+    let data = { id: id }
+    fetch('/turistas/eliminarHistorialIndividual',
+        {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    ).then(function () {
+        mostrarHistorial();
+    });
+}
 
+function eliminarTodo() {
+    fetch('/turistas/eliminarHistorialCompleto')
+        .then(function (response) {
+            mostrarHistorial();
+        })
+}
 
