@@ -151,7 +151,7 @@ async function checkCorreoExists(correo) {
 
 // Controlador pantalla de Inicio
 const bienvenida = async (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/html/bienvenida.html'));
+  res.sendFile(path.join(__dirname, '../../public/html/IU01 Pantalla incial.html'));
 }
 
 // Controlador pantalla de Login
