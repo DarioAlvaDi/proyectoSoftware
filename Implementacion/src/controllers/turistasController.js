@@ -4,7 +4,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const nodemailer = require("nodemailer");
-
+//Hola pichula
 // Configuración de la conexión a MySQL con piscina de conexiones
 const pool = mysql.createPool({
   connectionLimit: 10,
