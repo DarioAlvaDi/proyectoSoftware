@@ -2,18 +2,33 @@
 
 function colorear() {
     var color = document.getElementById('favorite');
+
+    const modal3 = new bootstrap.Modal(document.getElementById('modal3'));
+    const modal4 = new bootstrap.Modal(document.getElementById('modal4'));
+
     if (color.getAttribute("fill") !== "gold") {
         color.setAttribute("fill", "gold");
+        modal3.toggle();
+
+        setTimeout(() => {
+            modal3.hide();
+        }, 2000);
+
     }
-    else (color.removeAttribute("fill"));
+    else {
+        color.removeAttribute("fill");
+        modal4.toggle();
+
+        setTimeout(() => {
+            modal4.hide();
+        }, 2000);
+    }
 }
 
 function colorearf() {
     const color = document.getElementById('flag');
     const modal1 = new bootstrap.Modal(document.getElementById('modal1'));
-    //const modal1 = new bootstrap.Modal('#modal1');
     const modal2 = new bootstrap.Modal(document.getElementById('modal2'));
-    //const modal2 = new bootstrap.Modal('#modal2');
 
     if (color.getAttribute("fill") !== "rgb(19, 126, 176)") {
         color.setAttribute("fill", "rgb(19, 126, 176)");
