@@ -253,7 +253,7 @@ const informacionPerfil = async (req, res) => {
 // Función para obtener la información del turista desde la base de datos
 const obtenerInformacionTurista = (turistaId) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
+    const sql = 'SELECT Usuario, Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
     const values = [turistaId];
 
     pool.query(sql, values, (error, results) => {
