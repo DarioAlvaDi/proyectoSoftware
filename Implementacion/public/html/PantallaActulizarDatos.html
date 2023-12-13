@@ -35,36 +35,38 @@
                     <label id="btn-open-file-selector">Cambiar Foto</label>
                     <input type="file" name="avatar" id="avatar" />
                 </div>
-                <form action="patch">
+
+                <form method="PATCH" id="updateForm">
                     <div class="dtsActualizar">
                         <div class="col-12 center-items">
-                            <input type="text" placeholder="Nombre" id="nombre" class="form-control" disabled>
+                            <input name="Nombre" type="text" placeholder="Nombre de usuario" id="nombre" class="form-control">
                             <svg xmlns="http://www.w3.org/2000/svg" width="2.25rem" height="2.25rem" fill="currentColor" id="svg1" class="bi bi-pencil-square" viewBox="0 0 16 16" onclick="enabledNombre()">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                             </svg>
                         </div>
                         <div class="col-12 center-items">
-                            <input type="tel" placeholder="Telefono" id="telefono" class="form-control" disabled>
+                            <input name="Telefono" type="tel" placeholder="Telefono" id="telefono" class="form-control" disabled>
                             <svg xmlns="http://www.w3.org/2000/svg" width="2.25rem" height="2.25rem" fill="currentColor" id="svg2" class="bi bi-pencil-square" viewBox="0 0 16 16" onclick="enabledTelefono()">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                             </svg>
                         </div>
+
                         <div class="col-12 center-items">
-                            <input type="text" placeholder="Nueva contraseña" id="newPassword" class="form-control" disabled>
+                            <input name="contrasena" type="text" placeholder="Nueva contraseña" id="newPassword" class="form-control" disabled>
                             <svg xmlns="http://www.w3.org/2000/svg" width="2.25rem" height="2.25rem" fill="currentColor" id="svg3" class="bi bi-pencil-square" viewBox="0 0 16 16" onclick="enabledNuevaContraseña()">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                             </svg>
                         </div>
                         <div class="col-12 center-items">
-                            <input type="text" placeholder="Confirmar contraseña" id="confirmPass" class="form-control edit" disabled>
+                            <input name="confirmarContrasena" type="text" placeholder="Confirmar contraseña" id="confirmPass" class="form-control edit" disabled>
                         </div>
                     </div> 
                     <div class="botones">
                         <div class="col-12 center-items">
-                            <input type="button" value="Descartar cambios" id="" onclick="location.href='../html/PantallPerfil.html'">
+                            <input type="button" value="Volver a mi perfil" id="" onclick="location.href='../html/PantallPerfil.html'">
                             <input type="button" value="Guardar" id="guardar" data-bs-toggle="modal" data-bs-target="#modalGuardar">
                         </div>
                         
@@ -86,7 +88,7 @@
                     <div class="modal-body text-center">
                         <p>¿Está seguro de guardar los datos?</p>
                         <div class="center-items">
-                            <button type="button" class="btn btn-primary iconConfirm" id="confirmGuardarDatos" data-bs-toggle="modal" data-bs-target="#modalConfirm" onclick="actualizarDatos()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <button type="button" class="btn btn-primary iconConfirm" id="confirmGuardarDatos" data-bs-toggle="modal" data-bs-target="#modalConfirm" onclick="updateData()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                               </svg>Confirmar</button><!--aqui se guarda la info-->
                         </div>
@@ -133,7 +135,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+    </div> 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   
     <script>
@@ -160,28 +162,44 @@
             }
         };
 
-        async function actualizarDatos() {
-            try {
-                const response = await fetch('/turistas/actdatos', {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+        function updateData() {
+    // Obtén el formulario
+    const form = document.getElementById('updateForm');
 
-                if(response.ok){
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Datos guardados correctamente',
-                    }).then(() => {
-                        window.location.href = '/turistas/perfil'; 
-                    });
-                }
+    // Crea un objeto FormData para recopilar los datos del formulario
+    const formData = new FormData(form);
 
-            } catch (error) {
-                console.error('Error en la conexión con la base de datos:', error);
-            }
-        };
+    // Convierte FormData a un objeto JSON
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value;
+    });
+    console.log('Datos a enviar:', jsonData);
+
+
+    // Realiza una solicitud PATCH usando fetch
+    fetch('/turistas/actdatos', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json', // Especifica el tipo de contenido JSON
+        },
+        body: JSON.stringify(jsonData),
+    })
+    .then(response => {
+        // Manejar la respuesta del servidor
+        if (response.ok) {
+            console.log('Datos actualizados correctamente');
+            // Aquí puedes redirigir a otra página o realizar otras acciones
+        } else {
+            console.error('Error al actualizar datos');
+        }
+    })
+    .catch(error => {
+        // Manejar errores de red u otros errores
+        console.error('Error de red:', error);
+    });
+}
+
 
 
     </script>    
@@ -190,3 +208,16 @@
     <script type="text/javascript" src="../js/PantallaActualizarDatosScript.js"></script>
 </body>
 </html>
+
+<!--
+
+                        <div class="col-12 center-items">
+                            <input type="text" placeholder="Nueva contraseña" id="newPassword" class="form-control" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2.25rem" height="2.25rem" fill="currentColor" id="svg3" class="bi bi-pencil-square" viewBox="0 0 16 16" onclick="enabledNuevaContraseña()">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                            </svg>
+                        </div>
+                        <div class="col-12 center-items">
+                            <input type="text" placeholder="Confirmar contraseña" id="confirmPass" class="form-control edit" disabled>
+                        </div>-->

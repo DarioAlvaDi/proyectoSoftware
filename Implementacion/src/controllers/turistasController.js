@@ -188,21 +188,22 @@ const login = async (req, res, next) => {
 
       if (match) {
         console.log('Turista encontrado');
-        res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
+        res.status(200).json({ message: 'Autenticación exitosa' });
       } else {
         console.log('Contraseña incorrecta');
-        res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+        // Enviar respuesta JSON indicando que la autenticación falló
+        res.status(401).json({ message: 'Contraseña incorrecta' });
       }
     } else {
       console.log('Turista no encontrado');
-      res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+      // Enviar respuesta JSON indicando que el turista no fue encontrado
+      res.status(404).json({ message: 'Turista no encontrado' });
     }
   } catch (error) {
     console.error('Error en la consulta:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
-
 // Controlador para logout y destruye las variables de sesion
 const logout = async (req, res) => {
   req.session.destroy(err => {
@@ -251,7 +252,7 @@ const informacionPerfil = async (req, res) => {
 // Función para obtener la información del turista desde la base de datos
 const obtenerInformacionTurista = (turistaId) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
+    const sql = 'SELECT Usuario, Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
     const values = [turistaId];
 
     pool.query(sql, values, (error, results) => {
@@ -266,63 +267,62 @@ const obtenerInformacionTurista = (turistaId) => {
   });
 };
 
+
 // Función para realizar cambios en la tabla Turista
-const actdatos = async (req, res) => {
-  const { Id_Turista, Nombre, Telefono } = req.body; // Asegúrate de tener los datos adecuados
-
+// Función para realizar cambios en la tabla Turista
+// Actdatos function
+async function actdatos(req, res) {
+  const Id_Turista = req.session.Id_Turista;
   try {
-    // Actualizar el campo `Nombre`
-    await new Promise((resolve, reject) => {
-      connection.query(
-        'UPDATE Turista SET Nombre = ? WHERE Id_Turista = ?',
-        [Nombre, Id_Turista],
-        (err, results) => {
-          if (err) {
-            console.error('Error al actualizar el campo Nombre:', err);
-            reject(err);
-          } else {
-            console.log('Campo Nombre actualizado correctamente');
-            resolve(results);
-          }
-        }
-      );
-    });
+    console.log('Datos recibidos:', req.body);
+    const { Nombre, Telefono, contrasena, confirmarContrasena } = req.body;
 
-    // Actualizar el campo `Telefono`
-    await new Promise((resolve, reject) => {
-      connection.query(
-        'UPDATE Turista SET Telefono = ? WHERE Id_Turista = ?',
-        [Telefono, Id_Turista],
-        (err, results) => {
-          if (err) {
-            console.error('Error al actualizar el campo Telefono:', err);
-            reject(err);
-          } else {
-            console.log('Campo Telefono actualizado correctamente');
-            resolve(results);
-          }
-        }
-      );
-    });
+    // Verifica que al menos uno de los campos (Nombre, Telefono, contrasena) se proporciona
+    if (!Nombre && !Telefono && !contrasena) {
+      return res.status(400).json({ error: "Al menos uno de los campos (Nombre, Telefono, Contraseña) debe proporcionarse." });
+    }
 
-    res.status(200).json({ message: 'Datos actualizados correctamente' });
+    // Validar que la contraseña y la confirmación coincidan
+    if (contrasena !== confirmarContrasena) {
+      return res.status(400).json({ error: "La contraseña y la confirmación de la contraseña no coinciden." });
+    }
+
+    // Inicializa hashedPass
+    let hashedPass;
+
+    // Construye dinámicamente la parte SET de la consulta SQL en función de los campos proporcionados
+    const sets = [];
+    if (Nombre) {
+      sets.push('usuario = ?');
+    }
+    if (Telefono) {
+      sets.push('telefono = ?');
+    }
+    if (contrasena) {
+      // Utiliza bcrypt para cifrar la contraseña
+      hashedPass = await bcrypt.hash(contrasena, saltRounds);
+      sets.push('pass = ?');
+    }
+
+    // Junta las partes SET con comas
+    const setsString = sets.join(', ');
+
+    // Construye y ejecuta la consulta SQL
+    const result = await pool.query(`UPDATE Turista SET ${setsString} WHERE Id_Turista = ?`, [...(Nombre ? [Nombre] : []), ...(Telefono ? [Telefono] : []), ...(contrasena ? [hashedPass] : []), Id_Turista]);
+    console.log(result);
+
+    res.json({ message: 'Datos actualizados correctamente' });
   } catch (error) {
-    console.error('Error en la actualización de datos:', error);
+    console.error('Error al actualizar datos:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
-
-  // // Cambios en el campo `pass`
-  // connection.query(
-  //   'ALTER TABLE Turista MODIFY COLUMN pass VARCHAR(20) NOT NULL',
-  //   (err, results) => {
-  //     if (err) {
-  //       console.error('Error al modificar el campo pass:', err);
-  //     } else {
-  //       console.log('Campo pass modificado correctamente');
-  //     }
-  //   }
-  // );
 }
+
+
+
+
+
+
 
 // Controlador pantalla detalles
 const detalles = async (req, res) => {
@@ -352,7 +352,7 @@ const registrarPreferencias = async (req, res) => {
       if (err) throw err;
     });
   });
-  res.redirect('/turistas/mapa');
+ 
 };
 
 //Controlador pantalla favoritos
@@ -403,6 +403,12 @@ const historial = async (req, res) => {
 const itinerario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
 }
+
+//Controlador pantalla itinerario
+const actualizar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+}
+
 // Controlador para registrar un nuevo turista
 const agregarHistorial = async (req, res) => {
   const turista = req.session.Id_Turista;
@@ -598,10 +604,10 @@ const validacioncontraseña = async (req, res, next) => {
 
         if (match) {
           console.log('Turista encontrado');
-          res.sendFile(path.join(__dirname, '../../public/html/PantallaActulizarDatos.html'));
+          res.status(200).json({ message: "Contraseña correcta" });
         } else {
           console.log('Contraseña incorrecta');
-          res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
+          res.status(500).json({ message: "Contraseña incorrecta" });
         }
       } catch (error) {
         console.error('Error al comparar contraseñas:', error);
@@ -713,5 +719,6 @@ module.exports = {
   eliminarfavoritos,
   validacioncontraseña,
   enviarCorreo,
-  consultarPreferencias
+  consultarPreferencias,
+  actualizar
 }

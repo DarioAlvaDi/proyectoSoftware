@@ -36,6 +36,9 @@
           <img src="../imgs/imgPerfil/Ellipse 3.png" alt="" />
         </div>
         <div class="col-12 center-items">
+          <label id="Nombreusuario">Usuario: </label>
+        </div>
+        <div class="col-12 center-items">
           <label id="Nombre">Nombre: </label>
         </div>
         <div class="col-12 center-items">
@@ -115,6 +118,7 @@
         })
         .then((turistaInfo) => {
           // Actualizar el contenido de los contenedores con la información del turista
+          document.getElementById("Nombreusuario").innerHTML += turistaInfo.Usuario;
           document.getElementById("Nombre").innerHTML +=
             turistaInfo.Nombre +
             " " +

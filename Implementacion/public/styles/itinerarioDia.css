@@ -2,15 +2,11 @@
 @import url(css_bootstrap/bootstrap.css);
 
 .navColor{
-    background-color: #76ADFD;
+    background-color: #ffe552;
 }
 
 body {
-    background-image: url(../imgs/imgItinerarioDia/Fondo.png);
-    background-size: 100% 99.5vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-position: center;
+    background-color: #fff9d6;
 }
 
 .titulo{
