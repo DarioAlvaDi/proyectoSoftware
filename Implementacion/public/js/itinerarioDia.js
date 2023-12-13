@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nuevoElemento.id="lugar"+num;
 
     nuevoElemento.innerHTML = `
-    <div class="container rounded-pill border border-3 border-dark text-bg-dark p-3 m-3 mx-auto">
+    <div class="container rounded-pill border border-3 border-dark p-3 m-3 mx-auto navColor">
             <div class="row">
                 <div class="col text-center">
                     <img src="../imgs/itinerarioDia/FotoLugar.png" alt="busqueda">
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="row text-center">
 
                         <div class="col">
-                            <select name="" id="" class="form-select text-bg-light form-select-sm " type="time">
+                            <select name="" id="" class="form-select text-bg-light form-select-sm w-auto" type="time">
                                 <option selected>Hora</option>
                                 <option value="00:00">00:00</option>
                                 <option value="01:00">01:00</option>
@@ -63,13 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
 
                         <div class="col">
-                            <select name="" id=""  class="form-select text-bg-light form-select-sm">
+                            <select name="" id=""  class="form-select text-bg-light form-select-sm w-auto">
                                 <option selected value="0">No visitado</option>
                                 <option value="1">Visitado</option>
                             </select>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col">
 
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalElemento" id="eliminar">
                                 <img src="../imgs/itinerarioDia/BotonEliminar.png" alt="botonEliminar">
