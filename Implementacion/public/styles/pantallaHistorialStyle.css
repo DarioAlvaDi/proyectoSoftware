@@ -1,16 +1,13 @@
-body {
-  background-image: url("../../imgs/imgHistorial/Xochimilco.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 99.5vh;
-  background-position: center;
+body{
+  background-color: #fff9d6;
 }
+
 
 h1 {
   text-align: center;
 }
 
-header {
+header{
   z-index: 1000;
   position: fixed;
   top: 0;
@@ -18,54 +15,38 @@ header {
   width: 100%;
 }
 
-.background-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("../../imgs/imgHistorial/Xochimilco.png");
-  background-size: contain;
-  opacity: 0.2;
-  padding: 0;
-  margin: 0;
-}
 
-.busqueda {
+.busqueda{
   z-index: 10;
 }
 
-.navColor {
-  background-color: #abffb4;
+.navColor{
+  background-color: #ffe552;
 }
-.inicio {
-  text-align: right;
-}
+.inicio{text-align: right;}
 
-.inicio img {
+.inicio img{
   width: 3.4375rem;
   height: 3.4375rem;
   padding: 6px;
 }
 
-.regresar {
-  text-align: left;
-}
+.regresar{text-align: left;}
 
-.regresar img {
+.regresar img{
   width: 3.4375rem;
   height: 3.4375rem;
   padding: 6px;
 }
-.titulo {
+.titulo{
   text-align: center;
   color: #000;
   font-family: Roboto;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 900;
-  line-height: 1.875rem;
-}
+  line-height: 1.875rem; 
+}  
 .day {
   margin: 10px;
   padding: 10px;
@@ -75,16 +56,16 @@ header {
   background-color: #000;
 }
 
-#eliminarbtn {
+#eliminarbtn{
   width: 11.5rem;
   height: 2.3125rem;
-  background: #d9d9d9;
+  background: #D9D9D9;
   border: 1px solid #000000;
   border-radius: 25px;
   color: #000;
-  transition: 0.2s all ease;
+  transition: .2s all ease;
   padding: 8px 12px;
-  margin-top: 2rem;
+  margin-top:2rem;
   text-align: center;
   font-family: Roboto;
   font-size: 0.9375rem;
@@ -94,29 +75,15 @@ header {
 
 button:hover {
   background-color: #202020;
+  color:white;
 }
 
-.container {
+.container{
   margin-top: 5rem;
 }
 
-.nameSitio {
-  color: #000;
-  text-align: center;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: Inter;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.75rem; /* 200% */
-}
 
-.contenedorSitio {
-  background-color: #abffb4;
-  z-index: 1;
-}
-
-.detalles {
+.detalles{
   width: 8rem;
   height: 2rem;
   color: #000;
@@ -129,41 +96,41 @@ button:hover {
   line-height: 1.8125rem;
   border: 1px solid #000000;
   border-radius: 25px;
-  margin-top: 1rem;
+  margin-top:1rem;
 }
 
-.boton-redondo {
+.boton-redondo{
   padding: 5px 10px;
   font-size: 16px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: 50%; /* Esto hace que el botón sea redondo */
-  background-color: #abffb4;
+  background-color: #ffda1f;
   border: none;
-  outline: none;
+  outline: none;    
 }
 
-.boton-redondo svg {
+.boton-redondo svg{
   margin-bottom: 0.5rem;
 }
 
 .boton-redondo:hover {
-  background-color: #abffb4;
+  background-color: #ffda1f;
 }
 
-.resize {
+.resize{
   margin-top: -3rem;
 }
 
-.modal-content {
+.modal-content{
   border-radius: 1.25rem;
   border: 1px solid #000;
-  background: #8aec94;
+  background: #ffe552;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.modal-content div p {
+.modal-content div p{
   color: #000;
   text-align: center;
   font-family: Roboto;
@@ -174,12 +141,12 @@ button:hover {
   margin-bottom: 2.12rem;
 }
 
-.modal-content div button {
+.modal-content div button{
   width: 18.625rem;
   height: 2.9375rem;
   border-radius: 1.875rem;
   border: 1px solid #000;
-  background: #d9d9d9;
+  background: #D9D9D9;
   padding: 0.7rem 0.8rem;
   margin-bottom: 1.25rem;
   font-family: Roboto;
@@ -189,48 +156,141 @@ button:hover {
   color: #000;
 }
 
-.iconConfirm {
+.iconConfirm{
   text-align: left;
 }
-.iconConfirm svg {
+.iconConfirm svg{
   margin-right: 30%;
 }
-.iconConfirm2 {
+.iconConfirm2{
   text-align: left;
 }
-.iconConfirm2 svg {
+.iconConfirm2 svg{
   margin-right: 15%;
 }
-.iconCancel {
+.iconCancel{
   text-align: left;
 }
-.iconCancel svg {
+.iconCancel svg{
   margin-right: 30%;
 }
 
-.historial-container {
+.tab-container {
+  position: relative;
+}
+
+.tab-content {
+  z-index: 2;
+  position: relative;
+}
+
+.historial-container{
   max-width: 17rem;
   max-height: 10rem;
   min-height: 10rem;
   padding: 1.25rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background-color: #ffe552;
   z-index: 2;
   border-radius: 25px;
+  position: relative;
+  overflow: hidden;
 }
 
-.historial-empty {
-  text-align: center;
-  color: #777;
+.historial-empty{
+  text-align:center;
+  color:#777;
 }
 
-.historial-empty p {
+.historial-empty p{
   color: #000;
   text-align: center;
   font-family: Roboto;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 900;
-  line-height: 1.875rem;
+  line-height: 1.875rem; 
   margin-top: 10%;
 }
+
+
+.contenedorSitio{
+  width: auto;
+  height: 8rem;
+  position:relative;
+  z-index:2;
+  background-color:#ffda1f;
+  color:black;
+  display:flex;
+  align-items: center;
+  flex-wrap:wrap;
+  min-height:60px;
+  padding: 16px;
+  border-radius:24px;
+  font-size:16px;
+  margin: 5rem 0 5rem 0;
+}
+
+.imagenSitio{
+  width:6rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius:5px;
+  margin-right:1rem ;
+}
+
+#nameSitio{
+  display:grid;
+  gap:0.125rem;
+}
+
+.eliminarSitio1x1{
+  display:flex;
+  gap:6px;
+  margin-left:auto;
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .contenedorSitio{
+      width: auto;
+      height: 15rem;
+  }
+
+  .imagenSitio{
+      width:12rem;
+      height: 12rem;
+  }
+  .boton-redondo svg{
+      width:70px;
+      height:70px;
+  }
+
+  .detalles{
+      width: 9rem;
+      height: 3rem;
+  }
+}
+
+@media (max-width:350px) {
+
+  .imagenSitio{
+      width:4.5rem;
+      height: 4.5rem;
+  }
+  .boton-redondo svg{
+      width:25px;
+      height:25px;
+  }
+
+  .detalles{
+      width: 6rem;
+      height: 2rem;
+  }
+
+  .modal-content div button{
+      width: 16.625rem;
+      height: 2.9375rem;;
+  }
+}
+
