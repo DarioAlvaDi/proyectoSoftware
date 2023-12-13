@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
@@ -188,14 +188,16 @@ const login = async (req, res, next) => {
 
       if (match) {
         console.log('Turista encontrado');
-        res.sendFile(path.join(__dirname, '../../public/html/pantallaPrincipal.html'));
+        res.status(200).json({ message: 'Autenticación exitosa' });
       } else {
         console.log('Contraseña incorrecta');
-        res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+        // Enviar respuesta JSON indicando que la autenticación falló
+        res.status(401).json({ message: 'Contraseña incorrecta' });
       }
     } else {
       console.log('Turista no encontrado');
-      res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
+      // Enviar respuesta JSON indicando que el turista no fue encontrado
+      res.status(404).json({ message: 'Turista no encontrado' });
     }
   } catch (error) {
     console.error('Error en la consulta:', error);
