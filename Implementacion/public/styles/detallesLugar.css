@@ -1,5 +1,9 @@
 @import url(css_bootstrap/bootstrap.css);
 
+body{
+    background-color: #fff9d6;
+}
+
 header{
     z-index: 1000;
     position: fixed;
@@ -34,7 +38,7 @@ header{
 }    
 
 .navColor{
-    background-color: #DDCC90;
+    background-color: #ffe552;
 }
 
 .bopcions{
@@ -45,6 +49,14 @@ header{
 
 #flag{
 rotate: -35deg;
+}
+
+#modal1{
+    rotate: -35deg;
+}
+
+#modal2{
+    rotate: -35deg;
 }
 
 .espace{

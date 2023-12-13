@@ -1,4 +1,6 @@
-/*Función que hace aparecer el mensaje de Error en los Inputs del formulario a los que se le haya ingresado un valor no válido */
+let codigo;
+
+;/*Función que hace aparecer el mensaje de Error en los Inputs del formulario a los que se le haya ingresado un valor no válido */
 function mostrarError(elementId, message) {
   var errorElement = document.getElementById(elementId + "-error");
   errorElement.innerHTML = message;
@@ -93,10 +95,10 @@ function validarTelefono() {
 function validarCorreo() {
   let CorreoInput = document.getElementById("exampleInputEmail1");
   let CorreoValor = CorreoInput.value.trim();
-  let CorreoRegex = /^[\w._]+@[a-z]+\.[\a-z.]+$/;
+  let CorreoRegex = /^[\w._]+@gmail\.com+$/;
 
   if (!CorreoRegex.test(CorreoValor)) {
-    mostrarError("exampleInputEmail1", "El correo ingresada no es válido<br>");
+    mostrarError("exampleInputEmail1", "El correo ingresada no es válido. Ingresar solo correo gmail<br>");
     return false;
   } else {
     ocultarError("exampleInputEmail1");
@@ -159,7 +161,7 @@ async function validarFormulario(event) {
         },
         body: JSON.stringify({
           Usuario: valorUsuario,
-          Correo: valorCorreo, 
+          Correo: valorCorreo,
         }),
       });
 

@@ -205,33 +205,55 @@ button:hover {
 .iconCancel svg{
     margin-right: 30%;
 }
+.tab-container {
+    position: relative;
+}
 
-.historial-container{
+.tab-content {
+    z-index: 2;
+    position: relative;
+}
+
+.favoritos-container {
     max-width: 17rem;
     max-height: 10rem;
     min-height: 10rem;
     padding: 1.25rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #FF5858;
     z-index: 2;
     border-radius: 25px;
+    position: relative;
+    overflow: hidden;
 }
 
-.historial-empty{
-    text-align:center;
-    color:#777;
+.favoritos-empty {
+    text-align: center;
+    color: #777;
 }
 
-.historial-empty p{
+.favoritos-empty p {
     color: #000;
     text-align: center;
     font-family: Roboto;
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 900;
-    line-height: 1.875rem; 
+    line-height: 1.875rem;
     margin-top: 10%;
 }
+
+.tab-shadow {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: calc(100% );
+    height: calc(100%);
+    background-color: white;
+    z-index: 1;
+    border-radius: 25px;
+}
+
 .boton-en-fondo {
     position: fixed;
     bottom: 0;
@@ -239,6 +261,7 @@ button:hover {
     transform: translateX(-50%);
     background: transparent ; /* Fondo transparente para que se vea la imagen de fondo */
     border: none; /* Sin borde */
-    padding: 10px 50px; /* Ajusta el relleno según sea necesario */
     cursor: pointer;
 }
+
+

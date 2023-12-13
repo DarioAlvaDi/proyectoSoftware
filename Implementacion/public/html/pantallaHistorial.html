@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="pantallaHistorialStyle.css">
+    <link rel="stylesheet" href="../styles/pantallaHistorialStyle.css">
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"
+    ></script>
     <title>Historial</title>
 </head>
 <!-- En tu_nueva_pantalla.html -->
@@ -16,18 +20,17 @@
         <nav class="navbar navbar-expand-lg navColor">
             <div class="container-fluid">
                 <div class="col-3 regresar">
-                    <a href="mapa.html"><img src="img/image 29.png" alt=""></a>
+                    <a href="/turistas/perfil"><img src="../imgs/imgHistorial/image 29.png" alt=""></a>
                 </div>
                 <div class="col-6 titulo">
                     HISTORIAL
                 </div>
                 <div class="col-3 inicio">
-                    <a><img src="img/image 30.png" alt=""></a>
+                    <a><img src="../imgs/imgHistorial/image 30.png" alt=""></a>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="background-image"></div>
     <main>
         <div class="container">
             
@@ -37,14 +40,15 @@
                 <form  action="" class="d-flex rounded-pill border border-3 border-dark m-4 p-2 text-bg-light busqueda bg-white" role="search" style="opacity: 0.6;">
                     <input type="search" class="form-control text-bg-light busqueda bg-white" placeholder="Buscar en el itinerario" aria-label="Search">
                     <button class="btn busqueda" type="submit">
-                        <img src="img/Lupa.png" alt="busqueda">
+                        <img src="../imgs/imgHistorial/Lupa.png" alt="busqueda">
                     </button>
                 </form>
             </div>
                 <div class="col-12 center-items" style="margin-top: 0.5rem; z-index: 2" id="contenido">
-                    <div id="selectedDayInfo"></div>
                     <div id="historial"></div>
+                    
                 </div>
+                <div style="height: 4rem"></div>
             </div>
         </div>
         <!--Ventana de confirmacion para eliminar el historial-->
@@ -69,17 +73,9 @@
         </div>
     </main>
 
-    <footer class="fixed-bottom navColor">
-        <div class="container-fluid " style="margin-bottom: 2.5rem">
-            <div class="row"> 
-            <div class="col-12 text-center"><button id="eliminarbtn" data-bs-toggle="modal" data-bs-target="#modalEliminarHistorial"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16" style="margin-right: 10%">
-                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-              </svg>Eliminar historial</button></div>    
-            </div>
-        </div>
-    </footer>
+    
 
-    <script src="pantallHistorialScript.js"></script>
+    <script src="../js/pantallHistorialScript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

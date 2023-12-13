@@ -18,17 +18,12 @@ router.get('/formulario', turistasController.pedirdatos);
 router.get('/perfil', turistasController.perfil);
 //Ruta para sacar infromacion para pantalla perfil
 router.get('/informacionPerfil', turistasController.informacionPerfil);
-//Ruta de pantalla para modificar datos
-router.get('/actualizar', turistasController.actualizardatos);
 //Ruta para modificar datos
-router.put('/actdatos', turistasController.actdatos);
+router.patch('/actdatos', turistasController.actdatos);
 //Ruta de pantalla de preferencias
 router.get('/preferencias', turistasController.preferencias);
-//Ruta para registrar Preferencias
-router.post('/registrarPreferencias', turistasController.registrarPreferencias);
-// router.get('/pantalla', turistasController.Inicio);
+//Ruta de pantalla de Detalles
 router.get('/detalles', turistasController.detalles);
-
 //Ruta de pantalla de Favoritos
 router.get('/favoritos', turistasController.favoritos);
 // Ruta para el registro de turistas
@@ -36,6 +31,39 @@ router.post('/registro', turistasController.registrarTurista);
 //Ruta para valdiacion de que el usuario no este en la BD
 router.post('/usuario', turistasController.usuario);
 //Ruta para eliminar turistas
-router.post('/eliminar', turistasController.eliminarTurista);
-
+router.delete('/eliminar', turistasController.eliminarTurista);
+//Ruta de pantalla de recuperar contraseña
+router.get('/recuperar', turistasController.recuperar);
+//Ruta de pantalla de Historial
+router.get('/historial', turistasController.historial);
+//Ruta de pantalla de Itinerario
+router.get('/itinerario', turistasController.itinerario);
+//Ruta de pantalla para validar contraseña
+router.get('/validar', turistasController.validar);
+//Ruta para agrregar datos de historial
+router.post('/agregarHistorial', turistasController.agregarHistorial);
+//Ruta para obtener datos de historial
+router.get('/consultarHistorial', turistasController.consultarHistorial);
+//Ruta para eliminar registros de historial
+router.post('/eliminarHistorialIndividual', turistasController.eliminarHistorialIndividual);
+//Ruta eliminar un historial completo
+router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCompleto);
+//Ruta para validar contraseña
+router.post('/validarcontra', turistasController.validacioncontraseña);
+//Ruta para pantalla Actualizar Datos
+router.get('/actualizar', turistasController.actualizar);
+//Ruta para preferencia
+router.post('/pref', turistasController.registrarPreferencias);
+//Ruta para enviar correo
+router.post('/enviarCorreo', turistasController.enviarCorreo);
+//Ruta para obtener datos de historial
+router.get('/consultarPreferencias', turistasController.consultarPreferencias);
+//Ruta para agrregar datos de historial
+router.post('/agregarFavorito', turistasController.agregarFavorito);
+//Ruta para obtener datos de historial
+router.get('/consultarFavoritos', turistasController.consultarFavoritos);
+//Ruta para eliminar registros de historial
+router.post('/eliminarFavoritosIndividual', turistasController.eliminarFavoritosIndividual);
+//Ruta eliminar un historial completo
+router.get('/eliminarfavoritos', turistasController.eliminarfavoritos);
 module.exports = router;

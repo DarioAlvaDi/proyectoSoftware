@@ -7,30 +7,27 @@
     <title>validarContraseña</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylevalidarcontraseña.css">
+    <link rel="stylesheet" href="../styles/stylevalidarcontraseña.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="contenedor">
-        <img src="img/chichen.jpg" alt="" class="imglogin">
+        <img src="../imgs/imgValidarcontraseña/chichen.jpg" alt="" class="imglogin">
         <div class="Bienvenida">
             <h1>Validación contraseña</h1>
         </div>
         <div class="logo">
-            <img src="img/image-20@2x.png" alt="" class="imglogo">
+            <img src="../imgs/imgValidarcontraseña/image-20@2x.png" alt="" class="imglogo">
         </div>
 
         <div class="container mt-5"> <!-- Agregamos la clase mt-4 para separación -->
             <div class="row ">
                 <div class="fsesion">
-                    <form action="mapa.html" method="get">
+                    <form id="contraForm">
                         <div class="dtslogin">
                             <label for="contraseña">Contraseña</label><br>
-                            <input type="password" placeholder="Escribe tu contraseña">
-                            <br>
-                            <br>
-                            <label for="contraseconf">Reescribe tu contraseña</label><br>
-                            <input type="password" placeholder="Confirma tu contraseña">
+                            <input type="password" placeholder="Escribe tu contraseña" name="pass">
                             <br>
                             <br>
                             <button type="submit" class="textbutton">Validar</button>
@@ -38,8 +35,8 @@
                     </form>
                 </div>
             </div>
-                <a href="bienvenida.html">
-                    <img src="img/regresarl.png" alt="" class="regresarl">
+                <a href="/turistas/perfil">
+                    <img src="../imgs/imgValidarcontraseña/regresarl.png" alt="" class="regresarl">
                 </a>
             
         </div>
@@ -48,6 +45,41 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
+        <script>
+            document.getElementById('contraForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); 
+
+    const pass = document.querySelector('input[name="pass"]').value;
+
+    try {
+        const response = await fetch('/turistas/validarcontra', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ pass }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                    }).then(() => {
+                        window.location.href='/turistas/actualizar'
+                    });
+        } else {
+            Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+        }
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+    }
+});
+        </script>
 </body>
 
 </html>

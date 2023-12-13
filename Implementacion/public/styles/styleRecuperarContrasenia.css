@@ -1,5 +1,5 @@
 body{
-    background-color: blanchedalmond;
+    background-color: blachedalmond;
     margin: 0;
     padding: 0;
 }
@@ -46,7 +46,7 @@ body{
     margin-bottom: 100px;
 }
 
-.freenviar{
+.fboton{
     position: absolute;
     top: 55%;
     left: 50%;
@@ -62,13 +62,16 @@ body{
     font-size: 20px;
 }
 
-.reenviar{
+.boton2{
+    margin: 35px;
+    height: 40px;
+    width: 125px;
+}
+
+.boton {
     margin: 35px;
     height: 40px;
     width: 155px;
-}
-
-button {
     --primary-color: #8C493E;
     --secondary-color: #fff;
     --hover-color: #111;
@@ -87,46 +90,46 @@ button {
     font-weight: bold;
   }
   
-  button .arrow-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  button .arrow {
-    margin-top: 1px;
-    width: var(--arrow-width);
-    background: var(--primary-color);
-    height: var(--arrow-stroke);
-    position: relative;
-    transition: 0.2s;
-  }
-  
-  button .arrow::before {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    border: solid var(--secondary-color);
-    border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
-    display: inline-block;
-    top: -3px;
-    right: 3px;
-    transition: 0.2s;
-    padding: 3px;
-    transform: rotate(-45deg);
-  }
-  
-  button:hover {
-    background-color: var(--hover-color);
-  }
-  
-  button:hover .arrow {
-    background: var(--secondary-color);
-  }
-  
-  button:hover .arrow:before {
-    right: 0;
-  }
+.boton .arrow-wrapper {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.boton .arrow {
+margin-top: 1px;
+width: var(--arrow-width);
+background: var(--primary-color);
+height: var(--arrow-stroke);
+position: relative;
+transition: 0.2s;
+}
+
+.boton .arrow::before {
+content: "";
+box-sizing: border-box;
+position: absolute;
+border: solid var(--secondary-color);
+border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+display: inline-block;
+top: -3px;
+right: 3px;
+transition: 0.2s;
+padding: 3px;
+transform: rotate(-45deg);
+}
+
+.boton:hover {
+background-color: var(--hover-color);
+}
+
+.boton:hover .arrow {
+background: var(--secondary-color);
+}
+
+.boton:hover .arrow:before {
+right: 0;
+}
 
 .olvidar{
     position: absolute;
@@ -176,4 +179,52 @@ button {
     }
 
     
+}
+
+/* Estilos del mensaje emergente */
+
+.mi-alert {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 21rem;
+    height: 13.75rem;
+    background-color: #000;
+    opacity: 0.95;
+    color: #FFF;
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-direction: column; /* Alinear elementos verticalmente */
+}
+
+#btnContinuar {
+    margin-top: 2.5rem; /* Espacio entre el mensaje y el botón */
+    padding: 0; /* Elimina el espaciado interno del botón */
+    background-color: transparent; /* Color de fondo transparente */
+    color: #48ACD7; /* Color de texto del botón */
+    border: none; /* Elimina el borde del botón */
+    cursor: pointer;
+}
+
+#btnContinuar:disabled {
+    opacity: 0.5; /* Opacidad reducida cuando el botón está desactivado */
+    cursor: not-allowed; /* Cambia el cursor cuando el botón está desactivado */
+}
+
+.boton-regresar {
+    display: flex;
+}
+
+.boton-regresar img {
+    max-width: 20px; /* Tamaño máximo de la imagen */
+    height: auto;
 }

@@ -1,6 +1,8 @@
+body{
+    background-color: #fff9d6;
+}
+
 header{
-    background-color: #D5F2E1; 
-    text-align: center;
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -9,7 +11,7 @@ header{
 }
 
 h4{
-    margin-top: 55px;
+    margin-top: 100px;
 }
 
 h4,h6{
@@ -17,27 +19,41 @@ h4,h6{
     z-index: 1;
 }
 
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../imgs/ImgPreferencias/Cenote.jpg');
-    background-size: contain;
-    opacity: 0.2;
-    padding: 0;
-    margin: 0;
-    /*background-repeat: no-repeat;*/
+
+.navColor{
+    background-color: #ffe552;
+}
+.inicio{text-align: right;}
+
+.inicio img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
 }
 
-/* Nueva regla para hacer que el tamaño de la imagen sea responsive 
-@media (max-width: 100000px) {
-    .background-image {
-        background-size: contain;
-    }
-}*/
+.regresar{text-align: left;}
 
+.regresar img{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    padding: 6px;
+}
+.titulo{
+    text-align: center;
+    color: #000;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem; 
+}    
+
+
+.center-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .contenedor {
     display: flex;
@@ -70,8 +86,8 @@ h4,h6{
 
 .contenedor .checkbox ul li label {
     display: block;
-    background: #64D6BA;
-    border: 1px solid #64D6BA;
+    background: #ffda1f;
+    border: 1px solid #ffda1f;
     border-radius: 25px;
     color: #000000;
     transition: .2s all ease;
@@ -91,8 +107,8 @@ h4,h6{
 }
 
 .contenedor .checkbox ul li input[type=checkbox]:checked + label {
-    background: #047055;
-    border: 1px solid #047055;
+    background: #bd8400;
+    border: 1px solid #895f10;
     color: #FFFFFF;
 }
 
@@ -118,7 +134,7 @@ h4,h6{
 
 .contenedor .number input[type=number] {
     display: inline-block;
-    background: #64D6BA;
+    background: #ffda1f;
     border: 1px solid #000000;
     border-radius: 25px;
     color: #000000;
