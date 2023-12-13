@@ -9,7 +9,7 @@ function colorear() {
     if (color.getAttribute("fill") !== "gold") {
         color.setAttribute("fill", "gold");
         modal3.toggle();
-
+        agregarFavorito()
         setTimeout(() => {
             modal3.hide();
         }, 2000);
@@ -18,7 +18,7 @@ function colorear() {
     else {
         color.removeAttribute("fill");
         modal4.toggle();
-
+        eliminarfavorito()
         setTimeout(() => {
             modal4.hide();
         }, 2000);
@@ -33,7 +33,7 @@ function colorearf() {
     if (color.getAttribute("fill") !== "rgb(19, 126, 176)") {
         color.setAttribute("fill", "rgb(19, 126, 176)");
         modal1.toggle();
-
+        agregarHistorial()
         setTimeout(() => {
             modal1.hide();
         }, 2000);
@@ -41,15 +41,31 @@ function colorearf() {
     else {
         color.removeAttribute("fill");
         modal2.toggle();
+        eliminarHistorial()
         setTimeout(() => {
             modal2.hide();
         }, 2000);
     }
-    agregarHistorial()
 }
-function agregarHistorial() {
+function eliminarHistorial() {
     const urlParams = new URLSearchParams(window.location.search);
 
+    const id = urlParams.get('id')
+    let data = { id: id }
+    fetch('/turistas/eliminarFavoritosIndividual',
+        {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    ).then(function () {
+    });
+}
+function agregarHistorial() {
+
+    const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id')
     let data = { id: id }
     fetch('/turistas/agregarHistorial',
@@ -62,6 +78,41 @@ function agregarHistorial() {
         }
     )
 }
+
+function eliminarfavorito() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const id = urlParams.get('id')
+    let data = { id: id }
+    fetch('/turistas/eliminarFavoritosIndividual',
+        {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    ).then(function () {
+    });
+}
+
+function agregarFavorito() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const id = urlParams.get('id')
+    let data = { id: id }
+    fetch('/turistas/agregarFavorito',
+        {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    )
+
+}
+
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
 

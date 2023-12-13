@@ -51,11 +51,19 @@ router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCom
 //Ruta para validar contraseña
 router.post('/validarcontra', turistasController.validacioncontraseña);
 //Ruta para pantalla Actualizar Datos
-router.get('/actualizar', turistasController.actualizar);
+//Esta linea generaba error: router.get('/actualizar', turistasController.actualizar);
 //Ruta para preferencia
 router.post('/pref', turistasController.registrarPreferencias);
 //Ruta para enviar correo
 router.post('/enviarCorreo', turistasController.enviarCorreo);
 //Ruta para obtener datos de historial
 router.get('/consultarPreferencias', turistasController.consultarPreferencias);
+//Ruta para agrregar datos de historial
+router.post('/agregarFavorito', turistasController.agregarFavorito);
+//Ruta para obtener datos de historial
+router.get('/consultarFavoritos', turistasController.consultarFavoritos);
+//Ruta para eliminar registros de historial
+router.post('/eliminarFavoritosIndividual', turistasController.eliminarFavoritosIndividual);
+//Ruta eliminar un historial completo
+router.get('/eliminarfavoritos', turistasController.eliminarfavoritos);
 module.exports = router;

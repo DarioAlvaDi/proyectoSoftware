@@ -34,7 +34,7 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Favoritos(
 	Id_Favoritos INT AUTO_INCREMENT PRIMARY KEY,
-	Id_Lugar INT NOT NULL,
+	Id_Lugar VARCHAR(50) NOT NULL,
 	Id_Turista INT NOT NULL
 );
 ALTER TABLE Favoritos ADD FOREIGN KEY (Id_Turista) references Turista(Id_Turista) 
@@ -47,8 +47,6 @@ CREATE TABLE Lugar(
 	Nombre VARCHAR(50) NOT NULL
 );
 ALTER TABLE Itinerario ADD FOREIGN KEY (Id_Lugar) references Lugar(Id_Lugar) 
-ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE Favoritos ADD FOREIGN KEY (Id_Lugar) references Lugar(Id_Lugar) 
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Historial_busqueda(
