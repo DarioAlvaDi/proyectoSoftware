@@ -22,6 +22,8 @@ router.get('/informacionPerfil', turistasController.informacionPerfil);
 router.patch('/actdatos', turistasController.actdatos);
 //Ruta de pantalla de preferencias
 router.get('/preferencias', turistasController.preferencias);
+//Ruta de pantalla de preferencias de Actualizar Datos
+router.get('/preferencias2', turistasController.preferencias2);
 //Ruta de pantalla de Detalles
 router.get('/detalles', turistasController.detalles);
 //Ruta de pantalla de Favoritos

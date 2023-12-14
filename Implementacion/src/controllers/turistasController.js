@@ -326,26 +326,48 @@ const preferencias = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
 }
 
+//Controlador pantalla preferencias de Actualizar Datos
+const preferencias2 = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/Preferencias-Datos.html'));
+}
 // Controlador para insertar Preferencias en BD
 const registrarPreferencias = async (req, res) => {
   const turistaId = req.session.Id_Turista;
-  console.log(turistaId)
+  console.log(turistaId);
   const preferencia = req.body.preferencias || [];
   console.log(preferencia);
-  // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
-  const sql = `
-        INSERT INTO Preferencias (
-          Nombre,
-          Id_Turista
-        ) VALUES (?, ?)
-      `;
 
-  preferencia.forEach((preference) => {
-    pool.query(sql, [preference, turistaId], (err, result) => {
-      if (err) throw err;
+  // Eliminar preferencias existentes para el turistaId
+  const deleteSql = `
+    DELETE FROM Preferencias
+    WHERE Id_Turista = ?
+  `;
+
+  pool.query(deleteSql, [turistaId], (deleteErr, deleteResult) => {
+    if (deleteErr) {
+      console.error(deleteErr);
+      return res.status(500).send("Error al eliminar preferencias existentes.");
+    }
+
+    // Si la eliminación es exitosa, proceder con la inserción de nuevas preferencias
+    const insertSql = `
+      INSERT INTO Preferencias (
+        Nombre,
+        Id_Turista
+      ) VALUES (?, ?)
+    `;
+
+    // Insertar las nuevas preferencias
+    preferencia.forEach((preference) => {
+      pool.query(insertSql, [preference, turistaId], (insertErr, insertResult) => {
+        if (insertErr) {
+          console.error(insertErr);
+        }
+      });
     });
   });
 };
+
 
 //Controlador pantalla favoritos
 const favoritos = async (req, res) => {
@@ -788,6 +810,7 @@ module.exports = {
   actdatos,
   registrarTurista,
   preferencias,
+  preferencias2,
   eliminarTurista,
   detalles,
   favoritos,
