@@ -207,3 +207,5 @@ async function validarFormulario(event) {
 }
 
 document.forms[0].addEventListener('submit', validarFormulario);
+document.getElementById('exampleInputPassword1').addEventListener('input', validarContraseñas);
+document.getElementById('passwordconfirm').addEventListener('input', validarContraseñas);
