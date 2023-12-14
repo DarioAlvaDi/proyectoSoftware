@@ -1,13 +1,14 @@
 body {
     font-family: Arial, sans-serif;
     background-color: antiquewhite;
+    text-align: center;
 }
 
 h1 {
     text-align: center;
 }
 
-header{
+header {
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -15,43 +16,88 @@ header{
     width: 100%;
 }
 
-.navColor{
-    background-color: #76ADFD;
+.navColor {
+    background-color: #e7bd41;
 }
-.inicio{text-align: right;}
 
-.inicio img{
+.inicio {
+    text-align: right;
+}
+
+.inicio img {
     width: 3.4375rem;
     height: 3.4375rem;
     padding: 6px;
 }
 
-.regresar{text-align: left;}
+.regresar {
+    text-align: left;
+}
 
-.regresar img{
+.regresar img {
     width: 3.4375rem;
     height: 3.4375rem;
     padding: 6px;
 }
-.titulo{
+
+.titulo {
     text-align: center;
     color: #000;
     font-family: Roboto;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 900;
-    line-height: 1.875rem; 
-}  
+    line-height: 1.875rem;
+}
+
 .day {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    color: white;
-    background-color: #000;
+    color: black;
+    background-color: #e7bd41;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Añadir esta línea para centrar verticalmente el contenido */
 }
 
-button {
+.day-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: black;
+    background-color: #f9bf10;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.day p {
+    margin: 0px 2rem 1rem 0rem;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-delete-icon {
+    cursor: pointer;
+    fill: #000000;
+    width: 20px;
+    height: 20px;
+    margin-left: auto; /* Hacer que el botón esté siempre a la derecha */
+    margin-right: 10px; /* Agregar margen derecho para separar del texto */
+}
+
+.btn-delete-icon:hover {
+    fill: #434343;
+}
+
+#deleteBtn {
     background-color: #000000;
     color: white;
     padding: 10px 20px;
@@ -60,12 +106,51 @@ button {
     cursor: pointer;
     font-size: 16px;
     border-radius: 50px;
+    display: none;
 }
 
-button:hover {
-    background-color: #202020;
+#deleteBtn:hover {
+    background-color: #2a2a2a;
 }
 
-.container{
+
+.container {
     margin-top: 5rem;
+}
+
+.bt-add {
+    margin: 0 auto;
+}
+
+.bt-add:hover{
+    opacity: 75%;
+}
+
+.MI{
+    background-color: black; 
+    color: white;
+    margin-left: auto; /* Hacer que el botón esté siempre a la derecha */
+    margin-right: 10px; /* Agregar margen derecho para separar del texto */
+    cursor: pointer;
+    display: flex;
+}
+
+.MI:hover{
+    background-color: rgb(41, 40, 40);
+    color: white;
+}
+
+.empty-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 999;
 }
