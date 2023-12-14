@@ -33,7 +33,7 @@ body {
     height: 26rem;
     width: 20rem;
     max-width: 600px; /* Establece un máximo de 600px para evitar que se extienda demasiado */
-    background-color: #FFF; /* Color de fondo verde, ajusta según tus preferencias */
+    background-color: #9E6D0A; /* Color de fondo verde, ajusta según tus preferencias */
     opacity: 0.95;
     color: #000;
     text-align: center;
@@ -104,4 +104,75 @@ body {
 #btnContinuar:disabled {
     opacity: 0.5; /* Opacidad reducida cuando el botón está desactivado */
     cursor: not-allowed; /* Cambia el cursor cuando el botón está desactivado */
+}
+
+#mensaje {
+    font-size: 30px; /* Puedes ajustar este valor según tus preferencias */
+    font-weight: bold; /* Agrega negrita al texto */
+}
+
+.modal-content{
+    border-radius: 1.25rem;
+    border: 1px solid #000;
+    background: #ffe552;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content div p{
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem;
+    margin-bottom: 2.12rem;
+}
+
+.modal-content div button{
+    width: 18.625rem;
+    height: 2.9375rem;
+    border-radius: 1.875rem;
+    border: 1px solid #000;
+    background: #D9D9D9;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 1.25rem;
+    font-family: Roboto;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 900;
+    color: #000;
+}
+
+.iconConfirm{
+    text-align: left;
+}
+.iconConfirm svg{
+    margin-right: 30%;
+}
+.iconConfirm2{
+    text-align: left;
+}
+.iconConfirm2 svg{
+    margin-right: 15%;
+}
+.iconCancel{
+    text-align: left;
+}
+.iconCancel svg{
+    margin-right: 30%;
+}
+
+/* Mensaje de confirmacion */
+
+#guardar {
+    border: none; /* Elimina el borde predeterminado del botón */
+    background: none; /* Elimina el fondo predeterminado del botón */
+    padding: 0; /* Elimina el relleno predeterminado del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+}
+
+#guardar img {
+    width: 30px; /* Ajusta el ancho de la imagen según tus preferencias */
+    height: 25px; /* Ajusta la altura de la imagen según tus preferencias */
 }
