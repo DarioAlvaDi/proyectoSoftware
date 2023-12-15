@@ -2,181 +2,203 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/dias_itinerario_styles.css">
-    <title>Itinerario</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/dias_itinerario_styles.css">
+  <title>Itinerario</title>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navColor">
-            <div class="container-fluid">
-                <div class="col-3 regresar">
-                    <a href="mapa.html"><img src="../imgs/DI_img/image 29.png" alt=""></a>
-                </div>
-                <div class="col-6 titulo">
-                    ITINERARIO
-                </div>
-                <div class="col-3 inicio">
-                    <a><img src="../imgs/DI_img/image 30.png" alt=""></a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <div id="selectedDayInfo"></div>
-        <div id="itinerary"></div>
-    </div>
-
-    <div class="container fixed-bottom" style="margin-bottom: 2rem;">
-        <button class="btn bt-add" data-toggle="modal" data-target="#calendarioModal">
-            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
-            </svg>
-        </button>
-        <div class="row">
-            <button id="deleteBtn" data-toggle="modal" data-target="#confirmacionBorradoModal">BORRA ITINERARIO</button>
+  <header>
+    <nav class="navbar navbar-expand-lg navColor">
+      <div class="container-fluid">
+        <div class="col-3 regresar">
+          <a href="mapa.html"><img src="../imgs/DI_img/image 29.png" alt=""></a>
         </div>
-    </div>
-
-    <div class="modal" id="calendarioModal" tabindex="-1" role="dialog" aria-labelledby="calendarioModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="calendarioModalLabel">Selecciona una fecha</h5>
-                </div>
-                <div class="modal-body">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-warning" onclick="mostrarFechaSeleccionada()">Aceptar</button>
-                </div>
-            </div>
+        <div class="col-6 titulo">
+          ITINERARIO
         </div>
-    </div>
+        <div class="col-3 inicio">
+          <a><img src="../imgs/DI_img/image 30.png" alt=""></a>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../js/dias_itinerario_script.js"></script>
-
-
-    <div id="emptyMessage" class="empty-message">
-      <p>No hay fechas seleccionadas</p>
+  <div class="container">
+    <div id="selectedDayInfo"></div>
+    <div id="itinerary"></div>
   </div>
-    <!-- Agrega este código al final de tu body para incluir el modal -->
-<div class="modal" id="fechaEnUsoModal" tabindex="-1" role="dialog" aria-labelledby="fechaEnUsoModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+
+  <div class="container fixed-bottom" style="margin-bottom: 2rem;">
+    <button class="btn bt-add" data-toggle="modal" data-target="#calendarioModal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="" class="bi bi-plus-circle-fill"
+        viewBox="0 0 16 16">
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+      </svg>
+    </button>
+    <div class="row">
+      <button id="deleteBtn" data-toggle="modal" data-target="#confirmacionBorradoModal">Borrar Itinerarios</button>
+    </div>
+  </div>
+
+  <div class="modal" id="calendarioModal" tabindex="-1" role="dialog" aria-labelledby="calendarioModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="fechaEnUsoModalLabel">Fecha en Uso</h5>
-              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+        <div class="modal-header ah">
+          <h5 class="modal-title" id="calendarioModalLabel">Seleccionar una fecha</h5>
+        </div>
+        <div class="modal-body ab">
+          <label for="fecha">Escoge una fecha para crear un nuevo itinerario:</label>
+          <input type="date" id="fecha" class="form-control">
+        </div>
+        <div class="modal-footer ab justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-warning" onclick="mostrarFechaSeleccionada()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../js/dias_itinerario_script.js"></script>
+
+
+  <!-- Agrega este código al final de tu body para incluir el modal -->
+  <div class="modal" id="fechaEnUsoModal" tabindex="-1" role="dialog" aria-labelledby="fechaEnUsoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header ah">
+          <h5 class="modal-title" id="fechaEnUsoModalLabel">Fecha en Uso</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                   <span aria-hidden="true">&times;</span>
               </button> -->
-          </div>
-          <div class="modal-body">
-              La fecha seleccionada ya está en uso. Por favor, elige otra fecha.
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
+        </div>
+        <div class="modal-body fr">
+          La fecha seleccionada ya está en uso. Por favor, elige otra fecha.
+        </div>
+        <div class="modal-footer fr justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 
-<!-- Agrega este código al final de tu body para incluir el modal de confirmación -->
-<div class="modal" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <!-- Agrega este código al final de tu body para incluir el modal de confirmación -->
+  <div class="modal" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
-              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+        <div class="modal-header ah">
+          <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
+          <button type="button" style="background-color: #3d311d; color: white;" class="close" data-dismiss="modal" aria-label="Cerrar">
                   <span aria-hidden="true">&times;</span>
-              </button> -->
-          </div>
-          <div class="modal-body" id="confirmacionMensaje">
-              <!-- El mensaje se mostrará aquí -->
-          </div>
+              </button>
+        </div>
+        <div class="modal-body ab justify-content-center" id="confirmacionMensaje">
+          <!-- El mensaje se mostrará aquí -->
+        </div>
       </div>
+    </div>
   </div>
-</div>
 
   <!-- Modal para fechas inválidas -->
   <div class="modal" id="fechaInvalidaModal" tabindex="-1" role="dialog" aria-labelledby="fechaInvalidaModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="fechaInvalidaModalLabel">Fecha Inválida</h5>
-              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+        <div class="modal-header ah">
+          <h5 class="modal-title" id="fechaInvalidaModalLabel">Fecha Inválida</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                   <span aria-hidden="true">&times;</span>
               </button> -->
-          </div>
-          <div class="modal-body">
-              No puedes seleccionar fechas anteriores a la fecha actual.
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-      </div>
-  </div>
-</div>
-
-
-
-<!-- Agregar el modal de confirmación antes de borrar -->
-<div class="modal" id="confirmacionBorradoModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionBorradoModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmacionBorradoModalLabel">Confirmar Eliminación</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
-        ¿Estás seguro de que deseas borrar todo el itinerario?
-      </div>
-      <div class="modal-footer">
-        <!-- Llamar a la función para borrar el itinerario -->
-        <button type="button" class="btn btn-danger" onclick="borrarItinerario()">Confirmar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+        <div class="modal-body fr">
+          No puedes seleccionar fechas anteriores a la fecha actual.
+        </div>
+        <div class="modal-footer fr justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Agregar este código al final de tu body para incluir el segundo modal de confirmación -->
-<div class="modal" id="confirmacionEliminacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionEliminacionModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmacionEliminacionModalLabel">Itinerario Eliminado</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+
+
+  <!-- Agregar el modal de confirmación antes de borrar -->
+  <div class="modal" id="confirmacionBorradoModal" tabindex="-1" role="dialog"
+    aria-labelledby="confirmacionBorradoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header ah">
+          <h5 class="modal-title" id="confirmacionBorradoModalLabel">Confirmar Eliminación</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button> -->
-      </div>
-      <div class="modal-body">
-        El itinerario ha sido eliminado correctamente.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        <div class="modal-body ab">
+          ¿Estás seguro de que deseas borrar todos los itinerarios?
+        </div>
+        <div class="modal-footer ab justify-content-center">
+          <!-- Llamar a la función para borrar el itinerario -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-warning" onclick="borrarItinerario()">Confirmar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="emptyMessage" class="empty-message">
-  <p>No hay fechas seleccionadas</p>
-</div>
+  
+
+
+  <!-- Agregar este código al final de tu body para incluir el segundo modal de confirmación -->
+  <div class="modal" id="confirmacionEliminacionModal" tabindex="-1" role="dialog"
+    aria-labelledby="confirmacionEliminacionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header ah">
+          <h5 class="modal-title" id="confirmacionEliminacionModalLabel">Confirmación Eliminado</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+        </div>
+        <div class="modal-body ab">
+          Los itinerarios han sido eliminados correctamente.
+        </div>
+        <div class="modal-footer ab">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+  <div id="emptyMessage" class="empty-message ">
+    <!-- <p>No hay fechas seleccionadas</p> -->
+    <div class="tab-container ">
+      <div class="tab-content d-flex justify-content-center align-items-center">
+        <div class="container d-flex justify-content-center align-items-center">
+          <div class="col-12 favoritos-container">
+            <div class="tab-shadow">
+              <div class="favoritos-empty">
+                <p style="margin-left: 20px;">No tienes ningun itinerario agendado aún </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 </body>

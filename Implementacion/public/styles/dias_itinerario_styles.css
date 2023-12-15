@@ -71,7 +71,7 @@ header {
     border: 1px solid #ccc;
     border-radius: 5px;
     color: black;
-    background-color: #FFE1A3;
+    background-color: #dcc08b;
     text-align: center;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
@@ -140,17 +140,92 @@ header {
     color: white;
 }
 
-.empty-message {
+/* .empty-message {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: rgb(213, 186, 186);
     color: black;
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     z-index: 999;
+} */
+
+.container{
+    margin-top: 5rem;
+}
+
+.tab-container {
+    position: relative;
+}
+
+.tab-content {
+    z-index: 2;
+    position: relative;
+}
+.favoritos-container {
+    max-width: 17rem;
+    max-height: 10rem;
+    min-height: 10rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #BF923D;
+    z-index: 2;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.favoritos-empty {
+    text-align: center;
+    color: #777;
+}
+
+.favoritos-empty p {
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem;
+    margin-top: 10%;
+}
+.tab-shadow {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: calc(100% );
+    height: calc(100%);
+    background-color: white;
+    z-index: 1;
+    border-radius: 25px;
+}
+
+
+.ah{
+    background-color: #735725;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    font-family: Roboto;
+    border: #000;
+}
+
+.ab{
+    background-color: #e7dbc6;
+    font-weight: 600;
+    text-align: center;
+    font-family: Roboto;
+}
+
+.fr{
+    background-color: #dfc69a;
+    font-weight: 600;
+    text-align: center;
+    font-family: Roboto;
 }
