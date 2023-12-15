@@ -1,5 +1,5 @@
 body{
-  background-color: #fff9d6;
+  background-color: #fff3d7;
 }
 
 
@@ -21,7 +21,7 @@ header{
 }
 
 .navColor{
-  background-color: #ffe552;
+  background-color: #dcb56d;
 }
 .inicio{text-align: right;}
 
@@ -106,7 +106,7 @@ button:hover {
   text-decoration: none;
   cursor: pointer;
   border-radius: 50%; /* Esto hace que el botón sea redondo */
-  background-color: #ffda1f;
+  background-color: #ffe1a3;
   border: none;
   outline: none;    
 }
@@ -116,7 +116,7 @@ button:hover {
 }
 
 .boton-redondo:hover {
-  background-color: #ffda1f;
+  background-color: #ffe1a3;
 }
 
 .resize{
@@ -126,7 +126,7 @@ button:hover {
 .modal-content{
   border-radius: 1.25rem;
   border: 1px solid #000;
-  background: #ffe552;
+  background: #dcb56d;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -190,7 +190,7 @@ button:hover {
   min-height: 10rem;
   padding: 1.25rem;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  background-color: #ffe552;
+  background-color: #ffe1a3;
   z-index: 2;
   border-radius: 25px;
   position: relative;
@@ -219,7 +219,7 @@ button:hover {
   height: 8rem;
   position:relative;
   z-index:2;
-  background-color:#ffda1f;
+  background-color:#ffe1a3;
   color:black;
   display:flex;
   align-items: center;
@@ -293,4 +293,3 @@ button:hover {
       height: 2.9375rem;;
   }
 }
-

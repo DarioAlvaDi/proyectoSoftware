@@ -1,7 +1,7 @@
 body {
     margin: 0; /* Elimina el margen predeterminado del body */
     padding: 0; /* Elimina el relleno predeterminado del body */
-    background-color: #fff9d6;
+    background-color: #fff3d7;
 }
 
 
@@ -14,7 +14,7 @@ body {
 }
 
 .navColor{
-    background-color: #ffe552;
+    background-color: #dcb56d;
 }
 .inicio{text-align: right;}
 .titulo{

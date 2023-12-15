@@ -1,5 +1,5 @@
 body{
-    background-color: #fff9d6;
+    background-color: #fff3d7;
 }
 
 header{
@@ -21,7 +21,7 @@ h4,h6{
 
 
 .navColor{
-    background-color: #ffe552;
+    background-color: #dcb56d;
 }
 .inicio{text-align: right;}
 
@@ -86,8 +86,8 @@ h4,h6{
 
 .contenedor .checkbox ul li label {
     display: block;
-    background: #ffda1f;
-    border: 1px solid #ffda1f;
+    background: #ffe1a3;
+    border: 1px solid #ffe1a3;
     border-radius: 25px;
     color: #000000;
     transition: .2s all ease;
@@ -107,8 +107,8 @@ h4,h6{
 }
 
 .contenedor .checkbox ul li input[type=checkbox]:checked + label {
-    background: #bd8400;
-    border: 1px solid #895f10;
+    background: #735725;
+    border: 1px solid #735725;
     color: #FFFFFF;
 }
 
@@ -134,7 +134,7 @@ h4,h6{
 
 .contenedor .number input[type=number] {
     display: inline-block;
-    background: #ffda1f;
+    background: #ffe1a3;
     border: 1px solid #000000;
     border-radius: 25px;
     color: #000000;
