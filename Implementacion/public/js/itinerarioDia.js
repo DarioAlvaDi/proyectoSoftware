@@ -16,7 +16,7 @@ function recargar(elemento){
                         </div>
                     </div>
                 </div> 
-            </div> 
+            </div>  
             <div style="height: 10rem"></div>
         <footer class="fixed-bottom navColor">
             <!--Opciones de agregar y borrar-->
@@ -63,6 +63,7 @@ function recargar(elemento){
         </div>
         
             `+`
+          
         <div style="height: 10rem"></div>
         <footer class="fixed-bottom navColor">
             <!--Opciones de agregar y borrar-->
@@ -104,25 +105,88 @@ function recargar(elemento){
     }
 
 }
+
+function horaElemento(nombreElemento, elementos, valorSeleccionado){
+    for(let i = 0; i < elementos.length; i++){
+        if(elementos[i].nombre === nombreElemento){
+            var indice = i;
+        }
+    }
+
+    elementos[indice].hora = valorSeleccionado;
+    sort(elementos);
+
+    recargar(elementos);
+
+    console.log(elementos);
+
+    imprimir(elementos);
+
+}
+
+function sort(elementos){
+    var i, j, temp;
+    var swapped;
+    var n = elementos.length;
+    for (i = 0; i < n - 1; i++)
+    {
+        swapped = false;
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (elementos[j].hora > elementos[j + 1].hora)
+            {
+                temp = elementos[j];
+                elementos[j] = elementos[j + 1];
+                elementos[j + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (swapped == false)
+            break;
+    }
+
+}
+
+function mostrarBotonVisita(indice, num, elemento){
+    document.getElementById(`lugar${indice}`).innerHTML = '';
+    elemento.splice(indice, 1);
+    num--;
+
+    if(num == 0){
+        elemento.length = 0;
+    }
+    if(elemento.length == 0){
+        recargar(elemento);
+    }
+}
+
 /*Obtener de la base de datos los sitios guardados */
 document.addEventListener('DOMContentLoaded', () => {
     const elemento = [
-        {imagen: 'img1', nombre: 'Nombre del sitio1'},
-        {imagen: 'img2', nombre: 'Nombre del sitio2'},
-        {imagen: 'img3', nombre: 'Nombre del sitio3'},
-        {imagen: 'img4', nombre: 'Nombre del sitio4'},
+        {imagen: 'img1', nombre: 'Nombre del sitio1', hora: '00:00', visita: '0'},
+        {imagen: 'img2', nombre: 'Nombre del sitio2', hora: '00:00', visita: '0'},
+        {imagen: 'img3', nombre: 'Nombre del sitio3', hora: '00:00', visita: '0'},
+        {imagen: 'img4', nombre: 'Nombre del sitio4', hora: '00:00', visita: '0'},
     ];
 
     const contenido = document.getElementById('contenido');
     recargar(elemento);
+
+    imprimir(elemento);
+});
+
+function imprimir(elemento){
+
     const elementoElement = document.getElementById('elemento');
     let num=0;
 
     elemento.forEach(nombre => {
         let nombreLugar="Nombre lugar";
+        let hora = elemento[num].hora;
         let nuevoElemento = document.createElement("div");
         nuevoElemento.classList.add('resize');
         nuevoElemento.id="lugar"+num;
+
 
         nuevoElemento.innerHTML = `
         <div class="container border border-3 border-dark p-3 m-3 mx-auto navColor" style="border-radius: 24px">
@@ -139,39 +203,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="row text-center d-inline-flex">
     
                             <div class="col">
-                                <select name="" id="" class="form-select text-bg-light form-select-sm w-auto" type="time">
-                                    <option selected>Hora</option>
-                                    <option value="00:00">00:00</option>
-                                    <option value="01:00">01:00</option>
-                                    <option value="02:00">02:00</option>
-                                    <option value="03:00">03:00</option>
-                                    <option value="04:00">04:00</option>
-                                    <option value="05:00">05:00</option>
-                                    <option value="06:00">06:00</option>
-                                    <option value="07:00">07:00</option>
-                                    <option value="08:00">08:00</option>
-                                    <option value="09:00">09:00</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
-                                    <option value="13:00">13:00</option>
-                                    <option value="14:00">14:00</option>
-                                    <option value="15:00">15:00</option>
-                                    <option value="16:00">16:00</option>
-                                    <option value="17:00">17:00</option>
-                                    <option value="18:00">18:00</option>
-                                    <option value="19:00">19:00</option>
-                                    <option value="20:00">20:00</option>
-                                    <option value="21:00">21:00</option>
-                                    <option value="22:00">22:00</option>
-                                    <option value="23:00">23:00</option>
-                                    <option value="24:00">24:00</option>
-    
-                                </select>
+                                <input type="time" name="hora" id="horaElemento`+ num + `" class="form-select w-auto" value="${elemento[num].hora}">
                             </div>
     
                             <div class="col">
-                                <select name="" id=""  class="form-select text-bg-light form-select-sm w-auto">
+                                <select name="" id="visitaElemento`+ num + `"  class="form-select text-bg-light form-select-sm w-auto">
                                     <option selected value="0">No visitado</option>
                                     <option value="1">Visitado</option>
                                 </select>
@@ -230,16 +266,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for(let i = 0; i < elemento.length; i++){
         document.getElementById(`eliminar${i}`).addEventListener('click', function() {
-        document.getElementById(`lugar${i}`).innerHTML = '';
-        elemento.splice(i, 1);
-        num--;
+            document.getElementById(`lugar${i}`).innerHTML = '';
+            elemento.splice(i, 1);
+            num--;
 
-        if(num == 0){
-            elemento.length = 0;
-        }
-        if(elemento.length == 0){
-            recargar(elemento);
-        }
+            if(num == 0){
+                elemento.length = 0;
+            }
+            if(elemento.length == 0){
+                recargar(elemento);
+            }
 
 
         });
@@ -251,4 +287,20 @@ document.addEventListener('DOMContentLoaded', () => {
         elemento.length = 0;
         recargar(elemento);
     });
-});
+
+    for(let i = 0; i < elemento.length; i++){
+        const horaSelect = document.getElementById(`horaElemento${i}`);
+        const visitaSelect = document.getElementById(`visitaElemento${i}`);
+
+        horaSelect.addEventListener('change', function() {
+            const valorSeleccionado =horaSelect.value;
+            const nombreElemento = elemento[i].nombre;
+
+            horaElemento(nombreElemento, elemento, valorSeleccionado);
+        });
+
+        visitaSelect.addEventListener('change', function() {
+            mostrarBotonVisita(i, num, elemento);
+        });
+    }
+}
