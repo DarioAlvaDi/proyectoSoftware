@@ -9,7 +9,6 @@
 
         <!-- JavaScript library -->
         <script src="../js/bootstrap.js"></script>
-        <script src="../js/itinerarioDia.js"></script>
 
         <title>Itinerario Dia</title>
 
@@ -46,44 +45,19 @@
 
 
         <!--Contenedores del siguiente tipo contendran los sitios-->
-        <div id="elemento"></div>
-
-
-        <footer class="fixed-bottom navColor">
-            <!--Opciones de agregar y borrar-->
-            <div class="container ">
-                <div class="row">
-                    <button type="button" class="btn ">
-                        <img src="../imgs/itinerarioDia/Agregar.png" alt="agregar">
-                    </button>
-                </div>
-
-                <div class="row m-2">
-
-                    <div class="col text-center">
-                        <button type="button" class="btn btn-danger rounded-4" data-bs-toggle="modal" data-bs-target="#modalItinerarios" id="eliminarbtn">
-                            <img src="../imgs/itinerarioDia/BoteBasura.png" alt="eliminar">
-                            Eliminar itinerario
-                        </button>
-                    </div>
-
-
-                    <div class="col text-center">
-                        <button type="button" onclick="mostrarMensaje()" class="btn btn-dark rounded-4">
-                            Generar ruta
-                        </button>
-
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="" id="contenido">
 
                 </div>
             </div>
-            
-        </footer>
+        </div>
+
 
 
         <!-- Confirmacion eliminar itinerario -->
         <div class="modal fade" id="modalItinerarios" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered text-center">
                 <div class="modal-content navColor">
 
                     <button type="button" class="btn-close m-2" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -95,7 +69,7 @@
                         </div>
 
                         <div class="row m-3">
-                            <button type="button" class="btn btn-danger rounded-4" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#modalConfirm"> 
+                            <button type="button" class="btn btn-danger rounded-4" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#modalConfirm">
                                 <img src="../imgs/imgItinerarioDia/BoteBasura.png" alt="eliminar">
                                 Confirmar eliminación
                             </button>
@@ -106,7 +80,6 @@
                                 <img src="../imgs/itinerarioDia/BotonEliminar.png" alt="eliminar">
                                 Cancelar
                             </button>
-
                         </div>
                     </div>
                 </div>
@@ -140,7 +113,7 @@
                                     </button>
                                     <p class="etiquetaTransporte">Carro</p>
                                 </div>
-                                
+
                                 <div class="boton-imagen">
                                     <button type="button" id="guardar" data-bs-toggle="modal" data-bs-target="#modalGuardar">
                                         <img src="../imgs/imgMovilidad/caminando.png" alt="Guardar"
@@ -154,7 +127,7 @@
                                         <img src="../imgs/imgMovilidad/transportePublico.png" alt="Guardar"
                                         onclick="updateData('Haz seleccionado transporte público')">
                                     </button>
-                                    
+
                                     <p class="etiquetaTransporte">Transporte Público</p>
                                 </div>
                             </div>
@@ -163,13 +136,13 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
 
         <!-- Mensaje de confirmacion -->
 
         <div class="modal fade " id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content1 modal-content">
                     <div class="modal-body text-center">
                         <span id="mensaje"></span>
                         <div class="center-items">
@@ -185,9 +158,9 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
-        
+
 
     </body>
 
@@ -209,11 +182,13 @@
 
         function updateData(mensaje) {
             // Realiza las operaciones necesarias (puede ser guardar datos, etc.)
-            
+
             // Actualiza el contenido del span con el ID "mensaje" en el modal
             document.getElementById('mensaje').innerText = mensaje;
         }
-        
-      
+
+
     </script>
+    <script src="../js/itinerarioDia.js"></script>
+
 </html>
