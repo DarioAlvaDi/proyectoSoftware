@@ -1,41 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   const itinerary = [];
 
-  // Función para borrar el itinerario
-  window.borrarItinerario = function() {
-    // Borrar el itinerario
-    const itineraryElement = document.getElementById('itinerary');
-    itineraryElement.innerHTML = '';
+  window.borrarItinerario = function () {
+      const itineraryElement = document.getElementById('itinerary');
+      itineraryElement.innerHTML = '';
 
-    // Ocultar el botón de borrar itinerario
-    const deleteButton = document.getElementById('deleteBtn');
-    deleteButton.style.display = 'none';
+      const deleteButton = document.getElementById('deleteBtn');
+      deleteButton.style.display = 'none';
 
-    // Ocultar el modal de confirmación antes de borrar
-    $('#confirmacionBorradoModal').modal('hide');
-
-    // Mostrar el segundo modal de confirmación después de borrar
-    $('#confirmacionEliminacionModal').modal('show');
+      $('#confirmacionBorradoModal').modal('hide');
+      $('#confirmacionEliminacionModal').modal('show');
   };
 
-  function deleteDay(button) {
-    const dayElement = button.closest('.day-info');
-    dayElement.remove();
+  // Asegúrate de que deleteDay esté en el ámbito global
+  window.deleteDay = function (button) {
+      const dayElement = button.closest('.day-info');
+      dayElement.remove();
 
-    // Verificar si hay bloques restantes y mostrar/ocultar el botón de borrar itinerario
-    const itineraryElement = document.getElementById('itinerary');
-    const deleteButton = document.getElementById('deleteBtn');
-    deleteButton.style.display = itineraryElement.children.length > 0 ? 'block' : 'none';
+      const itineraryElement = document.getElementById('itinerary');
+      const deleteButton = document.getElementById('deleteBtn');
+      deleteButton.style.display = itineraryElement.children.length > 0 ? 'block' : 'none';
 
-    // Mostrar u ocultar el mensaje de fechas vacías
-    const emptyMessage = document.getElementById('emptyMessage');
-    emptyMessage.style.display = itineraryElement.children.length === 0 ? 'block' : 'none';
-}
-
+      const emptyMessage = document.getElementById('emptyMessage');
+      emptyMessage.style.display = itineraryElement.children.length === 0 ? 'block' : 'none';
+  };
 });
-
-
-
 
 window.addEventListener("message", function (event) {
   const selectedDayInfoElement = document.getElementById("selectedDayInfo");
@@ -46,36 +35,27 @@ window.addEventListener("message", function (event) {
   }
 });
 
-
 function mostrarFechaSeleccionada() {
   var fechaSeleccionada = document.getElementById('fecha').value;
 
-  // Verificar si el campo de fecha está vacío
   if (!fechaSeleccionada) {
-      // Mostrar modal de fecha vacía
-      $('#fechaVaciaModal').modal('show');
-      return;
-  }
-
-  // Obtener la fecha actual
-  var fechaActual = new Date();
-  fechaActual.setHours(0, 0, 0, 0); // Ajustar la hora actual a las 00:00:00 para hacer una comparación de días
-
-  // Convertir la fecha seleccionada a objeto Date
-  var fechaSeleccionadaObj = new Date(fechaSeleccionada + 'T00:00:00-06:00');
-
-  // Verificar si la fecha seleccionada es anterior a la fecha actual
-  if (fechaSeleccionadaObj < fechaActual) {
-      // Mostrar modal de fecha inválida
       $('#fechaInvalidaModal').modal('show');
       return;
   }
 
-  // Verificar si ya hay un contenedor para la fecha seleccionada
+  var fechaActual = new Date();
+  fechaActual.setHours(0, 0, 0, 0);
+
+  var fechaSeleccionadaObj = new Date(fechaSeleccionada + 'T00:00:00-06:00');
+
+  if (fechaSeleccionadaObj < fechaActual) {
+      $('#fechaInvalidaModal').modal('show');
+      return;
+  }
+
   const existingContainer = document.querySelector(`.day-info[data-date="${fechaSeleccionada}"]`);
 
   if (existingContainer) {
-      // Mostrar modal de fecha en uso
       $('#fechaEnUsoModal').modal('show');
       return;
   }
@@ -86,7 +66,7 @@ function mostrarFechaSeleccionada() {
 
   const newDayElement = document.createElement('div');
   newDayElement.classList.add('day-info');
-  newDayElement.setAttribute('data-date', fechaSeleccionada); // Agregar atributo de fecha
+  newDayElement.setAttribute('data-date', fechaSeleccionada);
   newDayElement.innerHTML = `
       <p>${nombreDia}</p>
       <button class="btn MI" style="background-color: black; color: white;" onclick="mostrarItinerario()">Mostrar itinerario</button>
@@ -102,18 +82,15 @@ function mostrarFechaSeleccionada() {
   const itineraryElement = document.getElementById('itinerary');
   itineraryElement.appendChild(newDayElement);
 
-  // Mostrar el botón "Borra Itinerario" después de agregar un bloque de fechas
   const deleteButton = document.getElementById('deleteBtn');
   deleteButton.style.display = 'block';
 
-  // Ordenar los contenedores por fecha
   const sortedContainers = Array.from(itineraryElement.children)
       .sort((a, b) => new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date')));
 
   itineraryElement.innerHTML = '';
   sortedContainers.forEach(container => itineraryElement.appendChild(container));
 
-  // Mostrar modal de confirmación por 2 segundos
   $('#confirmacionMensaje').text('Fecha agregada correctamente');
   $('#confirmacionModal').modal('show');
   setTimeout(() => {
@@ -123,9 +100,6 @@ function mostrarFechaSeleccionada() {
   $('#calendarioModal').modal('hide');
 }
 
-
-
 function mostrarItinerario() {
-  // Cambia 'nueva_pagina.html' por la ruta de la página a la que quieres redirigir
   window.location.href = 'bcalendario.html';
 }

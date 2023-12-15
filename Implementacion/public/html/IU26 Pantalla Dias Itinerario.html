@@ -28,42 +28,38 @@
     </header>
 
     <div class="container">
-        <!-- Agrega este div para mostrar la información del día seleccionado -->
         <div id="selectedDayInfo"></div>
-        <div id="itinerary" ></div>
+        <div id="itinerary"></div>
     </div>
+
     <div class="container fixed-bottom" style="margin-bottom: 2rem;">
-      
-        
-        <!-- <div class="row"> -->
-            <button class="btn bt-add" data-toggle="modal" data-target="#calendarioModal"><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+        <button class="btn bt-add" data-toggle="modal" data-target="#calendarioModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
-              </svg></button>
-        <!-- </div> -->
-        <div class="row">     
-          <!-- Modificar el botón para abrir el modal de confirmación -->
-<button id="deleteBtn" data-toggle="modal" data-target="#confirmacionBorradoModal">BORRA ITINERARIO</button>
-
-
+            </svg>
+        </button>
+        <div class="row">
+            <button id="deleteBtn" data-toggle="modal" data-target="#confirmacionBorradoModal">BORRA ITINERARIO</button>
         </div>
     </div>
+
     <div class="modal" id="calendarioModal" tabindex="-1" role="dialog" aria-labelledby="calendarioModalLabel"
         aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="calendarioModalLabel">Selecciona una fecha</h5>
-          </div>
-          <div class="modal-body">
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" class="form-control">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-warning" onclick="mostrarFechaSeleccionada()">Aceptar</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="calendarioModalLabel">Selecciona una fecha</h5>
+                </div>
+                <div class="modal-body">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" onclick="mostrarFechaSeleccionada()">Aceptar</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
 
@@ -73,6 +69,9 @@
     <script src="../js/dias_itinerario_script.js"></script>
 
 
+    <div id="emptyMessage" class="empty-message">
+      <p>No hay fechas seleccionadas</p>
+  </div>
     <!-- Agrega este código al final de tu body para incluir el modal -->
 <div class="modal" id="fechaEnUsoModal" tabindex="-1" role="dialog" aria-labelledby="fechaEnUsoModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
