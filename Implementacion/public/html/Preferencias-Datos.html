@@ -241,6 +241,42 @@ function ocultarMensajeConRedireccion() {
         }
     </script>
 
+    <script>
+         // Fecth para obtener las preferencias
+        fetch("/turistas/consultarPreferencias")
+            .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la solicitud fetch: " + response.status);
+            }
+            return response.json();
+            })
+            .then((turistaInfo) => {
+                marcarCheckboxes(turistaInfo);
+            })
+            .catch((error) =>
+                console.error("Error al obtener preferencias del turista:", error)
+            );
+
+            function marcarCheckboxes(preferencias) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            if (preferencias && Array.isArray(preferencias)) {
+                const nombresPreferencias = preferencias.map(pref => pref.Nombre);
+
+                // Marca los checkboxes con los mismos values de las preferencias enviadas desde la BD
+                nombresPreferencias.forEach((preferencia) => {
+                    const checkbox = Array.from(checkboxes).find((cb) => cb.value === preferencia);
+
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+            } else {
+                console.error("La lista de preferencias no está definida.");
+            }
+        }
+    </script>
+
     
 </body>
 </html>
