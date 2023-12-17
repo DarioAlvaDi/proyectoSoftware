@@ -91,6 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       dayElement.addEventListener("click", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id')
+        window.location.href = "/turistas/calendario?id="+id;
         alert(`Dia seleccionado ${day} de ${getMonthName(currentMonth)} de ${currentYear}`);
       });
       calendarElement.appendChild(dayElement);

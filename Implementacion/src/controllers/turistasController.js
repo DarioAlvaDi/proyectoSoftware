@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'n0m3l0',
   database: 'AD_SISTEMAS'
 });
 
@@ -799,7 +799,9 @@ const eliminarFavoritosIndividual = async (req, res, next) => {
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
-
+const calendario = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/calendario.html'));
+}
 module.exports = {
   bienvenida,
   datos,
@@ -833,5 +835,6 @@ module.exports = {
   actualizar,
   agregarFavorito,
   consultarFavoritos,
-  eliminarFavoritosIndividual
+  eliminarFavoritosIndividual,
+  calendario
 }
