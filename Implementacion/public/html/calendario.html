@@ -5,24 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/stylescalendario.css">
-
     <title>Calendario para agendar</title>
 </head>
 <body>
-    <header class="main-header">
-        <!-- Imagen centrada en el lado izquierdo -->
-        <div class="text-center">
-            <!-- Imagen flotante en el lado izquierdo -->
-            <img src="../imgs/imgcalendario/image 29.png" alt="Imagen Izquierda" class="img-fluid ml-3 mt-2 mb-2" style="cursor: pointer;" onclick="window.location.href='tu_nueva_pantalla.html'">
-        </div>
-
-        <!-- Título centrado utilizando el sistema de rejilla de Bootstrap -->
-        <h2 class="col-md-6 mx-auto header-text mt-2 mb-2">ITINERARIO</h2>
-
-        <!-- Imagen fija en el lado derecho del encabezado -->
-        <div class="fixed-right-image float-right">
-            <img src="../imgs/imgcalendario/image 30.png" alt="Imagen Derecha" class="img-fluid">
-        </div>
+    <header>
+        <nav class="navbar navbar-expand-lg navColor">
+            <div class="container-fluid">
+                <div class="col-3 regresar">
+                    <a href=""><img src="../imgs/imgcalendario/image 29.png" alt=""></a>
+                </div>
+                <div class="col-6 titulo">
+                    Calendario Itinerario
+                </div>
+                <div class="col-3 inicio">
+                    <a><img src="../imgs/imgcalendario/image 30.png" alt=""></a>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <div class="page-container">
@@ -36,6 +35,88 @@
         </div>
     </div>
 
+    <!-- Modal para el día seleccionado -->
+    <div class="modal" id="dayModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Día Seleccionado</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido del modal -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="continueButton">Continuar</button>
+                    <button type="button" class="btn btn-secondary" id="cancelButton">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la hora seleccionada -->
+    <div class="modal" id="hourModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Seleccionar Hora</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <label for="selectedHour">Seleccione una hora:</label>
+                    <select class="form-control" id="selectedHour">
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmHourButton">Confirmar Hora</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar información de la selección -->
+    <div class="modal" id="infoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Información de la Selección</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="infoModalBody">
+                    <!-- Contenido del modal -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="../js/scriptcalendario.js"></script>
 </body>
 </html>
