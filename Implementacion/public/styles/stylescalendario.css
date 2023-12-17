@@ -1,0 +1,123 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Estilos para centrar el contenido en la página */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.main-header {
+  background-color: #76ADFD;
+  color: #fff;
+  text-align: center;
+  padding: 4px; /* Ajusta el padding según tus necesidades */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Estilos para la imagen flotante en el lado izquierdo (solo en pantallas pequeñas) */
+.text-center {
+  display: flex;
+  align-items: center;
+}
+
+.fixed-right-image {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.header-text {
+  margin: 0;
+  text-align: center;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.875rem; 
+}
+
+.calendar-container {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+  padding: 20px; /* Añade espacio interno para evitar que el contenido toque los bordes */
+  overflow-x: auto; /* Agregar deslizamiento horizontal para pantallas más pequeñas */
+}
+
+.opciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #76ADFD;
+  color: #fff;
+  padding: 10px;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 1px;
+}
+
+.day {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.current-day {
+  background-color: #a9c3ea; /* Color café claro para el día actual */
+  color: #fff;
+}
+
+.day:hover {
+  background-color: #76ADFD;
+  color: #fff;
+}
+
+.day-of-week {
+  font-weight: bold;
+}
+
+.empty {
+  background-color: #f4f4f4;
+}
+
+.month-year-picker {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.month-year-picker select {
+  padding: 5px;
+}
+
+/* Agrega este bloque de estilos */
+.month-year-picker select:hover {
+  background-color: #96b8eb; /* Color café oscuro para resaltar al pasar el mouse */
+  color: #fff; /* Texto en color blanco para mejor visibilidad */
+}
+/* Resto de tus estilos existentes... */
+
+#currentMonth,
+.day,
+.day-of-week,
+.month-year-picker {
+  font-size: 1.5rem; /* Ajusta el tamaño de letra según tus preferencias */
+}
+
+
