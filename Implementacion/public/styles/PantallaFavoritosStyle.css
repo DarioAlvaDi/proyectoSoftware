@@ -1,62 +1,44 @@
 body{
-    font-family: Arial, sans-serif;
-    background-color: #FFF3D7 ;
+    background-color: #fff3d7;
+  }
+  
+  
+  h1 {
     text-align: center;
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
-    background-size: 100% 99.5vh;
-    background-position: center;
-}
-
-
-h1 {
-    text-align: center;
-}
-
-header{
+  }
+  
+  header{
     z-index: 1000;
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
-}
-
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('img/TorreLatino.png');
-    background-size: contain;
-    opacity: 0.2;
-    padding: 0;
-    margin: 0;
-}
-
-.busqueda{
+  }
+  
+  
+  .busqueda{
     z-index: 10;
-}
-
-.navColor{
+  }
+  
+  .navColor{
     background-color: #dcb56d;
-}
-.inicio{text-align: right;}
-
-.inicio img{
+  }
+  .inicio{text-align: right;}
+  
+  .inicio img{
     width: 3.4375rem;
     height: 3.4375rem;
     padding: 6px;
-}
-
-.regresar{text-align: left;}
-
-.regresar img{
+  }
+  
+  .regresar{text-align: left;}
+  
+  .regresar img{
     width: 3.4375rem;
     height: 3.4375rem;
     padding: 6px;
-}
-.titulo{
+  }
+  .titulo{
     text-align: center;
     color: #000;
     font-family: Roboto;
@@ -64,17 +46,17 @@ header{
     font-style: normal;
     font-weight: 900;
     line-height: 1.875rem; 
-}  
-.day {
+  }  
+  .day {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     color: white;
     background-color: #000;
-}
-
-#eliminarbtn{
+  }
+  
+  #eliminarbtn{
     width: 11.5rem;
     height: 2.3125rem;
     background: #D9D9D9;
@@ -83,40 +65,25 @@ header{
     color: #000;
     transition: .2s all ease;
     padding: 8px 12px;
-    margin-bottom: 0.75rem;
+    margin-top:2rem;
     text-align: center;
     font-family: Roboto;
     font-size: 0.9375rem;
     font-style: normal;
     font-weight: 700;
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: #202020;
-}
-
-.container{
+    color:white;
+  }
+  
+  .container{
     margin-top: 5rem;
-}
-
-.nameSitio{
-    color: #000;
-    text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: Inter;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.75rem; /* 200% */
-}
-
-.contenedorSitio{
-    background-color: #ffe1a3;
-    z-index: 1;
-}
-
-
-.detalles{
+  }
+  
+  
+  .detalles{
     width: 8rem;
     height: 2rem;
     color: #000;
@@ -130,9 +97,9 @@ button:hover {
     border: 1px solid #000000;
     border-radius: 25px;
     margin-top:1rem;
-}
-
-.boton-redondo{
+  }
+  
+  .boton-redondo{
     padding: 5px 10px;
     font-size: 16px;
     text-align: center;
@@ -142,28 +109,28 @@ button:hover {
     background-color: #ffe1a3;
     border: none;
     outline: none;    
-}
-
-.boton-redondo svg{
+  }
+  
+  .boton-redondo svg{
     margin-bottom: 0.5rem;
-}
-
-.boton-redondo:hover {
+  }
+  
+  .boton-redondo:hover {
     background-color: #ffe1a3;
-}
-
-.resize{
+  }
+  
+  .resize{
     margin-top: -3rem;
-}
-
-.modal-content{
+  }
+  
+  .modal-content{
     border-radius: 1.25rem;
     border: 1px solid #000;
     background: #dcb56d;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.modal-content div p{
+  }
+  
+  .modal-content div p{
     color: #000;
     text-align: center;
     font-family: Roboto;
@@ -172,9 +139,9 @@ button:hover {
     font-weight: 900;
     line-height: 1.875rem;
     margin-bottom: 2.12rem;
-}
-
-.modal-content div button{
+  }
+  
+  .modal-content div button{
     width: 18.625rem;
     height: 2.9375rem;
     border-radius: 1.875rem;
@@ -187,74 +154,146 @@ button:hover {
     font-style: normal;
     font-weight: 900;
     color: #000;
-}
-
-.iconConfirm{
+  }
+  
+  .iconConfirm{
     text-align: left;
-}
-.iconConfirm svg{
+  }
+  .iconConfirm svg{
     margin-right: 30%;
-}
-.iconConfirm2{
+  }
+  .iconConfirm2{
     text-align: left;
-}
-.iconConfirm2 svg{
+  }
+  .iconConfirm2 svg{
     margin-right: 15%;
-}
-.iconCancel{
+  }
+  .iconCancel{
     text-align: left;
-}
-.iconCancel svg{
+  }
+  .iconCancel svg{
     margin-right: 30%;
-}
-.tab-container {
+  }
+  
+  .tab-container {
     position: relative;
-}
-
-.tab-content {
+  }
+  
+  .tab-content {
     z-index: 2;
     position: relative;
-}
-
-.favoritos-container {
+  }
+  
+  .favoritos-container{
     max-width: 17rem;
     max-height: 10rem;
     min-height: 10rem;
     padding: 1.25rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #dcb56d;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: #ffe1a3;
     z-index: 2;
     border-radius: 25px;
     position: relative;
     overflow: hidden;
-}
-
-.favoritos-empty {
-    text-align: center;
-    color: #777;
-}
-
-.favoritos-empty p {
+  }
+  
+  .favoritos-empty{
+    text-align:center;
+    color:#777;
+  }
+  
+  .favoritos-empty p{
     color: #000;
     text-align: center;
     font-family: Roboto;
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 900;
-    line-height: 1.875rem;
+    line-height: 1.875rem; 
     margin-top: 10%;
-}
-
-.tab-shadow {
-    position: absolute;
-    top: 20px;
-    right: 15px;
-    width: calc(100% );
-    height: calc(100%);
-    background-color: white;
-    z-index: 1;
-    border-radius: 25px;
-}
+  }
+  
+  
+  .contenedorSitio{
+    width: auto;
+    height: 8rem;
+    position:relative;
+    z-index:2;
+    background-color:#ffe1a3;
+    color:black;
+    display:flex;
+    align-items: center;
+    flex-wrap:wrap;
+    min-height:60px;
+    padding: 16px;
+    border-radius:24px;
+    font-size:16px;
+    margin: 5rem 0 5rem 0;
+  }
+  
+  .imagenSitio{
+    width:6rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius:5px;
+    margin-right:1rem ;
+  }
+  
+  #nameSitio{
+    display:grid;
+    gap:0.125rem;
+  }
+  
+  .eliminarSitio1x1{
+    display:flex;
+    gap:6px;
+    margin-left:auto;
+    padding: 0;
+  }
+  
+  @media (min-width: 992px) {
+    .contenedorSitio{
+        width: auto;
+        height: 15rem;
+    }
+  
+    .imagenSitio{
+        width:12rem;
+        height: 12rem;
+    }
+    .boton-redondo svg{
+        width:70px;
+        height:70px;
+    }
+  
+    .detalles{
+        width: 9rem;
+        height: 3rem;
+    }
+  }
+  
+  @media (max-width:350px) {
+  
+    .imagenSitio{
+        width:4.5rem;
+        height: 4.5rem;
+    }
+    .boton-redondo svg{
+        width:25px;
+        height:25px;
+    }
+  
+    .detalles{
+        width: 6rem;
+        height: 2rem;
+    }
+  
+    .modal-content div button{
+        width: 16.625rem;
+        height: 2.9375rem;;
+    }
+  }
+  
 
 .boton-en-fondo {
     position: fixed;
