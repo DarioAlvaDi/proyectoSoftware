@@ -2,8 +2,53 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffe3;
+  background-color: #fff3d7;
 }
+ 
+h1 {
+  text-align: center;
+}
+
+header{
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+
+.busqueda{
+  z-index: 10;
+}
+
+.navColor{
+  background-color: #dcb56d;
+}
+.inicio{text-align: right;}
+
+.inicio img{
+  width: 3.4375rem;
+  height: 3.4375rem;
+  padding: 6px;
+}
+
+.regresar{text-align: left;}
+
+.regresar img{
+  width: 3.4375rem;
+  height: 3.4375rem;
+  padding: 6px;
+}
+.titulo{
+  text-align: center;
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.875rem; 
+}  
 
 /* Estilos para centrar el contenido en la página */
 .page-container {
@@ -109,8 +154,8 @@ body {
 
 /* Agrega este bloque de estilos */
 .month-year-picker select:hover {
-  background-color: #dcb56d; /* Color café oscuro para resaltar al pasar el mouse */
-  color: #fff; /* Texto en color blanco para mejor visibilidad */
+  /* background-color: ; Color café oscuro para resaltar al pasar el mouse */
+  color: black; /* Texto en color blanco para mejor visibilidad */
 }
 /* Resto de tus estilos existentes... */
 
@@ -119,6 +164,16 @@ body {
 .day-of-week,
 .month-year-picker {
   font-size: 1.5rem; /* Ajusta el tamaño de letra según tus preferencias */
+}
+
+.selected-day {
+  background-color: #dcb56d; /* Color café claro para días seleccionados */
+  color: #fff;
+}
+
+.day.selected-day:hover {
+  background-color: #dcb56d; /* Mantén el mismo color al pasar el mouse sobre el día seleccionado */
+  color: #fff;
 }
 
 
