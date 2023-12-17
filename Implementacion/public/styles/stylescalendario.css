@@ -2,7 +2,7 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #ffffe3;
 }
 
 /* Estilos para centrar el contenido en la página */
@@ -13,9 +13,9 @@ body {
   min-height: 100vh;
 }
 
+
 .main-header {
-  background-color: #76ADFD;
-  color: #fff;
+  background-color: #dcb56d;
   text-align: center;
   padding: 4px; /* Ajusta el padding según tus necesidades */
   display: flex;
@@ -26,6 +26,7 @@ body {
 /* Estilos para la imagen flotante en el lado izquierdo (solo en pantallas pequeñas) */
 .text-center {
   display: flex;
+  color: black;
   align-items: center;
 }
 
@@ -38,7 +39,7 @@ body {
 .header-text {
   margin: 0;
   text-align: center;
-  color: #ffffff;
+  color: black;
   font-family: Roboto;
   font-size: 1.5rem;
   font-style: normal;
@@ -60,7 +61,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #76ADFD;
+  background-color: #dcb56dbd;
   color: #fff;
   padding: 10px;
 }
@@ -79,12 +80,12 @@ body {
 }
 
 .current-day {
-  background-color: #a9c3ea; /* Color café claro para el día actual */
+  background-color: #dcb56d99; /* Color café claro para el día actual */
   color: #fff;
 }
 
 .day:hover {
-  background-color: #76ADFD;
+  background-color: #dcb56d;
   color: #fff;
 }
 
@@ -108,7 +109,7 @@ body {
 
 /* Agrega este bloque de estilos */
 .month-year-picker select:hover {
-  background-color: #96b8eb; /* Color café oscuro para resaltar al pasar el mouse */
+  background-color: #dcb56d; /* Color café oscuro para resaltar al pasar el mouse */
   color: #fff; /* Texto en color blanco para mejor visibilidad */
 }
 /* Resto de tus estilos existentes... */

@@ -46,15 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCalendar();
       });
 
-      select.addEventListener("mouseover", function () {
-        select.style.backgroundColor = "#76ADFD";
-        select.style.color = "#fff";
-      });
+      // select.addEventListener("mouseover", function () {
+      //   select.style.backgroundColor = "#f3dbae";
+      //   select.style.color = "#fff";
+      // });
 
-      select.addEventListener("mouseout", function () {
-        select.style.backgroundColor = "";
-        select.style.color = "";
-      });
+      // select.addEventListener("mouseout", function () {
+      //   select.style.backgroundColor = "";
+      //   select.style.color = "";
+      // });
 
       monthYearPicker.appendChild(select);
     });
