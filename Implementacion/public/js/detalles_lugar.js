@@ -129,6 +129,7 @@ window.onload = function () {
     service.getDetails(request, callback);
 
     function callback(place, status) {
+        console.log(place);
         if (status == google.maps.places.PlacesServiceStatus.OK) {
 
             document.getElementById("nombre").innerHTML = place.name;
@@ -174,5 +175,5 @@ window.onload = function () {
 function calendario() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id')
-    window.location.href = "/turistas/calendario?id="+id;
+    window.location.href = "/turistas/calendario?id=" + id;
 }

@@ -164,7 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     confirmHourButton.addEventListener("click", function () {
         const selectedHour = document.getElementById("selectedHour").value;
-
+        let numDia = ((new Date(currentYear + "-" + (parseInt(currentMonth) + 1) + "-" + selectedDay).getDay()) + 1) % 7;
+        validar(numDia, parseInt(selectedHour))
         const selectedDateInfo = `Día seleccionado: ${selectedDay} de ${getMonthName(currentMonth)} de ${currentYear}`;
         const selectedHourInfo = `Hora seleccionada: ${selectedHour}`;
 
@@ -187,3 +188,65 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+function validar(num_dia, hora) {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const id = urlParams.get('id')
+    service = new google.maps.places.PlacesService(
+        document.createElement("div")
+    );
+    var request = {
+        placeId: id,
+        language: "es",
+        fields: ["opening_hours", "geometry"]
+    };
+
+    service.getDetails(request, callback);
+
+    function callback(place, status) {
+        console.log(place);
+        let diaEncontrado = false;
+        let horaEncontrada = false;
+        let periodos = place.opening_hours.periods
+        periodos.forEach(item => {
+            let dia = item.close.day
+            console.log(dia, num_dia, diaEncontrado)
+            if (num_dia == dia) {
+                diaEncontrado = true;
+                if (hora >= parseInt(item.open.time) && hora <= parseInt(item.close.time)) {
+                    horaEncontrada = true;
+                }
+            }
+        });
+
+        if (diaEncontrado) {
+            if (horaEncontrada) {
+                let item = [{ id: id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }]
+                console.log("Hora y dia disponible")
+                if (localStorage.getItem("itinerario") === null) {
+                    localStorage.setItem("itinerario", JSON.stringify(item));
+                }
+                else {
+                    var itinerario = JSON.parse(localStorage.getItem("itinerario"));
+                    console.log(itinerario);
+                    itinerario.push(item[0]);
+                    localStorage.setItem("itinerario", JSON.stringify(itinerario));
+                }
+            } else {
+                console.log("La hora no esta disponible para ese día ")
+            }
+        } else {
+            console.log("Ese dia no esta disponible")
+        }
+
+
+    }
+}
+
+function convertTime(num) {
+    // Ensure the number is treated as a four-digit string
+    let str = num.toString().padStart(4, '0');
+    // Insert a colon between the hour and minute parts
+    return str.slice(0, 2) + ":" + str.slice(2);
+}
