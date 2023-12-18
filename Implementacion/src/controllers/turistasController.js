@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
@@ -262,11 +262,11 @@ const obtenerInformacionTurista = (turistaId) => {
         reject(error);
       } else if (results.length > 0) {
         const turistaInfo = results[0];
-         // Normaliza la ruta de la foto
-         if (turistaInfo.Foto) {
+        // Normaliza la ruta de la foto
+        if (turistaInfo.Foto) {
           turistaInfo.Foto = path.normalize(turistaInfo.Foto);
-          
-          turistaInfo.Foto= turistaInfo.Foto.replace('public', '..')
+
+          turistaInfo.Foto = turistaInfo.Foto.replace('public', '..')
         }
         resolve(turistaInfo);
       } else {
@@ -814,7 +814,7 @@ const cambiarFoto = async (req, res) => {
     console.log(req.file);
     if (!req.file) {
       return res.status(400).json({ error: 'No se proporcionó ningún archivo.' });
-  }
+    }
 
     const nuevaRutaFoto = req.file.path;
 
@@ -871,6 +871,7 @@ module.exports = {
   actualizar,
   agregarFavorito,
   consultarFavoritos,
-  eliminarFavoritosIndividual, 
-  cambiarFoto
+  eliminarFavoritosIndividual,
+  cambiarFoto,
+  calendario
 }
