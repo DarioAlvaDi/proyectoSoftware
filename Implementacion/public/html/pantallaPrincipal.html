@@ -249,7 +249,7 @@
 
           function callback(results, status) {
             console.log(results);
-            if (res >= 3) {
+            if (res >= 6) {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < 7; i++) {
                   var place = results[i];
@@ -333,6 +333,14 @@
           );
         }
       }
+
+      //Función para que se le ponga en la Distancia de búsqueda, el valor puesto por el Usuario
+      document.addEventListener("DOMContentLoaded", function() {
+        var radioValue = localStorage.getItem("radio");
+        if (radioValue) {
+            document.getElementById("rangoBusqueda").value = radioValue / 1000;
+        }
+      });
 
       function setRadio(elemento) {
         localStorage.setItem("radio", elemento.value * 1000);
