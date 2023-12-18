@@ -22,7 +22,7 @@ a{
 
 .Bienvenida{
     position: absolute;
-    top: 23%;
+    top: 6rem;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1; /* Asegura que el texto esté por encima de la imagen */
@@ -38,7 +38,7 @@ a{
 
 .logo{
     position: absolute;
-    top: 43%;
+    top: 17rem;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1; /* Asegura que el texto esté por encima de la imagen */
@@ -52,11 +52,22 @@ a{
 
 .fboton{
     position: absolute;
-    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1; /* Asegura que el texto esté por encima de la imagen */
     text-align: center;
+}
+
+@media screen and (max-height: 600px) {
+    .fboton {
+        top: 19rem;    
+    }
+}
+
+@media screen and (min-height: 601px) {
+    .fboton {
+        top: 50%;
+    }
 }
 
 .dtslogin input{
