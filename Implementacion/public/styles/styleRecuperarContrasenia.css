@@ -4,6 +4,10 @@ body{
     padding: 0;
 }
 
+a{
+    text-decoration: none;
+}
+
 .contenedor{
     position: relative;
 }
@@ -74,7 +78,9 @@ body{
     width: 155px;
     --primary-color: #8C493E;
     --secondary-color: #fff;
+    --disabled-color: #111;
     --hover-color: #111;
+    --hover-txt-color:#FFF;
     --arrow-width: 10px;
     --arrow-stroke: 2px;
     box-sizing: border-box;
@@ -88,47 +94,54 @@ body{
     align-items: center;
     gap: 0.6em;
     font-weight: bold;
-  }
+}
   
+.boton:disabled {
+    background: #8c483e84;
+    color: var(--disabled-color); /* Cambia el color del texto cuando el botón está desactivado */
+    cursor: not-allowed; /* Cambia el cursor cuando el botón está desactivado */
+}
+
 .boton .arrow-wrapper {
-display: flex;
-justify-content: center;
-align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .boton .arrow {
-margin-top: 1px;
-width: var(--arrow-width);
-background: var(--primary-color);
-height: var(--arrow-stroke);
-position: relative;
-transition: 0.2s;
+    margin-top: 1px;
+    width: var(--arrow-width);
+    background: var(--primary-color);
+    height: var(--arrow-stroke);
+    position: relative;
+    transition: 0.2s;
 }
 
 .boton .arrow::before {
-content: "";
-box-sizing: border-box;
-position: absolute;
-border: solid var(--secondary-color);
-border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
-display: inline-block;
-top: -3px;
-right: 3px;
-transition: 0.2s;
-padding: 3px;
-transform: rotate(-45deg);
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    border: solid var(--secondary-color);
+    border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+    display: inline-block;
+    top: -3px;
+    right: 3px;
+    transition: 0.2s;
+    padding: 3px;
+    transform: rotate(-45deg);
 }
 
 .boton:hover {
-background-color: var(--hover-color);
+    background-color: var(--hover-color);
+    color: var(--hover-txt-color);
 }
 
 .boton:hover .arrow {
-background: var(--secondary-color);
+    background: var(--secondary-color);
 }
 
 .boton:hover .arrow:before {
-right: 0;
+    right: 0;
 }
 
 .olvidar{
@@ -171,6 +184,7 @@ right: 0;
 
 #Ocontra:hover{
     color: brown;
+
 }
 
 @media (max-width:768px){
