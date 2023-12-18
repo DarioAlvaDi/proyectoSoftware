@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -781,11 +781,11 @@ const obtenerFavoritos = (turistaId) => {
 const eliminarFavoritosIndividual = async (req, res, next) => {
   const turistaId = req.session.Id_Turista;
   const Id_Favoritos = req.body.id;
-  console.log(turistaId);
+  console.log(turistaId, Id_Favoritos);
   const sql = `
     DELETE FROM Favoritos
     WHERE Id_Turista = ? 
-    AND Id_Lugar  = ?
+    AND Id_Favoritos  = ?
   `;
 
   try {
@@ -835,7 +835,9 @@ const cambiarFoto = async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
-
+const calendario = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/calendario.html'));
+}
 module.exports = {
   bienvenida,
   datos,
@@ -869,6 +871,6 @@ module.exports = {
   actualizar,
   agregarFavorito,
   consultarFavoritos,
-  eliminarFavoritosIndividual,
+  eliminarFavoritosIndividual, 
   cambiarFoto
 }

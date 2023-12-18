@@ -171,3 +171,8 @@ window.onload = function () {
 
 };
 
+function calendario() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id')
+    window.location.href = "/turistas/calendario?id="+id;
+}
