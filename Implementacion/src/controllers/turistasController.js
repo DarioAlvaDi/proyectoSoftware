@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'n0m3l0',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -773,11 +773,11 @@ const obtenerFavoritos = (turistaId) => {
 const eliminarFavoritosIndividual = async (req, res, next) => {
   const turistaId = req.session.Id_Turista;
   const Id_Favoritos = req.body.id;
-  console.log(turistaId);
+  console.log(turistaId, Id_Favoritos);
   const sql = `
     DELETE FROM Favoritos
     WHERE Id_Turista = ? 
-    AND Id_Lugar  = ?
+    AND Id_Favoritos  = ?
   `;
 
   try {
