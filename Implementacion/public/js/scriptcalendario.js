@@ -165,7 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
     confirmHourButton.addEventListener("click", function () {
         const selectedHour = document.getElementById("selectedHour").value;
         let numDia = ((new Date(currentYear + "-" + (parseInt(currentMonth) + 1) + "-" + selectedDay).getDay()) + 1) % 7;
-        validar(numDia, parseInt(selectedHour))
+        let fecha = currentYear + "-" + (parseInt(currentMonth) + 1) + "-" + selectedDay;
+        validar(numDia, parseInt(selectedHour), fecha)
         const selectedDateInfo = `Día seleccionado: ${selectedDay} de ${getMonthName(currentMonth)} de ${currentYear}`;
         const selectedHourInfo = `Hora seleccionada: ${selectedHour}`;
 
@@ -211,12 +212,21 @@ function validar(num_dia, hora) {
         let periodos = place.opening_hours.periods
         periodos.forEach(item => {
             let dia = item.close.day
-            console.log(dia, num_dia, diaEncontrado)
+            let abre = item.open.time
+            let cierra = item.close.time
+
             if (num_dia == dia) {
                 diaEncontrado = true;
-                if (hora >= parseInt(item.open.time) && hora <= parseInt(item.close.time)) {
-                    horaEncontrada = true;
+                if (abre > cierra) {
+                    if (hora >= cierra && hora <= abre) {
+                        horaEncontrada = true;
+                    }
+                } else {
+                    if (hora >= abre && hora <= cierra) {
+                        horaEncontrada = true;
+                    }
                 }
+
             }
         });
 

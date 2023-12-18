@@ -423,7 +423,7 @@ const historial = async (req, res) => {
 
 //Controlador pantalla itinerario
 const itinerario = async (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/html/dias_itinerario.html'));
+  res.sendFile(path.join(__dirname, '../../public/html/itinerarioDia.html'));
 }
 //Controlador pantalla itinerario
 const actualizar = async (req, res) => {
