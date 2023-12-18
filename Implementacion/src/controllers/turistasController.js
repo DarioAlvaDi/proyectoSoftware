@@ -3,6 +3,7 @@ const mysql = require('mysql')
 const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const multer = require('multer');
 const nodemailer = require("nodemailer");
 //Hola pichula
 // Configuración de la conexión a MySQL con piscina de conexiones
@@ -10,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'n0m3l0',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -253,14 +254,21 @@ const informacionPerfil = async (req, res) => {
 // Función para obtener la información del turista desde la base de datos
 const obtenerInformacionTurista = (turistaId) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT Usuario, Nombre, A_Paterno, A_Materno, Correo, Telefono FROM Turista WHERE Id_Turista = ?';
+    const sql = 'SELECT Usuario, Nombre, A_Paterno, A_Materno, Correo, Telefono, Foto FROM Turista WHERE Id_Turista = ?';
     const values = [turistaId];
 
     pool.query(sql, values, (error, results) => {
       if (error) {
         reject(error);
       } else if (results.length > 0) {
-        resolve(results[0]);
+        const turistaInfo = results[0];
+         // Normaliza la ruta de la foto
+         if (turistaInfo.Foto) {
+          turistaInfo.Foto = path.normalize(turistaInfo.Foto);
+          
+          turistaInfo.Foto= turistaInfo.Foto.replace('public', '..')
+        }
+        resolve(turistaInfo);
       } else {
         reject(new Error('Turista no encontrado'));
       }
@@ -773,11 +781,11 @@ const obtenerFavoritos = (turistaId) => {
 const eliminarFavoritosIndividual = async (req, res, next) => {
   const turistaId = req.session.Id_Turista;
   const Id_Favoritos = req.body.id;
-  console.log(turistaId);
+  console.log(turistaId, Id_Favoritos);
   const sql = `
     DELETE FROM Favoritos
     WHERE Id_Turista = ? 
-    AND Id_Lugar  = ?
+    AND Id_Favoritos  = ?
   `;
 
   try {
@@ -797,6 +805,34 @@ const eliminarFavoritosIndividual = async (req, res, next) => {
   } catch (error) {
     console.error('Error en la conexión con la base de datos:', error);
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+};
+
+const cambiarFoto = async (req, res) => {
+  try {
+    const userId = req.session.Id_Turista
+    console.log(req.file);
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se proporcionó ningún archivo.' });
+  }
+
+    const nuevaRutaFoto = req.file.path;
+
+    // Actualiza la ruta de la foto de perfil en la base de datos para el usuario actual
+    const sql = 'UPDATE Turista SET Foto = ? WHERE Id_Turista = ?';
+
+    pool.query(sql, [nuevaRutaFoto, userId], (error, results) => {
+      if (error) {
+        console.error('Error al actualizar la foto de perfil:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+      } else {
+        // Envía la nueva ruta de la foto de perfil como respuesta en formato JSON
+        res.json({ nuevaRutaFoto });
+      }
+    });
+  } catch (error) {
+    console.error('Error al cambiar la foto de perfil:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 const calendario = async (req, res) => {
@@ -835,6 +871,6 @@ module.exports = {
   actualizar,
   agregarFavorito,
   consultarFavoritos,
-  eliminarFavoritosIndividual,
-  calendario
+  eliminarFavoritosIndividual, 
+  cambiarFoto
 }

@@ -1,6 +1,20 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const turistasController = require('../controllers/turistasController');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/imgs/profiles');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  });
+
+
+const upload = multer({ storage: storage });
 
 //Ruta de pantalla Bievenida
 router.get('/', turistasController.bienvenida);
@@ -70,4 +84,6 @@ router.post('/eliminarFavoritosIndividual', turistasController.eliminarFavoritos
 router.get('/eliminarfavoritos', turistasController.eliminarfavoritos);
 //Ruta para mostrar calendario
 router.get('/calendario', turistasController.calendario);
+//Ruta cambiar foto de perfil
+router.post('/cambiarFoto',upload.single('avatar'), turistasController.cambiarFoto);
 module.exports = router;
