@@ -1,3 +1,6 @@
+/*Importar Bootstrap*/
+@import url(css_bootstrap/bootstrap.css);
+
 body{
     background-color: blachedalmond;
     margin: 0;
@@ -195,15 +198,12 @@ a{
 
 #Ocontra:hover{
     color: brown;
-
 }
 
 @media (max-width:768px){
     .Bienvenida h1{
         text-shadow: 5px 5px 6px rgba(124, 28, 13, 0.7);
-    }
-
-    
+    }   
 }
 
 /* Estilos del mensaje emergente */
@@ -252,4 +252,71 @@ a{
 .boton-regresar img {
     max-width: 20px; /* Tamaño máximo de la imagen */
     height: auto;
+}
+
+/*Mensaje emergente */
+
+#mensaje {
+    font-size: 30px; /* Puedes ajustar este valor según tus preferencias */
+    font-weight: bold; /* Agrega negrita al texto */
+}
+
+.modal-content1{
+    border-radius: 1.25rem;
+    border: 1px solid #000;
+    background: #ffcf95;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content1 div p{
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem;
+    margin-bottom: 2.12rem;
+}
+
+.modal-content1 div button{
+    width: 18.625rem;
+    height: 2.9375rem;
+    border-radius: 1.875rem;
+    border: 1px solid #000;
+    background: #D9D9D9;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 1.25rem;
+    font-family: Roboto;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 900;
+    color: #000;
+}
+
+.iconConfirm{
+    text-align: left;
+}
+.iconConfirm svg{
+    margin-right: 30%;
+}
+.iconConfirm2{
+    text-align: left;
+}
+.iconConfirm2 svg{
+    margin-right: 15%;
+}
+
+/* Mensaje de confirmacion */
+
+#botonTransporte {
+    border: none; /* Elimina el borde predeterminado del botón */
+    background: none; /* Elimina el fondo predeterminado del botón */
+    padding: 0; /* Elimina el relleno predeterminado del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+}
+
+#botonTransporte img {
+    width: 30px; /* Ajusta el ancho de la imagen según tus preferencias */
+    height: 25px; /* Ajusta la altura de la imagen según tus preferencias */
 }

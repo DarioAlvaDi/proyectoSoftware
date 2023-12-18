@@ -159,20 +159,54 @@
                   <p class="etiquetaTransporte">Carro</p>
                 </div>
 
-                <div class="boton-imagen">
-                  <button
-                    type="button"
-                    id="guardar"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalGuardar"
-                  >
-                    <img
-                      src="../imgs/imgMovilidad/caminando.png"
-                      alt="Guardar"
-                      onclick="updateData('Haz seleccionado caminando')"
-                    />
-                  </button>
-                  <p class="etiquetaTransporte">Caminando</p>
+        <!--Movilidad-->
+
+        <div id="miAlert" class="mi-alert">
+            <div class="boton-regresar">
+                <button id="botonRegresar" onclick="ocultarMensaje()" class="boton-regresar">
+                    <img src="../imgs/imgMovilidad/boton-de-retorno.png" alt="Regresar" />
+                </button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="background-image"></div>
+                    <div class="my-2">
+                        <h4>Seleccione su medio de transporte</h4>
+                    </div>
+
+                    <div class="container mt-4">
+                        <div class="row text-center">
+                            <!-- Centra los elementos verticalmente -->
+
+                            <div class="mb-4 pt-4 mx-auto">
+                                <div class="boton-imagen" id="contenedorCarro" data-bs-toggle="modal" data-bs-target="#modalGuardar">
+                                    <button type="button" id="botonTransporte">
+                                        <img src="../imgs/imgMovilidad/carro.png" alt="carro"
+                                        onclick="updateData('Haz seleccionado carro')">
+                                        <p class="etiquetaTransporte">Carro</p>
+                                    </button>
+                                </div>
+                                
+                                <div class="boton-imagen" id="contenedorCaminando" data-bs-toggle="modal" data-bs-target="#modalGuardar">
+                                    <button type="button" id="botonTransporte">
+                                        <img src="../imgs/imgMovilidad/caminando.png" alt="caminando"
+                                        onclick="updateData('Haz seleccionado caminando')">
+                                        <p class="etiquetaTransporte">Caminando</p>
+                                    </button>
+                                </div>
+
+                                <div class="boton-imagen" id="contenedorTransportePublico" data-bs-toggle="modal" data-bs-target="#modalGuardar">
+                                    <button type="button" id="botonTransporte">
+                                        <img src="../imgs/imgMovilidad/transportePublico.png" alt="transportePublico"
+                                        onclick="updateData('Haz seleccionado transporte público')">
+                                        <p class="etiquetaTransporte">Transporte Público</p>
+                                    </button>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
                 <div class="boton-imagen">
@@ -278,9 +312,27 @@
     function updateData(mensaje) {
       // Realiza las operaciones necesarias (puede ser guardar datos, etc.)
 
-      // Actualiza el contenido del span con el ID "mensaje" en el modal
-      document.getElementById("mensaje").innerText = mensaje;
-    }
-  </script>
-  <script src="../js/itinerarioDia.js"></script>
+        document.getElementById('contenedorCarro').addEventListener('click', function() {
+            updateData('Haz seleccionado carro');
+        });
+
+        document.getElementById('contenedorCaminando').addEventListener('click', function() {
+            updateData('Haz seleccionado caminando');
+        });
+
+        document.getElementById('contenedorTransportePublico').addEventListener('click', function() {
+            updateData('Haz seleccionado transporte público');
+        });
+
+        function updateData(mensaje) {
+            // Realiza las operaciones necesarias (puede ser guardar datos, etc.)
+
+            // Actualiza el contenido del span con el ID "mensaje" en el modal
+            document.getElementById('mensaje').innerText = mensaje;
+        }
+
+
+    </script>
+    <script src="../js/itinerarioDia.js"></script>
+
 </html>

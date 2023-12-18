@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contrase&ntildea</title>
+    <!-- Bootstrap CSS library -->
+    <link rel="stylesheet" type="text/css" href="../styles/itinerarioDia.css">
+    <!-- JavaScript library -->
+    <script src="../js/bootstrap.js"></script>
     <link rel="stylesheet" href="../styles/styleRecuperarContrasenia.css">
 </head>
 
@@ -17,70 +21,75 @@
             <div class="logo">
                 <img src="../imgs/Imgbienvenida/image-20@2x.png" alt="" class="imglogo">
             </div>
-            <div class="fboton">    
-                <a href="/turistas/datos">
-                    <button id="reenviarBtn" onclick="mostrarMensaje()" class="boton">
-                        Reenviar link
-                        <div class="arrow-wrapper">
-                            <div class="arrow"></div>
-                        </div>
-                    </button>
-                </a>
+
+            <div class="fboton" id="contenedorReenviarLink">    
+                <button id="reenviarBtn" class="boton" data-bs-toggle="modal" data-bs-target="#modalGuardar">
+                    Reenviar link
+                    <div class="arrow-wrapper">
+                        <div class="arrow"></div>
+                    </div>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- Agrega esta parte al cuerpo de tu HTML para definir el modal -->
+        <div class="modal" id="miModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Contenido del modal, como título, cuerpo y botones -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mensaje Emergente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¡Haz seleccionado transporte público!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!--Mensaje emergente-->
 
-        <div id="miAlert" class="mi-alert">
-            <div class="boton-regresar">
-                <button id="botonRegresar" onclick="ocultarMensaje()" class="boton-regresar">
-                    <img src="../imgs/imgMovilidad/boton-de-retorno.png" alt="Regresar" />
-                </button>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="background-image"></div>
-                    <div class="my-2">
-                        <h4>Link reenviado</h4>
-                    </div>
-    
-                    <div class="container mt-4">
-                        <div class="row text-center">
-                            <!-- Centra los elementos verticalmente -->
-    
-                            <div class="fboton">
-                                <a href="restablecerContraseña.hmtl">
-                                    <button class="btnContinuar">
-                                        Continuar
-                                        <div class="arrow-wrapper">
-                                            <div class="arrow"></div>
-                                        </div>
-                                    </button>
-                                </a>
-                            </div>
-    
+        <div class="modal fade " id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content1 modal-content">
+                    <div class="modal-body text-center">
+                        <p id="mensaje">Link reenviado</p>
+                        <div class="center-items">
+                            <button type="button" class="btn btn-primary iconConfirm" 
+                            id="confirmGuardarDatos" data-bs-toggle="modal" 
+                            data-bs-target="#modalConfirm" onclick="recargarPagina()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" 
+                            height="25" fill="green" class="bi bi-check-circle-fill" 
+                            viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                              </svg>Continuar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    
     </body>
     <script>
         document.getElementById("reenviarBtn").disabled = true;
-        function mostrarMensaje() {
-            var contenedor = document.getElementById("miAlert");
-            contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
-        }
 
-        function ocultarMensaje() {
-            var contenedor = document.getElementById("miAlert");
-            contenedor.style.display = "none";
+        //Mensaje emergente
+        function recargarPagina() {
+            // Espera 200 milisegundos antes de recargar la página
+            setTimeout(function() {
+                location.reload();
+            }, 200); 
         }
-
+        
         // Temporizador
 
         // Tiempo inicial en segundos
-        var tiempoRestante = 15;
+        var tiempoRestante = 20;
 
         function actualizarTemporizador() {
             var boton = document.getElementById("reenviarBtn");
@@ -88,7 +97,7 @@
             if (tiempoRestante > 0) {
                 tiempoRestante--;
                 // Actualizar el texto del botón con el tiempo restante
-                boton.innerHTML = "Reenviar link (" + tiempoRestante + "s)";
+                boton.innerHTML = "Reenviar link (" + tiempoRestante + " seg)";
                 setTimeout(actualizarTemporizador, 1000); // Llamar a la función nuevamente después de 1 segundo
             } else {
                 // Habilitar el botón cuando el temporizador llegue a cero
