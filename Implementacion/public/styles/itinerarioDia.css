@@ -70,29 +70,6 @@ body {
     height: auto;
 }
 
-.mi-alert2 {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 21rem;
-    height: 13.75rem;
-    background-color: #000; /* Color de fondo verde, ajusta según tus preferencias */
-    opacity: 0.95;
-    color: #FFF;
-    text-align: center;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    flex-direction: column; /* Alinear elementos verticalmente */
-}
-
 #btnContinuar {
     margin-top: 2.5rem; /* Espacio entre el mensaje y el botón */
     padding: 0; /* Elimina el espaciado interno del botón */
@@ -166,14 +143,14 @@ body {
 
 /* Mensaje de confirmacion */
 
-#guardar {
+#botonTransporte {
     border: none; /* Elimina el borde predeterminado del botón */
     background: none; /* Elimina el fondo predeterminado del botón */
     padding: 0; /* Elimina el relleno predeterminado del botón */
     cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
 }
 
-#guardar img {
+#botonTransporte img {
     width: 30px; /* Ajusta el ancho de la imagen según tus preferencias */
     height: 25px; /* Ajusta la altura de la imagen según tus preferencias */
 }

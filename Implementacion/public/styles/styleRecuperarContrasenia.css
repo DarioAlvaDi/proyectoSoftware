@@ -195,15 +195,12 @@ a{
 
 #Ocontra:hover{
     color: brown;
-
 }
 
 @media (max-width:768px){
     .Bienvenida h1{
         text-shadow: 5px 5px 6px rgba(124, 28, 13, 0.7);
-    }
-
-    
+    }   
 }
 
 /* Estilos del mensaje emergente */
