@@ -429,7 +429,7 @@
 
     <script>
 
-        // Añade esta función para manejar la subida de la imagen con fetch
+        // Función para manejar la subida de la imagen con fetch
 const cambiarImagen = async (event) => {
     try {
         const fileInput = event.target;
@@ -451,8 +451,6 @@ const cambiarImagen = async (event) => {
             const responseData = await response.json();
             console.log('Respuesta del servidor:', responseData);
 
-            // Aquí puedes realizar acciones adicionales si es necesario
-
         } else {
             console.error('Error al cambiar la foto de perfil');
         }
@@ -463,7 +461,7 @@ const cambiarImagen = async (event) => {
     </script>
 
     <script>
-        // Hacer una solicitud al servidor para obtener la información del turista
+        // Solicitud al servidor para obtener la información del turista
         fetch("/turistas/informacionPerfil")
             .then((response) => {
             if (!response.ok) {
