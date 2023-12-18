@@ -1,90 +1,163 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-               
-        <!-- Bootstrap CSS library -->
-        <link rel="stylesheet" type="text/css" href="../styles/itinerarioDia.css">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- JavaScript library -->
-        <script src="../js/bootstrap.js"></script>
+    <!-- Bootstrap CSS library -->
+    <link rel="stylesheet" type="text/css" href="../styles/itinerarioDia.css" />
 
-        <title>Itinerario Dia</title>
+    <!-- JavaScript library -->
+    <script src="../js/bootstrap.js"></script>
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"
+    ></script>
+    <title>Itinerario Dia</title>
+  </head>
 
-    </head>
+  <body>
+    <header class="header">
+      <!--Barra de navegacion-->
+      <nav class="navbar navColor">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand">
+            <img
+              src="../imgs/imgItinerarioDia/regresar.png"
+              alt="botonRegresar"
+            />
+          </a>
 
-    <body>
+          <h1 class="navbar-brand titulo">Itinerario</h1>
 
-        <header class="header">
-            <!--Barra de navegacion-->
-                <nav class="navbar navColor">
-                    <div class="container-fluid">
-
-                        <a href="#" class="navbar-brand">
-                            <img src="../imgs/imgItinerarioDia/regresar.png" alt="botonRegresar">
-                        </a>
-
-                        <h1 class="navbar-brand titulo">Itinerario</h1>
-
-                        <a href="#" class="navbar-brand">
-                            <img src="../imgs/itinerarioDia/logo.png" alt="logoBeyamaps">
-                        </a>
-                    </div>
-                </nav>
-        </header>
-
-        <div class="container ">
-            <form action="" class="d-flex rounded-pill border border-3 border-dark m-4 p-2 text-bg-light" role="search">
-                <input type="search" class="form-control text-bg-light" placeholder="Buscar en el itinerario" aria-label="Search">
-                <button class="btn" type="submit">
-                    <img src="../imgs/imgItinerarioDia/Lupa.png" alt="busqueda">
-                </button>
-            </form>
+          <a href="#" class="navbar-brand">
+            <img src="../imgs/itinerarioDia/logo.png" alt="logoBeyamaps" />
+          </a>
         </div>
+      </nav>
+    </header>
 
+    <div class="container">
+      <form
+        action=""
+        class="d-flex rounded-pill border border-3 border-dark m-4 p-2 text-bg-light"
+        role="search"
+      >
+        <input
+          type="search"
+          class="form-control text-bg-light"
+          placeholder="Buscar en el itinerario"
+          aria-label="Search"
+        />
+        <button class="btn" type="submit">
+          <img src="../imgs/imgItinerarioDia/Lupa.png" alt="busqueda" />
+        </button>
+      </form>
+    </div>
 
-        <!--Contenedores del siguiente tipo contendran los sitios-->
-        <div class="container">
+    <!--Contenedores del siguiente tipo contendran los sitios-->
+    <div class="container">
+      <div class="row">
+        <div class="" id="contenido"></div>
+      </div>
+    </div>
+
+    <!-- Confirmacion eliminar itinerario -->
+    <div
+      class="modal fade"
+      id="modalItinerarios"
+      tabindex="-1"
+      aria-labelledby="ModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered text-center">
+        <div class="modal-content navColor">
+          <button
+            type="button"
+            class="btn-close m-2"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+
+          <div class="modal-body text-center">
             <div class="row">
-                <div class="" id="contenido">
-
-                </div>
+              <h5>¿Estás seguro de que deseas eliminar este itinerario?</h5>
             </div>
-        </div>
 
-
-
-        <!-- Confirmacion eliminar itinerario -->
-        <div class="modal fade" id="modalItinerarios" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered text-center">
-                <div class="modal-content navColor">
-
-                    <button type="button" class="btn-close m-2" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                    <div class="modal-body text-center">
-                        <div class="row">
-                            <h5>¿Estás seguro de que deseas eliminar este itinerario?</h5>
-
-                        </div>
-
-                        <div class="row m-3">
-                            <button type="button" class="btn btn-danger rounded-4" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#modalConfirm">
-                                <img src="../imgs/imgItinerarioDia/BoteBasura.png" alt="eliminar">
-                                Confirmar eliminación
-                            </button>
-                        </div>
-
-                        <div class="row m-3">
-                            <button type="button" class="btn btn-secondary rounded-4" data-bs-toggle="modal" data-bs-target="#modalItinerarios">
-                                <img src="../imgs/itinerarioDia/BotonEliminar.png" alt="eliminar">
-                                Cancelar
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="row m-3">
+              <button
+                type="button"
+                class="btn btn-danger rounded-4"
+                id="deleteBtn"
+                data-bs-toggle="modal"
+                data-bs-target="#modalConfirm"
+              >
+                <img
+                  src="../imgs/imgItinerarioDia/BoteBasura.png"
+                  alt="eliminar"
+                />
+                Confirmar eliminación
+              </button>
             </div>
+
+            <div class="row m-3">
+              <button
+                type="button"
+                class="btn btn-secondary rounded-4"
+                data-bs-toggle="modal"
+                data-bs-target="#modalItinerarios"
+              >
+                <img
+                  src="../imgs/itinerarioDia/BotonEliminar.png"
+                  alt="eliminar"
+                />
+                Cancelar
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!--Movilidad-->
+
+    <div id="miAlert" class="mi-alert">
+      <div class="boton-regresar">
+        <button
+          id="botonRegresar"
+          onclick="ocultarMensaje()"
+          class="boton-regresar"
+        >
+          <img src="../imgs/imgMovilidad/boton-de-retorno.png" alt="Regresar" />
+        </button>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="background-image"></div>
+          <div class="my-2">
+            <h4>Seleccione su medio de transporte</h4>
+          </div>
+
+          <div class="container mt-4">
+            <div class="row text-center">
+              <!-- Centra los elementos verticalmente -->
+
+              <div class="mb-4 pt-4 mx-auto">
+                <div class="boton-imagen">
+                  <button
+                    type="button"
+                    id="guardar"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalGuardar"
+                  >
+                    <img
+                      src="../imgs/imgMovilidad/carro.png"
+                      alt="Guardar"
+                      onclick="updateData('Haz seleccionado carro')"
+                    />
+                  </button>
+                  <p class="etiquetaTransporte">Carro</p>
+                </div>
 
         <!--Movilidad-->
 
@@ -135,50 +208,109 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Mensaje de confirmacion -->
+                <div class="boton-imagen">
+                  <button
+                    type="button"
+                    id="guardar"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalGuardar"
+                  >
+                    <img
+                      src="../imgs/imgMovilidad/transportePublico.png"
+                      alt="Guardar"
+                      onclick="updateData('Haz seleccionado transporte público')"
+                    />
+                  </button>
 
-        <div class="modal fade " id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content1 modal-content">
-                    <div class="modal-body text-center">
-                        <span id="mensaje"></span>
-                        <div class="center-items">
-                            <button type="button" class="btn btn-primary iconConfirm" id="confirmGuardarDatos" data-bs-toggle="modal" data-bs-target="#modalConfirm"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                              </svg>Confirmar</button><!--aqui se guarda la info-->
-                        </div>
-                        <div class="center-items">
-                            <button type="button" class="btn btn-secondary iconCancel" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
-                              </svg>Cancelar</button>
-                        </div>
-                    </div>
+                  <p class="etiquetaTransporte">Transporte Público</p>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
 
+    <!-- Mensaje de confirmacion -->
 
+    <div
+      class="modal fade"
+      id="modalGuardar"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content1 modal-content">
+          <div class="modal-body text-center">
+            <span id="mensaje"></span>
+            <div class="center-items">
+              <button
+                type="button"
+                class="btn btn-primary iconConfirm"
+                id="confirmGuardarDatos"
+                data-bs-toggle="modal"
+                data-bs-target="#modalConfirm"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="25"
+                  fill="green"
+                  class="bi bi-check-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+                  /></svg
+                >Confirmar</button
+              ><!--aqui se guarda la info-->
+            </div>
+            <div class="center-items">
+              <button
+                type="button"
+                class="btn btn-secondary iconCancel"
+                data-bs-dismiss="modal"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="25"
+                  fill="red"
+                  class="bi bi-x-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
+                  /></svg
+                >Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 
-    </body>
+  <script>
+    function mostrarMensaje() {
+      var contenedor = document.getElementById("miAlert");
+      contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
 
-    <script>
-        function mostrarMensaje() {
-            var contenedor = document.getElementById("miAlert");
-            contenedor.style.display = "flex"; // Cambiado a flex para centrar el botón
+      // Desactiva el botón cuando se muestra el mensaje
+      //document.getElementById("btnContinuar").disabled = true;
+    }
 
-            // Desactiva el botón cuando se muestra el mensaje
-            //document.getElementById("btnContinuar").disabled = true;
-        }
+    function ocultarMensaje() {
+      var contenedor = document.getElementById("miAlert");
+      var contenedor2 = document.getElementById("miAlert2");
+      contenedor.style.display = "none";
+      contenedor2.style.display = "none";
+    }
 
-        function ocultarMensaje() {
-            var contenedor = document.getElementById("miAlert");
-            var contenedor2 = document.getElementById("miAlert2");
-            contenedor.style.display = "none";
-            contenedor2.style.display = "none";
-        }
+    function updateData(mensaje) {
+      // Realiza las operaciones necesarias (puede ser guardar datos, etc.)
 
         document.getElementById('contenedorCarro').addEventListener('click', function() {
             updateData('Haz seleccionado carro');
