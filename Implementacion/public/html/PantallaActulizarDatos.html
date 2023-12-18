@@ -52,11 +52,13 @@
                 <div class="col-12 foto">
                     <img id="view-new-upload-image" src="../imgs/imgActualizarDatos/Ellipse 3.png">
                 </div>
-                <div class="col-12 center-items subirImg">
-                    <img src="../imgs/imgActualizarDatos/Agregar.png">
-                    <label id="btn-open-file-selector">Cambiar Foto</label>
-                    <input type="file" name="avatar" id="avatar" />
-                </div>
+                <form id="form-actualizar-datos" enctype="multipart/form-data">
+                    <div class="col-12 center-items subirImg">
+                        <img id="profile-image" src="../imgs/imgActualizarDatos/Agregar.png">
+                        <label id="btn-open-file-selector">Cambiar Foto</label>
+                        <input type="file" accept="image/*" name="avatar" id="avatar" onchange="cambiarImagen(event)" />
+                    </div>
+                </form>
 
                 <form method="PATCH" id="updateForm">
                     <div class="dtsActualizar">
@@ -425,6 +427,63 @@
     <script type="text/javascript" src="../js/PantallaActualizarDatosScript.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-J6qa4849blEEN+R6O5enYsK2YbHaNU6K1cOPZ5f8+9R5ZBZ5lF06tLhN6sBoZl" crossorigin="anonymous"></script>
 
+    <script>
+
+        // Añade esta función para manejar la subida de la imagen con fetch
+const cambiarImagen = async (event) => {
+    try {
+        const fileInput = event.target;
+        const file = fileInput.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('avatar', file);
+
+        const response = await fetch('/turistas/cambiarFoto', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Respuesta del servidor:', responseData);
+
+            // Aquí puedes realizar acciones adicionales si es necesario
+
+        } else {
+            console.error('Error al cambiar la foto de perfil');
+        }
+    } catch (error) {
+        console.error('Error en la subida de la imagen:', error);
+    }
+};
+    </script>
+
+    <script>
+        // Hacer una solicitud al servidor para obtener la información del turista
+        fetch("/turistas/informacionPerfil")
+            .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la solicitud fetch: " + response.status);
+            }
+            return response.json();
+            })
+            .then((turistaInfo) => {
+            console.log('Camino:' + turistaInfo.Foto)
+
+            // Actualizar la imagen de perfil con la nueva ruta
+            const profileImage = document.getElementById("view-new-upload-image");
+            if (turistaInfo.Foto) {
+                profileImage.src = turistaInfo.Foto.replace(/\\/g, '/')
+            }
+            })
+            .catch((error) =>
+            console.error("Error al obtener información del turista:", error)
+            );
+    </script>
 </body>
 </html>
 

@@ -32,7 +32,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 foto">
-          <img src="../imgs/imgPerfil/Ellipse 3.png" alt="" />
+          <img id="profile-image" src="../imgs/imgPerfil/Ellipse 3.png" alt="" />
         </div>
         <div class="col-12 center-items">
           <label id="Nombreusuario">Usuario: </label>
@@ -126,6 +126,13 @@
             turistaInfo.A_Materno;
           document.getElementById("Correo").innerHTML += turistaInfo.Correo;
           document.getElementById("Telefono").innerHTML += turistaInfo.Telefono;
+          console.log('Camino:' + turistaInfo.Foto)
+
+          // Actualizar la imagen de perfil con la nueva ruta
+          const profileImage = document.getElementById("profile-image");
+          if (turistaInfo.Foto) {
+            profileImage.src = turistaInfo.Foto.replace(/\\/g, '/')
+          }
         })
         .catch((error) =>
           console.error("Error al obtener información del turista:", error)
