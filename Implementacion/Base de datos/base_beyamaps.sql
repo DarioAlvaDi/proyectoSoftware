@@ -11,7 +11,9 @@ CREATE TABLE Turista (
     Telefono VARCHAR(50) NOT NULL,
     Usuario VARCHAR(50) NOT NULL,
     pass VARCHAR(60) NOT NULL,
-    Foto VARCHAR(255)
+    Foto VARCHAR(255),
+    Estado CHAR,
+    Codigo VARCHAR(100)
 );
 
 CREATE TABLE Preferencias(

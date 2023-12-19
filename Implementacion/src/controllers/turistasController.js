@@ -27,8 +27,9 @@ const registrarTurista = async (req, res) => {
         correo,
         telefono,
         usuario,
-        pass
-      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        pass,
+        estado
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, 'N')
     `;
   const hashedPass = await bcrypt.hash(turista.pass, saltRounds);
   console.log(hashedPass);
@@ -64,7 +65,7 @@ const registrarTurista = async (req, res) => {
         res.status(400).json({ error: 'No se pudo obtener el último Id_Turista' });
       } else {
         req.session.Id_Turista = resultadosUltimoTurista[0].Id_Turista;
-        res.sendFile(path.join(__dirname, '../../public/html/Preferencias.html'));
+        res.redirect('/turistas/enviarCorreo');
       }
     })
   } else {
@@ -160,6 +161,11 @@ const datos = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/Login.html'));
 }
 
+// Controlador pantalla de verificar Cuenta
+const verificarCuenta = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/verificarcuenta.html'));
+}
+
 // AUTENTICACION DE USUARIO(LOGIN)
 const login = async (req, res, next) => {
   console.log('Recibiendo solicitud de login...');
@@ -183,13 +189,19 @@ const login = async (req, res, next) => {
       const turistaId = results[0].Id_Turista
       req.session.Id_Turista = turistaId
       const storedHashedPass = results[0].pass;
+      const status = results[0].Estado;
       console.log(turistaId)
       // Comparar la contraseña ingresada con la contraseña almacenada en la base de datos
       const match = await bcrypt.compare(turista.pass, storedHashedPass);
 
       if (match) {
-        console.log('Turista encontrado');
-        res.status(200).json({ message: 'Autenticación exitosa' });
+        if(status === 'V'){
+          console.log('Turista encontrado');
+          res.status(200).json({ message: 'Autenticación exitosa' });
+        }else if(status === 'N'){
+          console.log('Cuenta no verificada')
+          res.status(401).json({ message: 'Cuenta no verificada' });
+        }
       } else {
         console.log('Contraseña incorrecta');
         // Enviar respuesta JSON indicando que la autenticación falló
@@ -640,38 +652,115 @@ const validacioncontraseña = async (req, res, next) => {
   }
 };
 
-//Controlador pantalla validar contraseña
+//Controlador pantalla validar correo
 const enviarCorreo = async (req, res) => {
-  const codigo = req.body.codigo;
-  const correo = req.body.correo;
-  console.log(req.body);
-  const config = {
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-      user: 'ledesma.ramirez.jose.emiliano@gmail.com',
-      pass: 'fums ozuy asmz lfst'
+  const turistaId = req.session.Id_Turista;
+
+  // Generar un código aleatorio
+  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+
+  // Actualizar el código en la base de datos
+  const updateCodigoSql = 'UPDATE Turista SET Codigo = ? WHERE Id_Turista = ?';
+  pool.query(updateCodigoSql, [codigo, turistaId], async (errorUpdateCodigo, resultsUpdateCodigo) => {
+    if (errorUpdateCodigo) {
+      console.error("Error al actualizar el código en la base de datos:", errorUpdateCodigo);
+      res.status(500).json({ error: 'Error al actualizar el código en la base de datos' });
+      return;
     }
-  }
 
-  const mensaje = {
-    from: 'ledesma.ramirez.jose.emiliano@gmail.com',
-    to: correo,
-    subject: 'Hola, adiós',
-    text: 'El código de verificación es ' + codigo + '.'
-  }
+    if (resultsUpdateCodigo.affectedRows !== 1) {
+      console.error("No se pudo actualizar el código en la base de datos");
+      res.status(500).json({ error: 'Error al actualizar el código en la base de datos' });
+      return;
+    }
 
-  const transport = nodemailer.createTransport(config);
+    // Realizar la consulta para obtener el correo del turista
+    const sql = 'SELECT Correo FROM Turista WHERE Id_Turista = ?';
+    pool.query(sql, [turistaId], async (error, results) => {
+      if (error) {
+        console.error("Error al obtener el correo del turista:", error);
+        res.status(500).json({ error: 'Error al obtener el correo del turista' });
+        return;
+      }
 
-  try {
-    const info = await transport.sendMail(mensaje);
-    console.log("Correo enviado:", info);
-    res.send("test")
-  } catch (error) {
-    console.error("Error al enviar el correo:", error);
-  }
+      if (results.length === 0) {
+        console.error("No se encontró el turista con el ID proporcionado");
+        res.status(404).json({ error: 'Turista no encontrado' });
+        return;
+      }
 
-}
+      const correo = results[0].Correo;
+
+      const config = {
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+          user: 'ledesma.ramirez.jose.emiliano@gmail.com',
+          pass: 'fums ozuy asmz lfst'
+        }
+      };
+
+      const mensaje = {
+        from: 'ledesma.ramirez.jose.emiliano@gmail.com',
+        to: correo,
+        subject: 'Verificación de Correo',
+        text: 'El código de verificación es ' + codigo + '.'
+      };
+
+      const transport = nodemailer.createTransport(config);
+
+      try {
+        const info = await transport.sendMail(mensaje);
+        console.log("Correo enviado:", info);
+        res.redirect('/turistas/verificarCuenta');
+      } catch (error) {
+        console.error("Error al enviar el correo:", error);
+        res.status(500).json({ error: 'Error al enviar el correo' });
+      }
+    });
+  });
+};
+
+
+// Controlador para comparar códigos para verificar la cuenta
+const compararCodigos = async (req, res) => {
+  const turistaId = req.session.Id_Turista;
+  const CodigoIngresado = req.body.codigo;
+  console.log(CodigoIngresado)
+  const sql = 'SELECT Codigo FROM Turista WHERE Id_Turista= ?';
+
+  pool.query(sql, [turistaId], async (error, results) => {
+    if (error) {
+      console.error("Error al obtener el código del turista:", error);
+      res.status(500).json({ error: 'Error al obtener el código del turista' });
+      return;
+    }
+
+    if (results.length === 0) {
+      console.error("No se encontró el código con el ID proporcionado");
+      res.status(404).json({ error: 'Código no encontrado' });
+      return;
+    }
+
+    const codigo = results[0].Codigo;
+    console.log(codigo)
+
+    if (CodigoIngresado === codigo) {
+      const sql2 = 'UPDATE Turista SET Estado=? WHERE Id_Turista=?';
+      pool.query(sql2, ['V', turistaId], async (error, results) => {
+        if (error) {
+          console.error("Error al actualizar el estado del turista:", error);
+          res.status(500).json({ error: 'Error al actualizar el estado del turista' });
+          return;
+        }
+        res.status(200).json({ message: "Cuenta verificada" });
+      });
+    } else {
+      res.status(500).json({ message: "Código ingresado no coincide" });
+    }
+  });
+};
+
 
 const consultarPreferencias = async (req, res) => {
   try {
@@ -865,6 +954,7 @@ module.exports = {
   consultarHistorial,
   agregarHistorial,
   eliminarfavoritos,
+  compararCodigos,
   validacioncontraseña,
   enviarCorreo,
   consultarPreferencias,
@@ -873,5 +963,6 @@ module.exports = {
   consultarFavoritos,
   eliminarFavoritosIndividual,
   cambiarFoto,
-  calendario
+  calendario,
+  verificarCuenta
 }

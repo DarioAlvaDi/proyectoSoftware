@@ -56,6 +56,8 @@ router.get('/historial', turistasController.historial);
 router.get('/itinerario', turistasController.itinerario);
 //Ruta de pantalla para validar contraseña
 router.get('/validar', turistasController.validar);
+//Ruta de pantalla para validar contraseña
+router.get('/verificarCuenta', turistasController.verificarCuenta);
 //Ruta para agrregar datos de historial
 router.post('/agregarHistorial', turistasController.agregarHistorial);
 //Ruta para obtener datos de historial
@@ -71,7 +73,7 @@ router.get('/actualizar', turistasController.actualizar);
 //Ruta para preferencia
 router.post('/pref', turistasController.registrarPreferencias);
 //Ruta para enviar correo
-router.post('/enviarCorreo', turistasController.enviarCorreo);
+router.get('/enviarCorreo', turistasController.enviarCorreo);
 //Ruta para obtener datos de historial
 router.get('/consultarPreferencias', turistasController.consultarPreferencias);
 //Ruta para agrregar datos de historial
@@ -86,4 +88,6 @@ router.get('/eliminarfavoritos', turistasController.eliminarfavoritos);
 router.get('/calendario', turistasController.calendario);
 //Ruta cambiar foto de perfil
 router.post('/cambiarFoto', upload.single('avatar'), turistasController.cambiarFoto);
+//Ruta para comparar Codigos
+router.post('/compararCodigos', turistasController.compararCodigos)
 module.exports = router;
