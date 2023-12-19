@@ -335,6 +335,14 @@
         }
       }
 
+      //Función para que se le ponga en la Distancia de búsqueda, el valor puesto por el Usuario
+      document.addEventListener("DOMContentLoaded", function () {
+        var radioValue = localStorage.getItem("radio");
+        if (radioValue) {
+          document.getElementById("rangoBusqueda").value = radioValue / 1000;
+        }
+      });
+
       function setRadio(elemento) {
         localStorage.setItem("radio", elemento.value * 1000);
         window.location.reload();

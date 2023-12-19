@@ -41,18 +41,16 @@
       <!--Barra de navegacion-->
       <nav class="navbar navColor">
         <div class="container-fluid">
-          <a href="/turistas/favoritos" class="navbar-brand">
             <img
               src="../imgs/detalles_lugar_imgs/regresar.png"
-              alt="botonRegresar"
+              alt="botonRegresar" onclick="history.back()"
             />
-          </a>
 
           <h1 id="nombre" class="navbar-brand titulo">Nombre del lugar</h1>
 
-          <!-- <a href="#" class="navbar-brand"> -->
-          <img src="../imgs/detalles_lugar_imgs/logo.png" alt="logoBeyamaps" />
-          <!-- </a> -->
+          <a href="/turistas/mapa" class="navbar-brand"> 
+          <img src="../imgs/detalles_lugar_imgs/logo.png" alt="logoBeyamaps" hre />
+          </a>
         </div>
       </nav>
     </header>
@@ -86,17 +84,11 @@
     </div>
     <div class="container">
       <div class="detalleslugar">
-        <div class="row mt-2">
-          <div class="mt-2 col-sm-6 col-md-6 col-lg-6 col-xl-6 order-lg-first">
+        <div class="row mt-1 justify-content-center align-items-center">
+          <div class="mt-1 col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <!-- Rectángulo blanco a la izquierda en pantallas medianas y grandes -->
             <div class="bg-white p-2">
-              <p class="m-0">Calificación: <span id="calificacion"></span></p>
-            </div>
-          </div>
-          <div class="mt-2 col-sm-6 col-md-6 col-lg-6 col-xl-6 order-lg-last">
-            <!-- Rectángulo blanco a la derecha en pantallas medianas y grandes -->
-            <div class="bg-white p-2">
-              <p class="m-0">Distancia: <span id="distancia"></span></p>
+              <p class="m-0 text-center">Calificación: <span id="calificacion"></span></p>
             </div>
           </div>
         </div>
