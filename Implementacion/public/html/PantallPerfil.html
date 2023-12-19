@@ -131,5 +131,38 @@
     }
 </script>
 
+<script>
+        // Solicitud al servidor para obtener la información del turista
+        fetch("/turistas/informacionPerfil")
+        .then((response) => {
+            if (!response.ok) {
+            throw new Error("Error en la solicitud fetch: " + response.status);
+            }
+            return response.json();
+        })
+        .then((turistaInfo) => {
+            // Actualizar el contenido de los contenedores con la información del turista
+            document.getElementById("Nombreusuario").innerHTML += turistaInfo.Usuario;
+            document.getElementById("Nombre").innerHTML +=
+            turistaInfo.Nombre +
+            " " +
+            turistaInfo.A_Paterno +
+            " " +
+            turistaInfo.A_Materno;
+            document.getElementById("Correo").innerHTML += turistaInfo.Correo;
+            document.getElementById("Telefono").innerHTML += turistaInfo.Telefono;
+            console.log('Camino:' + turistaInfo.Foto)
+
+            // Actualizar la imagen de perfil con la nueva ruta
+            const profileImage = document.getElementById("profile-image");
+            if (turistaInfo.Foto) {
+                profileImage.src = turistaInfo.Foto.replace(/\\/g, '/')
+            }
+            })
+            .catch((error) =>
+            console.error("Error al obtener información del turista:", error)
+            );
+        </script>
+
 </body>
 </html>

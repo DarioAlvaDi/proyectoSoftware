@@ -1,0 +1,131 @@
+\newpage
+\section{\textcolor{blue}{Base de Datos}}
+\subsection{\textcolor{blue}{Diagrama entidad-relación}}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{entregable final/Img_BasesdeDatos/Diagrama.png}
+    \caption{Diagrama Entidad-Relacion}
+    \label{fig:Diagrama Entidad-Relacion}
+\end{figure}
+
+\subsection{\textcolor{blue}{Diagrama Relacional}}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{entregable final/Img_BasesdeDatos/image.png}
+    \caption{Diagrama Relacional}
+    \label{fig:Diagrama Relacional}
+\end{figure}
+\newpage
+\section{{Diccionario de datos}}
+%---Tabla turista --%
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| c | c | c | c | }
+\hline
+\multicolumn{4}{ |c| }{Tabla turista} \\ \hline
+Atributo & Tipo de dato & Tipo de llave  & Descripción \\ \hline
+Id\_Turista & INT & Llave primaria & No nulo \\ 
+Usuario & VARCHAR & - & No nulo \\
+Contraseña & VARCHAR & - & No nulo \\
+Id\_Historial & INT & Llave foránea & No nulo \\ 
+Nombre & VARCHAR & - & No nulo \\
+A\_Paterno & VARCHAR & - & No nulo \\
+A\_Materno & VARCHAR & - & No nulo \\
+Correo & VARCHAR & - & No nulo \\
+Teléfono & VARCHAR & - & No nulo \\
+
+ \hline
+\end{tabular}
+\caption{Diccionario tabla turista}
+\label{tab:coches}
+\end{center}
+\end{table}
+
+%---Tabla preferencias --%
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| c | c | c | c | }
+\hline
+\multicolumn{4}{ |c| }{Tabla preferencias} \\ \hline
+Atributo & Tipo de dato & Tipo de llave  & Descripción \\ \hline
+Id\_Preferencia & INT & Llave primaria & No nulo \\ 
+Nombre & VARCHAR & - & No nulo \\
+Id\_Turista & INT & Llave foránea & No nulo \\ 
+ \hline
+\end{tabular}
+\caption{Diccionario tabla preferencias}
+\label{tab:coches}
+\end{center}
+\end{table}
+%---Tabla itinerario --%
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| c | c | c | c | }
+\hline
+\multicolumn{4}{ |c| }{Tabla itinerario} \\ \hline
+Atributo & Tipo de dato & Tipo de llave  & Descripción \\ \hline
+Id\_Itinerario & INT & Llave primaria & No nulo \\ 
+Fecha\_Itinerario & DATE & - & No nulo \\
+Hora\_Itinerario & TIME & - & No nulo \\
+Id\_Lugar & INT & Llave foránea & No nulo \\ 
+ \hline
+\end{tabular}
+\caption{Diccionario tabla itinerario}
+\label{tab:coches}
+\end{center}
+\end{table}
+
+%---Tabla historial --%
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| c | c | c | c | }
+\hline
+\multicolumn{4}{ |c| }{Tabla historial} \\ \hline
+Atributo & Tipo de dato & Tipo de llave  & Descripción \\ \hline
+Id\_Historial & INT & Llave primaria & No nulo \\ 
+Id\_Lugar & INT & Llave foránea & No nulo \\ 
+ \hline
+\end{tabular}
+\caption{Diccionario tabla historial}
+\label{tab:coches}
+\end{center}
+\end{table}
+
+%---Tabla lugar --%
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| c | c | c | c | }
+\hline
+\multicolumn{4}{ |c| }{Tabla lugar} \\ \hline
+Atributo & Tipo de dato & Tipo de llave  & Descripción \\ \hline
+Id\_Lugar & INT & Llave primaria & No nulo \\ 
+Nombre & Varchar & - & No nulo \\ 
+ \hline
+\end{tabular}
+\caption{Diccionario tabla lugar}
+\label{tab:coches}
+\end{center}
+\end{table}
+
+%---Tabla favoritos --%
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| c | c | c | c | }
+\hline
+\multicolumn{4}{ |c| }{Tabla favoritos} \\ \hline
+Atributo & Tipo de dato & Tipo de llave  & Descripción \\ \hline
+Id\_Favorito & INT & Llave primaria & No nulo \\ 
+Id\_Lugar & INT & Llave foránea & No nulo \\ 
+Id\_Turista & INT & Llave foránea & No nulo \\ 
+ \hline
+\end{tabular}
+\caption{Diccionario tabla favoritos}
+\label{tab:coches}
+\end{center}
+\end{table}
