@@ -209,26 +209,32 @@ function validar(num_dia, hora, fecha) {
         console.log(place);
         let diaEncontrado = false;
         let horaEncontrada = false;
-        let periodos = place.opening_hours.periods
-        periodos.forEach(item => {
-            let dia = item.close.day
-            let abre = item.open.time
-            let cierra = item.close.time
+        if (place.opening_hours == undefined) {
+            diaEncontrado == true;
+            horaEncontrada == true;
+        } else {
+            let periodos = place.opening_hours.periods
+            periodos.forEach(item => {
+                let dia = item.close.day
+                let abre = item.open.time
+                let cierra = item.close.time
 
-            if (num_dia == dia) {
-                diaEncontrado = true;
-                if (abre > cierra) {
-                    if (hora >= cierra && hora <= abre) {
-                        horaEncontrada = true;
+                if (num_dia == dia) {
+                    diaEncontrado = true;
+                    if (abre > cierra) {
+                        if (hora >= cierra && hora <= abre) {
+                            horaEncontrada = true;
+                        }
+                    } else {
+                        if (hora >= abre && hora <= cierra) {
+                            horaEncontrada = true;
+                        }
                     }
-                } else {
-                    if (hora >= abre && hora <= cierra) {
-                        horaEncontrada = true;
-                    }
+
                 }
+            });
+        }
 
-            }
-        });
 
         if (diaEncontrado) {
             if (horaEncontrada) {

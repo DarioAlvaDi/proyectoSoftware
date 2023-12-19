@@ -841,19 +841,24 @@ const calendario = async (req, res) => {
 
 const agregarItinerario = async (req, res) => {
   const turista = req.session.Id_Turista;
+  console.log(req.body)
   // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
   const sql = `
       INSERT INTO Itinerario  (
         Id_Lugar,
         Fecha_Itinerario,
         Hora_Itinerario,
+        Latitud,
+        Longitud,
         Id_Turista
-      ) VALUES (?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?)
     `;
   const values = [
     req.body.id,
     req.body.fecha,
     req.body.hora,
+    req.body.lat,
+    req.body.lng,
     turista,
   ];
 
