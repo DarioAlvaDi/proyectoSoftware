@@ -178,119 +178,120 @@
         if (localStorage.getItem("radio") === null) {
           localStorage.setItem("radio", 2500);
         }
-        var res = 0;
-        var map = L.map("map").setView([0, 0], 2);
+      };
+      var res = 0;
+      var map = L.map("map").setView([0, 0], 2);
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap contributors"
-        }).addTo(map);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors"
+      }).addTo(map);
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-          var userLat = position.coords.latitude;
-          var userLng = position.coords.longitude;
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var userLat = position.coords.latitude;
+        var userLng = position.coords.longitude;
 
-          var userMarker = L.marker([userLat, userLng], {
-            icon: L.divIcon({
-              className: "leaflet-div-icon",
-              html: '<div style="background-color: red; width: 10px; height: 10px;"></div>'
-            })
+        var userMarker = L.marker([userLat, userLng], {
+          icon: L.divIcon({
+            className: "leaflet-div-icon",
+            html: '<div style="background-color: red; width: 10px; height: 10px;"></div>'
           })
-            .addTo(map)
-            .bindPopup("¡Tu ubicación!");
+        })
+          .addTo(map)
+          .bindPopup("¡Tu ubicación!");
 
-          map.setView([userLat, userLng], 13);
+        map.setView([userLat, userLng], 13);
 
-          var radius = localStorage.getItem("radio") + 100; // radio + 500 mts
+        var radius = localStorage.getItem("radio") + 100; // radio + 500 mts
 
-          var museumsLayer = new L.GeoJSON.AJAX(
-            "https://www.overpass-api.de/api/interpreter?data=[out:json];node(around:" +
-              radius +
-              "," +
-              userLat +
-              "," +
-              userLng +
-              ')["tourism"="museum"];out;',
-            {
-              onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.tags.name || "Unnamed");
-              },
-              pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {
-                  icon: L.divIcon({
-                    className: "leaflet-div-icon",
-                    html: '<div style="background-color: blue; width: 10px; height: 10px;"></div>'
-                  })
-                });
+        var museumsLayer = new L.GeoJSON.AJAX(
+          "https://www.overpass-api.de/api/interpreter?data=[out:json];node(around:" +
+            radius +
+            "," +
+            userLat +
+            "," +
+            userLng +
+            ')["tourism"="museum"];out;',
+          {
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.tags.name || "Unnamed");
+            },
+            pointToLayer: function (feature, latlng) {
+              return L.marker(latlng, {
+                icon: L.divIcon({
+                  className: "leaflet-div-icon",
+                  html: '<div style="background-color: blue; width: 10px; height: 10px;"></div>'
+                })
+              });
+            }
+          }
+        ).addTo(map);
+
+        var ubi = new google.maps.LatLng(userLat, userLng);
+        service = new google.maps.places.PlacesService(
+          document.createElement("div")
+        );
+        var radio = localStorage.getItem("radio").toString();
+        fetch("/turistas/consultarPreferencias")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (arreglo) {
+            res = arreglo.length;
+            arreglo.forEach((item) => {
+              var request = {
+                location: ubi,
+                radius: radio,
+                type: item.Nombre
+              };
+              console.log(request);
+              service.nearbySearch(request, callback);
+            });
+          });
+
+        function callback(results, status) {
+          console.log(results);
+          if (res >= 7) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              for (var i = 0; i < 7; i++) {
+                var place = results[i];
+                var marcador = L.marker([
+                  place.geometry.location.lat(),
+                  place.geometry.location.lng()
+                ]).addTo(map);
+                marcador
+                  .bindPopup(
+                    "<a href=/turistas/detalles?id=" +
+                      place.place_id +
+                      ">" +
+                      place.name +
+                      "</a>"
+                  )
+                  .openPopup();
               }
             }
-          ).addTo(map);
-
-          var ubi = new google.maps.LatLng(userLat, userLng);
-          service = new google.maps.places.PlacesService(
-            document.createElement("div")
-          );
-          var radio = localStorage.getItem("radio").toString();
-          fetch("/turistas/consultarPreferencias")
-            .then(function (response) {
-              return response.json();
-            })
-            .then(function (arreglo) {
-              res = arreglo.length;
-              arreglo.forEach((item) => {
-                var request = {
-                  location: ubi,
-                  radius: radio,
-                  type: item.Nombre
-                };
-                console.log(request);
-                service.nearbySearch(request, callback);
-              });
-            });
-
-          function callback(results, status) {
-            console.log(results);
-            if (res >= 3) {
-              if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < 7; i++) {
-                  var place = results[i];
-                  var marcador = L.marker([
-                    place.geometry.location.lat(),
-                    place.geometry.location.lng()
-                  ]).addTo(map);
-                  marcador
-                    .bindPopup(
-                      "<a href=/turistas/detalles?id=" +
-                        place.place_id +
-                        ">" +
-                        place.name +
-                        "</a>"
-                    )
-                    .openPopup();
-                }
-              }
-            } else {
-              if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                  var place = results[i];
-                  var marcador = L.marker([
-                    place.geometry.location.lat(),
-                    place.geometry.location.lng()
-                  ]).addTo(map);
-                  marcador
-                    .bindPopup(
-                      "<a href=/turistas/detalles?id=" +
-                        place.place_id +
-                        ">" +
-                        place.name +
-                        "</a>"
-                    )
-                    .openPopup();
-                }
+          } else {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              for (var i = 0; i < results.length; i++) {
+                var place = results[i];
+                var marcador = L.marker([
+                  place.geometry.location.lat(),
+                  place.geometry.location.lng()
+                ]).addTo(map);
+                marcador
+                  .bindPopup(
+                    "<a href=/turistas/detalles?id=" +
+                      place.place_id +
+                      ">" +
+                      place.name +
+                      "</a>"
+                  )
+                  .openPopup();
               }
             }
           }
-        });
-      };
+        }
+      });
+
       //locationBiaslocationBiaslocationBiaslocationBiaslocationBias
       let autocomplete;
       function initAutocomplete() {

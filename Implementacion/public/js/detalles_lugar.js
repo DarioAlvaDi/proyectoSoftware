@@ -135,38 +135,43 @@ window.onload = function () {
             document.getElementById("nombre").innerHTML = place.name;
             document.getElementById("calificacion").innerHTML = place.rating + ' ☆';
             document.getElementById("nombre").innerHTML = place.name;
-            document.getElementById("lunes").innerHTML = place.opening_hours.weekday_text[0];
-            document.getElementById("martes").innerHTML = place.opening_hours.weekday_text[1];
-            document.getElementById("miercoles").innerHTML = place.opening_hours.weekday_text[2];
-            document.getElementById("jueves").innerHTML = place.opening_hours.weekday_text[3];
-            document.getElementById("viernes").innerHTML = place.opening_hours.weekday_text[4];
-            document.getElementById("sabado").innerHTML = place.opening_hours.weekday_text[5];
-            document.getElementById("domingo").innerHTML = place.opening_hours.weekday_text[6];
-            for (let i = 0; i < place.photos.length; i++) {
-                if (i == 0) {
-                    document.getElementById("carrusel").innerHTML = document.getElementById("carrusel").innerHTML +
+            if (place.opening_hours != undefined) {
+                document.getElementById("lunes").innerHTML = place.opening_hours.weekday_text[0];
+                document.getElementById("martes").innerHTML = place.opening_hours.weekday_text[1];
+                document.getElementById("miercoles").innerHTML = place.opening_hours.weekday_text[2];
+                document.getElementById("jueves").innerHTML = place.opening_hours.weekday_text[3];
+                document.getElementById("viernes").innerHTML = place.opening_hours.weekday_text[4];
+                document.getElementById("sabado").innerHTML = place.opening_hours.weekday_text[5];
+                document.getElementById("domingo").innerHTML = place.opening_hours.weekday_text[6];
+            }
+            if (place.photos != undefined) {
+                for (let i = 0; i < place.photos.length; i++) {
+                    if (i == 0) {
+                        document.getElementById("carrusel").innerHTML = document.getElementById("carrusel").innerHTML +
+                            `
+                        <div class="carousel-item active">
+                            <img
+                            src="`+ place.photos[i].getUrl({ maxWidth: 335, maxHeight: 400 }) + `"
+                            class="d-block img-fluid"
+                            alt="Imagen 1"
+                            />
+                        </div>
                         `
-                    <div class="carousel-item active">
-                        <img
-                        src="`+ place.photos[i].getUrl({ maxWidth: 335, maxHeight: 400 }) + `"
-                        class="d-block img-fluid"
-                        alt="Imagen 1"
-                        />
-                    </div>
-                    `
-                } else {
-                    document.getElementById("carrusel").innerHTML = document.getElementById("carrusel").innerHTML +
+                    } else {
+                        document.getElementById("carrusel").innerHTML = document.getElementById("carrusel").innerHTML +
+                            `
+                        <div class="carousel-item">
+                            <img
+                            src="`+ place.photos[i].getUrl({ maxWidth: 335, maxHeight: 400 }) + `"
+                            class="d-block img-fluid"
+                            alt="Imagen 1"
+                            />
+                        </div>
                         `
-                    <div class="carousel-item">
-                        <img
-                        src="`+ place.photos[i].getUrl({ maxWidth: 335, maxHeight: 400 }) + `"
-                        class="d-block img-fluid"
-                        alt="Imagen 1"
-                        />
-                    </div>
-                    `
+                    }
                 }
             }
+
         }
     }
 

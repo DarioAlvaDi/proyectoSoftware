@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function validar(num_dia, hora) {
+function validar(num_dia, hora, fecha) {
     const urlParams = new URLSearchParams(window.location.search);
 
     const id = urlParams.get('id')
@@ -232,7 +232,7 @@ function validar(num_dia, hora) {
 
         if (diaEncontrado) {
             if (horaEncontrada) {
-                let item = [{ id: id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }]
+                let item = [{ id: id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), fecha: fecha }]
                 console.log("Hora y dia disponible")
                 if (localStorage.getItem("itinerario") === null) {
                     localStorage.setItem("itinerario", JSON.stringify(item));
