@@ -1,0 +1,304 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{comment}
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{rojo}{RGB}{255,0,0}
+\definecolor{azul}{RGB}{12,0,200}
+
+%Configurar el encabezado de pagina
+\pagestyle{fancy}
+\lhead{Análisis y Diseño de Sistemas}
+\chead{}
+\rhead{5CM4 - Análisis y Diseño de Sistemas}
+\renewcommand{\headrulewidth}{0.4pt} 
+\makeindex
+
+%\begin{document}
+%Portada
+\begin{document}
+\begin{titlepage}
+\centering
+{\bfseries\LARGE Instituto Politécnico Nacional \par}
+\vspace{.5cm}
+{\bfseries\LARGE Escuela Superior de Computo \par}
+\vspace{1cm}
+\Large ANÁLISIS Y DISEÑO DE SISTEMAS \par
+\vspace{1cm}
+\itshape\LARGE Proyecto \par
+\vspace{1cm}
+%\itshape\LARGE Requerimientos funcionales, no funcionales y reglas de negocio \par
+%\vspace{2cm}
+\LARGE 5CM4\par
+\vspace{1cm}
+\begin{FlushLeft}
+\Large Nombre del equipo: Bellakitos FC\par
+\Large Nombre del proyecto: \textbf{Beyamaps}\par
+\vspace{0.5cm}
+\Large Profesora: Maldonado Castillo Idalia	 \par
+\vspace{0.5cm}
+    Integrantes:\\
+    \begin{enumerate}
+    \item Alvarado Díaz Dario\\
+   \item Cervantes Maxtla Saúl\\
+    \item Dominguez Olvera Leonardo Daniel\\
+    \item Espinosa de los Monteros Martínez Eric Omar\\
+   \item Estrada Yepez Omar Said\\
+   \item García Torres Adair\\
+   \item Ledesma Ramírez José Emiliano\\
+   \item Murillo Mendoza María Fernanda\\
+   \item Peña Ramírez Jonathan\\
+   \item Ramírez Martínez Kevin Andrés\\
+   \item Rojo Segura José Emmanuel\\
+   \item Zamarrón Ramírez Javier\\
+    \end{enumerate}
+\vspace{.5cm}
+%\Large Fecha de Entrega: 18 de Octubre de 2023 \par
+%\vspace{.5cm}
+\end{FlushLeft}
+\end{titlepage}
+\tableofcontents
+\newpage
+\section{Alcance del proyecto}
+\justifying
+Sistema que fomente el turismo el cual sera una aplicación movil, donde el turista que lo use se le mostrara en un mapa su ubicacion geografica a traves de su GPS y sea capaz de recomendarle sitios turisticos cercanos a su ubicacion para visitar de acuerdo a su medio de transporte ya sea caminando o utilizando un vehiculo. Los sitios turisticos deberan tener una clasificación como museos, restaurantes, parques entre otros sitios de interes. El sistema solo sera funcional a nivel nacional, es decir, solamente en México.
+
+\section{Requerimientos Funcionales}
+\subsection{Usuario Turista}
+\begin{itemize}
+    \item El sistema deberá acceder a la ubicación del usuario turista por medio de su GPS.
+    \item El sistema debe permitir al usuario turista buscar lugares cercanos en el mapa basados en su ubicación en un radio de 1 km a 10 km.
+    \item El sistema debe permitir al usuario turista la creación de un perfil mediante un correo y una contraseña.
+    \item El sistema debe permitir al usuario turista iniciar sesión.
+    \item El sistema debe permitir al usuario turista cerrar sesión.
+    \item El sistema debe permitir al usuario turista visualizar sus datos tales como nombre, correo electronico. 
+    \item El sistema debe permitir al usuario turista modificar sus datos tales como nombre, correo, preferencias, radio de búsqueda y contraseña.
+    \item El sistema deberá mostrar al usuario turista las reseñas de cada sitio de interés.
+    \item El sistema permitirá al usuario turista crear itinerarios con base a los sitios de interes, en un dia determinado y poder seleccionar una hora de inicio para cada sitio.
+    \item El sistema permitira la eliminación de los lugares de su itinerario o todo el itinerario.
+    \item El sistema deberá permitir al perfil usuario turista guardar ubicaciones en favoritos y poder eliminarlos.
+    \item El sistema deberá generar una ruta basada en los lugares listados en el itinerario partiendo de la ubicación del usuario turista.
+    \item El sistema deberá permitir al usuario turista seleccionar su forma de movilidad.
+    \item El sistema deberá permitir al usuario turista eliminar su cuenta.
+    \item El sistema deberá mostrar información de los lugares señalados tales como su nombre, dirección, horarios, calificación, distancia y opciones de agregar itinerario, visitado y agregar a favoritos.
+    \item El sistema debe permitir al usuario turista recuperar su contraseña utilizando su correo electronico.
+    \item El sistema debera mostrar los sitios visitados y la posibilidad de eliminarlos.
+    \item El sistema permitira realizar la busqueda de sitios de interes.
+    \item El sistema debera mostrar el sitio de interes en el mapa.
+    
+
+\end{itemize}
+
+\section{Requerimientos No Funcionales}
+\begin{enumerate}
+    \item Los datos de ubicación del usuario turista deberán ser utilizados por el sistemas mientras este ultimo se encuentre en funcionamiento.
+    
+    \item El sistema debe solicitar al usuario turista permiso para utilizar su ubicación a través de una ventana emergente al momento de iniciaizar el sistema por primera vez.
+    
+    \item El sistema deberá dar acceso a los usuarios turista en un tiempo aproximado de 3 minutos como maximo.
+
+    \item El sistema debe permitir al usuario visualizar sus datos, al hacer clic en "mi perfil". La sección de datos
+    de la cuenta debe mostrar al usuario información detallada sobre su perfil.
+    
+    \item El sistema debe permitir al usuario turista la modificación de sus datos, preferencias y eliminar cuenta por medio de una validación de su contraseña. 
+    
+    \item El sistema permitira al ususario turista agregar los lugares mediante un boton \textbf{Agregar itinerario} que se muestra en el apartado detalles del lugar a la sección itinerario
+    
+    \item El sistema permitira elegir en que horarios llegara el usuario turista a cada uno de los lugares mostrados en la sección itinerario. El sistema ordenara el itinerario con base a las horas idicadas de menor a mayor. El usuario debe poder modificar los horarios de los lugares a visitar cuando lo desee.
+    
+    \item El sistema permitira al usuario turista marcar como visitado el lugar en la sección itinerario, agruegando el lugar al historial.
+    
+    \item  El sistema debera validar la eliminacion de los lugares del itinerario, historial, favoritos a traves de una confirmación del usuario turista mostrada en una ventana emergente.
+    
+    \item El sistema debera generar una ruta a partir de un itinerario, la generacion de la ruta se dara de acuerdo a la movilidad seleccionada por el usuario turista ya sea a pie, auto o transporte publico. La ruta generada se mostrara en una nueva pantalla que aparecera el mapa y los lugares indicados con su ubicacion y el orden que debera seguir.
+    
+    \item El sistema debera permitir mostrar los lugares en el mapa. El usuario debe poder dar click a los diferentes lugares, el sistema debera mostrar informacion del lugar y un boton que indique ver detalles del lugar seleccionado.
+    
+    \item El sistema debera mostrar la informacion del lugar indicado. El usuario turista debe poder seleccionar agregar a itinerario, marcar como visitado y/o como favorito. De acuerdo a su elección se agregara a su apartado correspondiente.
+    
+    \item El usuario debe poder buscar diferentes lugares en los buscadores las secciones pantalla mapa, itinerario, historial y favoritos. EL sistema debera mostrar los lugares relacionados a la palabra colocada, Se debera ver la visualizacion de su nombre e imagen del lugar.
+    
+    \item El sistema permitira la visualizacion de los lugares favoritos del usuario turista. El usuario debe poder agregar y/o eliminar sus favoritos. El sistema debera permitir buscar sus lugares favoritos mediante la opcion de busqueda.
+    
+    \item El sistema permitira la visualizacion de su historial del usuario turista en una nueva pantalla. El usuario turista debe poder seleccionar ver detalles y eliminar historial completo. El usuario puede buscar sus lugares visitado mediante la opcion de busqueda. El sistema debe poder eliminar el historial.
+        
+    \item Los datos de los usuarios turista, como su informacion personal, correo y contraseña seran protegidos mediante un cifrado.
+    
+    \item El sistema debe implementar mecanismos de autenticación para proteger los datos de los usuarios turistas y garantizar que solo tengan acceso a su propia información, atraves de su nombre de usuario y correo electronico.
+
+    \item El sistema debera verificar en la base de datos los correos electronicos, con la finalidad de que sean unicos para los usuarios turistas al momento del registro de una nueva cuenta. Los correos electronicos solo pueden ser utilizados una unica vez en una cuenta.
+
+    \item El sistema deberá ser responsivo en dispositivos móviles con pantallas a partir de una resolución de 375x667 px hasta 820x1180.
+    
+    \item El sistema deberá ser responsivo en dispositivos de cómputo con pantallas de una resolución de 1280x720 px.
+    
+    \item El sistema debe ser capaz de integrarse con servicios de mapas y navegación para proporcionar direcciones y rutas precisas a partir de la API de Google.
+    
+    \item El sistema debe ser capaz de manejar al menos 20 usuarios concurrentes sin degradación significativa del rendimiento utilizando balanceadores de carga.
+    
+    \item La precisión de la ubicación debe ser lo más precisa posible, al menos 2 km, teniendo en cuenta las capacidades del hardware del dispositivo del usuario turista a través de la activación del GPS de dicho dispositivo.
+    
+    \item El sistema no deberá estar disponible únicamente en periodos de mantenimiento previamente señalados al usuario turista a traves de notificaciones por medio del sistema.
+    
+    \item El sistema deberá cerrar la sesión del usuario turista cuando él lo indique, la sesión cerrara de manera inmediata y redirigir al usuario turista a la página de inicio de sesión y debera recibir un mensaje de confirmación que indique que la sesión se ha cerrado de manera exitosa y segura. 
+    
+    \item El sistema debe contar con medidas de seguridad para evitar un usuario pueda acceder a la cuenta de otro usuario mientras este abierta su sesión en un dispositivo que ha dejado su sesión abierta, por lo tanto solo se tendria una sesion iniciada en un unico dispositivo.
+
+    \item  El sistema permitira al usuario turista la recuperación de su contraseña en el apartado de iniciar sesion, mediante su correo electronico registrado previamente al momento de la creacion de su cuenta validando la información proporcionada a traves de un enlace. La contraseña sera actualizada teniendo que confirmar la nueva contraseña para su actualización.
+\end{enumerate}
+
+\section{Reglas de Negocio}
+    \begin{itemize}
+    
+    \item \textbf{RN01} El sistema no deberá permitir el registro de dos usuarios con la misma dirección de correo electrónico ni con el mismo nombre de usuario.
+    
+        \item \textbf{RN02} Los usuarios turistas pueden crear un perfil proporcionando un correo electrónico de gmail y contraseña válidos, así como sus datos personales como nombre, teléfono, y preferencias de lugares de interés.
+        \item \textbf{RN03} Las contraseñas deberán tener al menos una letra mayúscula y un carácter especial (*,@, -), tener una longitud mínima de 8 caracteres y máxima de 12 y utilizar caracteres alfanuméricos.
+        \item \textbf{RN04} El nombre de usuario sera unico para cuenta, solamente existira uno en el sistema con esos datos, sin tener espacios y debera ser de una longitud minima de 10 caracteres y maxima 15 caracteres.
+        \item \textbf{RN05} La contraseña deberan ser escritas 2 veces, una para ingreso y otra para validación, ambas deben contener los mismos caracteres para su confirmación.
+        \item \textbf{RN06} Los nombres y apellidos deberan ser caracteres alfabeticos de una longitud maxima de 60 caracteres. para cada uno.
+        \item \textbf{RN07} El correo electrónico debera ser de GMAIL.
+        \item \textbf{RN08} El telefono movil debe ser exactamente de 10 caracteres numericos.
+
+    \end{itemize}
+
+    \begin{itemize}
+        \item \textbf{RN09} Los usuarios turistas deben iniciar sesión con su correo electrónico y contraseña registrados.
+        \item \textbf{RN010} El sistema debe verificar las credenciales del usuario antes de permitir el acceso.
+    \end{itemize}
+    
+    \begin{itemize}
+        \item \textbf{RN011} El sistema debe obtener el consentimiento del usuario turista para acceder a su ubicación por medio de una ventana emergente cuando se abra por primera el sistema.
+        \item \textbf{RN12} El acceso a la ubicación debe ser desactivable por parte del usuario en cualquier momento.
+    \end{itemize}
+    
+    \begin{itemize}
+        \item \textbf{RN13} El usuario turista podrá filtrar la búsqueda seleccionando las categorías de su preferencia tales como restaurantes, parques, museos, entre otros.
+        \item \textbf{RN14} Los usuarios turistas pueden buscar lugares de interés dentro de un radio de 1 km a 10 km de su ubicación actual.
+        \item \textbf{RN15} Los resultados de la búsqueda deben basarse en la ubicación actual del usuario.
+    \end{itemize}
+
+    \begin{itemize}
+        \item \textbf{RN16} Los usuarios turistas pueden ver y editar su nombre, región, sitios de interés, radio de búsqueda, contraseña.
+        \item \textbf{RN17} Los usuarios turistas solo visualizarán los datos de nombre de usuario y correo electrónico sin realizar modificaciones.
+    \end{itemize}
+
+    \item \textbf{Creación de Itinerarios}:
+    \begin{itemize}
+        \item \textbf{RN18} Los usuarios turistas pueden crear itinerarios basados en la cercanía y horarios de los lugares de interés.
+        \item \textbf{RN19} Deben especificar la fecha y hora de inicio de cada itinerario.
+        \item\textbf{RN20}  Solo se tendra un itinerario por dia indicado.
+         
+    \end{itemize}
+    \begin{itemize}
+        \item \textbf{RN21} Los usuarios turistas pueden guardar lugares de interés en su lista de favoritos para acceder fácilmente en el futuro.
+    \end{itemize}
+    
+    \item \textbf{Selección de Forma de Desplazamiento}:
+    \begin{itemize}
+        \item \textbf{RN22} Los usuarios turistas pueden elegir su forma de desplazamiento preferida, como caminar, conducir, o usar transporte público (PENDIENTE).
+    \end{itemize}
+    
+    \begin{itemize}
+        \item \textbf{RN23} Los usuarios turistas deberán aceptar los términos y condiciones mostrados al momento de crear una cuenta.
+        \item \textbf{RN24} Los datos personales de los usuarios, como el correo electrónico y la ubicación, deben mantenerse confidenciales y protegerse de acuerdo con las regulaciones de privacidad aplicables.
+    \end{itemize}
+    
+
+    \begin{itemize}
+        \item \textbf{RN25} Los usuarios turistas pueden eliminar sus cuentas de usuario si lo desean, lo que resultará en la eliminación permanente de sus datos.
+    \end{itemize}
+    \begin{itemize}
+        \item \textbf{RN26} El sistema generara un token para los procesos de restablecer contraseña, el cual tendra una duración de 30 min activo.
+        \item \textbf{RN27} Los idas agendados dentro de un itinerario de un dia tendran una hora unica, no se pueden terner dos lugares con la misma hora de visita.
+        \item \textbf{RN28} El usuario debera seleccionar al menos 3 preferencias al momento del registro de su cuenta.
+        \item \textbf{RN29} El usuario puede modificar sus preferencias siempre que lo desee, solamente coumpliendo con la RN28.
+        
+        \end{itemize}
+    
+
+
+\newpage
+\section{Mensajes}
+\begin{itemize}
+    \item \textbf{MSJ01} Lugar añadido a favoritos.
+    \item \textbf{MSJ02} Lugar eliminado de favoritos.
+    \item \textbf{MSJ03} Correo electronico no valido.
+    \item \textbf{MSJ04} Ese correo electronico no esta asociado a alguna     cuenta activa.
+    \item \textbf{MSJ05} Las contraseñas deben ser iguales.
+    \item \textbf{MSJ06} La contraseña deberá contener al menos: Una letra mayúscula y un caractér especial (=,*,etc) y la contraseña tiene que tener una longuitud de 8 a 12 caracteres.
+    \item \textbf{MSJ07} No hay resultado que coincida con tu búsqueda en el radio seleccionado.
+    \item \textbf{MSJ08} No se pudo eliminar el itinerario.
+    \item \textbf{MSJ09} Activar permisos de ubicación.
+    \item \textbf{MSJ10} Activar servicios de ubicación en el dispositivo.
+    \item \textbf{MSJ11} No se pudo agregar correctamente el lugar a favoritos.
+    \item \textbf{MSJ12} Registro exitoso.
+    \item \textbf{MSJ13} Usuario existente.
+    \item \textbf{MSJ14} El nombre no debe tener espacios.
+    \item \textbf{MSJ15} El nombre debe tener un máximo 10 a 15 palabras.
+    \item \textbf{MSJ16} No se aceptan números y caracteres especiales (=,*,etc), solamente letras.
+    \item \textbf{MSJ17} El correo es inválido, no es un correo Gmail.
+    \item \textbf{MSJ18} El número debe tener 10 dígitos.
+    \item \textbf{MSJ19} Operación cancelada.
+    \item \textbf{MSJ20} Día ha sido agendado.
+    \item \textbf{MSJ21} Sin fechas disponibles.
+    \item \textbf{MSJ22} Día no disponible.
+    \item \textbf{MSJ23} Itinerario vacio.
+    \item \textbf{MSJ24} Agregar a intinerario.
+    \item \textbf{MSJ25} Sin fechas disponibles.
+    \item \textbf{MSJ26} Seleccionar al menos 3 preferencias.
+    \item \textbf{MSJ27} Hora Modificada.
+    \item \textbf{MSJ28} Hora en uso.
+    
+\end{itemize}
+
+
+\newpage
+%ARCHIVO DE DIAGRAMAS
+\include{entregable final/Diagramas}
+\include{entregable final/clases}
+
+
+    
+\section{Definición de actores propuestos}
+\textbf{Usuario Turista}\par
+Es el usuario que interactua con el sistema, es decir, el cliente de nuestra aplicacion, sus principales caracteristicas son creacion de cuentas para poder acceder al sistema, iniciar sesión en el sistema, visualizar su ubicacion en un mapa, poder visualizar sus datos de usuario, generar un itinerario de su ruta turistica, contar con un historial de los sitios que ha visitado, poder tener un apartado de favoritos, cerrar sesión, organizar sus horarios. 
+
+%ARCHIVO DE Planeacion
+\include{entregable final/UltimaPlaneacion/UltimaPlaneacion}
+
+%ARCHIVO DE PANTALLAS
+\include{entregable final/pantallasSistema/pantallasFinales}
+
+\begin{comment}
+
+%ARCHIVO DE PANTALLAS
+\include{Prototipos}
+
+%ARCHIVO DE PANTALLAS
+\include{front}
+\end{comment}
+
+%ARCHIVO DESCRIPCION CASOS DE USO
+\include{DetalleCU}
+
+
+
+
+\include{entregable final/BasesdeDatos}
+% Imprimir el índice
+\printindex
+\end{document}
