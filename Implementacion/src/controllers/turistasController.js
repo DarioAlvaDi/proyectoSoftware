@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
@@ -226,7 +226,7 @@ const logout = async (req, res) => {
       res.status(500).send('Error interno del servidor');
     } else {
       console.log('Sesion destruida')
-      res.redirect('/turistas');
+      res.status(200).json({ message:'Sesión cerrada éxitosamente'});
     }
   });
 }

@@ -112,24 +112,32 @@
         window.location.href = url;
     }
 
-    function cerrarSesion() {
-        fetch("/turistas/logout", { method: "GET" })
-            .then((response) => {
-              if(response.redirected){
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Sesion cerrada exitosamente',
-                    }).then(() => {
-                        window.location.href = '/turistas'; 
-                    });
-                }
-            })
-            .catch((error) => console.error("Error al cerrar sesión:", error));
+    async function cerrarSesion() {
+    const response = await fetch('/turistas/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            const data = await response.json();
+            console.log(data.message)
+            if (response.ok && (data.message = 'Sesión cerrada éxitosamente')) {
+                Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                        }).then(() => {
+                            window.location.href='/turistas'
+                        });
+            }
         // Ocultar el modal después de cerrar sesión
         var modal = new bootstrap.Modal(document.getElementById('confirmModal'));
         modal.hide();
     }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
         // Solicitud al servidor para obtener la información del turista
