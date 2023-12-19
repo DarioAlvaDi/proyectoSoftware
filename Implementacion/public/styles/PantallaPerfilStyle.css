@@ -118,3 +118,56 @@ div label{
     width: 7.75rem; 
     border-radius: 7.75rem;
 }
+
+
+.modal-content{
+    border-radius: 1.25rem;
+    border: 1px solid #000;
+    background: #dcb56d;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content div p{
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.875rem;
+    margin-bottom: 2.12rem;
+}
+
+.modal-content div button{
+    width: 18.625rem;
+    height: 2.9375rem;
+    border-radius: 1.875rem;
+    border: 1px solid #000;
+    background: #D9D9D9;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 1.25rem;
+    font-family: Roboto;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 900;
+    color: #000;
+}
+
+.iconConfirm{
+    text-align: left;
+}
+.iconConfirm svg{
+    margin-right: 30%;
+}
+.iconConfirm2{
+    text-align: left;
+}
+.iconConfirm2 svg{
+    margin-right: 15%;
+}
+.iconCancel{
+    text-align: left;
+}
+.iconCancel svg{
+    margin-right: 30%;
+}
