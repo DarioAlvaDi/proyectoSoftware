@@ -30,7 +30,7 @@
     <script src="../js/detalles_lugar.js"></script>
     <script
       async
-      src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8H74olPQhtcfY4aGDO6Gyj7PHmvGDir8&libraries=places"
     ></script>
 
     <title>Detalles del lugar</title>
@@ -41,15 +41,20 @@
       <!--Barra de navegacion-->
       <nav class="navbar navColor">
         <div class="container-fluid">
-            <img
-              src="../imgs/detalles_lugar_imgs/regresar.png"
-              alt="botonRegresar" onclick="history.back()"
-            />
+          <img
+            src="../imgs/detalles_lugar_imgs/regresar.png"
+            alt="botonRegresar"
+            onclick="history.back()"
+          />
 
           <h1 id="nombre" class="navbar-brand titulo">Nombre del lugar</h1>
 
-          <a href="/turistas/mapa" class="navbar-brand"> 
-          <img src="../imgs/detalles_lugar_imgs/logo.png" alt="logoBeyamaps" hre />
+          <a href="/turistas/mapa" class="navbar-brand">
+            <img
+              src="../imgs/detalles_lugar_imgs/logo.png"
+              alt="logoBeyamaps"
+              hre
+            />
           </a>
         </div>
       </nav>
@@ -88,7 +93,9 @@
           <div class="mt-1 col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <!-- Rectángulo blanco a la izquierda en pantallas medianas y grandes -->
             <div class="bg-white p-2">
-              <p class="m-0 text-center">Calificación: <span id="calificacion"></span></p>
+              <p class="m-0 text-center">
+                Calificación: <span id="calificacion"></span>
+              </p>
             </div>
           </div>
         </div>

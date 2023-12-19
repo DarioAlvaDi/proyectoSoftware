@@ -86,4 +86,6 @@ router.get('/eliminarfavoritos', turistasController.eliminarfavoritos);
 router.get('/calendario', turistasController.calendario);
 //Ruta cambiar foto de perfil
 router.post('/cambiarFoto', upload.single('avatar'), turistasController.cambiarFoto);
+//Ruta para agrregar datos de historial
+router.post('/agregarItinerario', turistasController.agregarItinerario);
 module.exports = router;
