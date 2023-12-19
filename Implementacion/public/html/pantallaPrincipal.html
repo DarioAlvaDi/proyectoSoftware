@@ -189,7 +189,11 @@
       navigator.geolocation.getCurrentPosition(function (position) {
         var userLat = position.coords.latitude;
         var userLng = position.coords.longitude;
-
+        localStorage.setItem(
+          "ubi",
+          JSON.stringify({ lat: userLat, lng: userLng })
+        );
+        let ca = JSON.parse(localStorage.getItem("ubi"));
         var userMarker = L.marker([userLat, userLng], {
           icon: L.divIcon({
             className: "leaflet-div-icon",

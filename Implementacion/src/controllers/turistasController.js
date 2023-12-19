@@ -195,10 +195,10 @@ const login = async (req, res, next) => {
       const match = await bcrypt.compare(turista.pass, storedHashedPass);
 
       if (match) {
-        if(status === 'V'){
+        if (status === 'V') {
           console.log('Turista encontrado');
           res.status(200).json({ message: 'Autenticación exitosa' });
-        }else if(status === 'N'){
+        } else if (status === 'N') {
           console.log('Cuenta no verificada')
           res.status(401).json({ message: 'Cuenta no verificada' });
         }
@@ -657,7 +657,7 @@ const enviarCorreo = async (req, res) => {
   const turistaId = req.session.Id_Turista;
 
   // Generar un código aleatorio
-  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase();
 
   // Actualizar el código en la base de datos
   const updateCodigoSql = 'UPDATE Turista SET Codigo = ? WHERE Id_Turista = ?';
@@ -973,6 +973,79 @@ const agregarItinerario = async (req, res) => {
   }
 }
 
+const consultarItinerario = async (req, res) => {
+  try {
+    // Obtener el Id_Turista de la variable de sesión
+    const turistaId = req.session.Id_Turista;
+
+    // Consulta para obtener la información del turista
+    const infoItinerario = await obtenerItinerario(turistaId);
+    console.log(infoItinerario)
+    // Enviar la información del turista como respuesta JSON
+    res.json(infoItinerario);
+
+  } catch (error) {
+    console.error('Error en el controlador de itinerario', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// Función para obtener la información del turista desde la base de datos
+const obtenerItinerario = (turistaId) => {
+
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM Itinerario WHERE Id_Turista = ?';
+    const values = [turistaId];
+
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else if (results.length > 0) {
+        resolve(results);
+      } else {
+        reject(new Error('Itinerario no encontrado'));
+      }
+    });
+  });
+};
+const test = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/test.html'));
+}
+const consultarItinerarioFecha = async (req, res) => {
+  try {
+    // Obtener el Id_Turista de la variable de sesión
+    const turistaId = req.session.Id_Turista;
+    let fecha = req.body.id;
+    // Consulta para obtener la información del turista
+    const infoItinerario = await obtenerItinerarioFecha(turistaId, fecha);
+    console.log(infoItinerario)
+    // Enviar la información del turista como respuesta JSON
+    res.json(infoItinerario);
+
+  } catch (error) {
+    console.error('Error en el controlador de itinerario', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// Función para obtener la información del turista desde la base de datos
+const obtenerItinerarioFecha = (turistaId, fecha) => {
+
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM Itinerario WHERE Id_Turista = ? AND Fecha_Itinerario = ?';
+    const values = [turistaId, fecha];
+
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else if (results.length > 0) {
+        resolve(results);
+      } else {
+        reject(new Error('Itinerario no encontrado'));
+      }
+    });
+  });
+};
 module.exports = {
   bienvenida,
   datos,
@@ -997,6 +1070,8 @@ module.exports = {
   diasItinerario,
   agregarItinerario,
   itinerarioDia,
+  consultarItinerario,
+  consultarItinerarioFecha,
   validar,
   eliminarHistorialCompleto,
   eliminarHistorialIndividual,
@@ -1013,5 +1088,6 @@ module.exports = {
   eliminarFavoritosIndividual,
   cambiarFoto,
   calendario,
-  verificarCuenta
+  verificarCuenta,
+  test
 }

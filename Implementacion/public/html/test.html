@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="../styles/pantallaPrincipal.css"
+      type="text/css"
+    />
+    <title>Trazar Ruta con Coordenadas</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8H74olPQhtcfY4aGDO6Gyj7PHmvGDir8&libraries=places"></script>
+    <script>
+      window.onload = function () {
+        trazarRuta();
+      };
+      function trazarRuta() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const id = urlParams.get("id");
+        let data = { id: id };
+        fetch("/turistas/consultarItinerarioFecha", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (myJson) {
+            console.log(myJson);
+          });
+        var directionsService = new google.maps.DirectionsService();
+        var directionsRenderer = new google.maps.DirectionsRenderer();
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: { lat: 37.7749, lng: -122.4194 } // Coordenadas de San Francisco, puedes cambiarlas
+        });
+        directionsRenderer.setMap(map);
+        var request = {
+          origin: { lat: 19.435638888889, lng: -99.141277777778 }, // Coordenadas de San Francisco
+          destination: { lat: 19.440694444444, lng: -99.204722222222 }, // Coordenadas de Los Angeles
+          travelMode: "DRIVING",
+          waypoints: [
+            {
+              location: { lat: 19.437980271929717, lng: -99.15459046378841 },
+              stopover: false
+            },
+            {
+              location: { lat: 19.427891576458027, lng: -99.16713010156829 },
+              stopover: false
+            }
+          ]
+        };
+
+        directionsService.route(request, function (result, status) {
+          if (status === "OK") {
+            directionsRenderer.setDirections(result);
+          } else {
+            console.error("Error al trazar la ruta:", status);
+          }
+        });
+      }
+    </script>
+    <style>
+      #map {
+        height: 100vh;
+      }
+    </style>
+    <script src="../Js/bootstrap.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <!--Barra de navegacion-->
+      <nav class="navbar navColor">
+        <div class="container-fluid">
+          <a
+            href="#"
+            class="navbar-brand"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            <img src="../imgs/Menu.png" alt="menu" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!--Menu de opciones-->
+    <div
+      class="offcanvas offcanvas-start bg-transparent-1"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-center titulo" id="offcanvasRightLabel">
+          Menú de Opciones
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <!--Menu de opciones-->
+        <div
+          class="container d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="row m-3">
+            <div class="col">
+              <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+              <div class="d-inline-flex align-items-center">
+                <img
+                  src="../imgs/Perfil.png"
+                  class="img-fluid me-4"
+                  alt="fotoDePefil"
+                />
+                <a
+                  href="/turistas/perfil"
+                  class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark"
+                  >Mi perfil</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col">
+              <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+              <div class="d-inline-flex align-items-center">
+                <img
+                  src="../imgs/Favoritos.png"
+                  class="img-fluid me-4"
+                  alt="Favoritos"
+                />
+                <a
+                  href="/turistas/favoritos"
+                  class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark"
+                  >Favoritos</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col">
+              <!---La foto ira al lado izquierdo del texto en un mismo renglon-->
+              <div class="d-inline-flex align-items-center">
+                <img
+                  src="../imgs/Itinerario.png"
+                  class="img-fluid me-4"
+                  alt="Itinerario"
+                />
+                <a
+                  href="/turistas/itinerario"
+                  class="fs-5 fw-semibold link-underline link-underline-opacity-0 link-dark"
+                  >Itinerarios</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="map"></div>
+  </body>
+</html>

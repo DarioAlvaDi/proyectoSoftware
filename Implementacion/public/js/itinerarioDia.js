@@ -1,8 +1,8 @@
-function recargar(elemento){
+function recargar(elemento) {
     const contenido = document.getElementById('contenido');
 
-    if(elemento.length === 0){
-        contenido.innerHTML='';
+    if (elemento.length === 0) {
+        contenido.innerHTML = '';
         contenido.innerHTML =
             `
             <div class="tab-container">
@@ -40,13 +40,16 @@ function recargar(elemento){
         </footer> 
             `;
     } else {
-        contenido.innerHTML='';
-        contenido.innerHTML=`
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const id = urlParams.get('id')
+        contenido.innerHTML = '';
+        contenido.innerHTML = `
         <div class="container">
             <div id="elemento"></div>        
         </div>
         
-            `+`
+            `+ `
           
         <div style="height: 10rem"></div>
         <footer class="fixed-bottom navColor">
@@ -70,8 +73,8 @@ function recargar(elemento){
 
 
                     <div class="col text-center">
-                        <button type="button" onclick="mostrarMensaje()" class="btn btn-dark rounded-4">
-                            Generar ruta
+                        <button type="button" class="btn btn-dark rounded-4">
+                            <a href="/turistas/test?id=${id}">Generar ruta</a>
                         </button>
 
                     </div>
@@ -85,9 +88,9 @@ function recargar(elemento){
 
 }
 
-function horaElemento(nombreElemento, elementos, valorSeleccionado){
-    for(let i = 0; i < elementos.length; i++){
-        if(elementos[i].nombre === nombreElemento){
+function horaElemento(nombreElemento, elementos, valorSeleccionado) {
+    for (let i = 0; i < elementos.length; i++) {
+        if (elementos[i].nombre === nombreElemento) {
             var indice = i;
         }
     }
@@ -103,17 +106,14 @@ function horaElemento(nombreElemento, elementos, valorSeleccionado){
 
 }
 
-function sort(elementos){
+function sort(elementos) {
     var i, j, temp;
     var swapped;
     var n = elementos.length;
-    for (i = 0; i < n - 1; i++)
-    {
+    for (i = 0; i < n - 1; i++) {
         swapped = false;
-        for (j = 0; j < n - i - 1; j++)
-        {
-            if (elementos[j].hora > elementos[j + 1].hora)
-            {
+        for (j = 0; j < n - i - 1; j++) {
+            if (elementos[j].hora > elementos[j + 1].hora) {
                 temp = elementos[j];
                 elementos[j] = elementos[j + 1];
                 elementos[j + 1] = temp;
@@ -126,14 +126,14 @@ function sort(elementos){
 
 }
 
-function mostrarBotonVisita(indice, num, elemento){
+function mostrarBotonVisita(indice, num, elemento) {
     document.getElementById(`lugar${indice}`).innerHTML = '';
     elemento.splice(indice, 1);
 
-    if(num == 0){
+    if (num == 0) {
         elemento.length = 0;
     }
-    if(elemento.length == 0){
+    if (elemento.length == 0) {
         recargar(elemento);
     }
 }
@@ -141,10 +141,10 @@ function mostrarBotonVisita(indice, num, elemento){
 /*Obtener de la base de datos los sitios guardados */
 document.addEventListener('DOMContentLoaded', () => {
     const elemento = [
-        {imagen: 'img1', nombre: 'Nombre del sitio1', hora: '00:00', visita: '0'},
-        {imagen: 'img2', nombre: 'Nombre del sitio2', hora: '00:00', visita: '0'},
-        {imagen: 'img3', nombre: 'Nombre del sitio3', hora: '00:00', visita: '0'},
-        {imagen: 'img4', nombre: 'Nombre del sitio4', hora: '00:00', visita: '0'},
+        { imagen: 'img1', nombre: 'Nombre del sitio1', hora: '00:00', visita: '0' },
+        { imagen: 'img2', nombre: 'Nombre del sitio2', hora: '00:00', visita: '0' },
+        { imagen: 'img3', nombre: 'Nombre del sitio3', hora: '00:00', visita: '0' },
+        { imagen: 'img4', nombre: 'Nombre del sitio4', hora: '00:00', visita: '0' },
     ];
 
     const contenido = document.getElementById('contenido');
@@ -153,17 +153,17 @@ document.addEventListener('DOMContentLoaded', () => {
     imprimir(elemento);
 });
 
-function imprimir(elemento){
+function imprimir(elemento) {
 
     const elementoElement = document.getElementById('elemento');
-    let num=0;
+    let num = 0;
 
     elemento.forEach(nombre => {
-        let nombreLugar="Nombre lugar";
+        let nombreLugar = "Nombre lugar";
         let hora = elemento[num].hora;
         let nuevoElemento = document.createElement("div");
         nuevoElemento.classList.add('resize');
-        nuevoElemento.id="lugar"+num;
+        nuevoElemento.id = "lugar" + num;
 
 
         nuevoElemento.innerHTML = `
@@ -175,7 +175,7 @@ function imprimir(elemento){
     
                     <div class="col">
                         <div class="row text-center">
-                            <h6 class="fw-bold"> `+elemento[num].nombre+`</h6>
+                            <h6 class="fw-bold"> `+ elemento[num].nombre + `</h6>
                         </div>
     
                         <div class="row text-center d-inline-flex">
@@ -242,16 +242,16 @@ function imprimir(elemento){
 
     const body = document.getElementById('body');
 
-    for(let i = 0; i < elemento.length; i++){
-        document.getElementById(`eliminar${i}`).addEventListener('click', function() {
+    for (let i = 0; i < elemento.length; i++) {
+        document.getElementById(`eliminar${i}`).addEventListener('click', function () {
             document.getElementById(`lugar${i}`).innerHTML = '';
             elemento.splice(i, 1);
             num--;
 
-            if(num == 0){
+            if (num == 0) {
                 elemento.length = 0;
             }
-            if(elemento.length == 0){
+            if (elemento.length == 0) {
                 recargar(elemento);
             }
 
@@ -266,18 +266,18 @@ function imprimir(elemento){
         recargar(elemento);
     });
 
-    for(let i = 0; i < elemento.length; i++){
+    for (let i = 0; i < elemento.length; i++) {
         const horaSelect = document.getElementById(`horaElemento${i}`);
         const visitaSelect = document.getElementById(`visitaElemento${i}`);
 
-        horaSelect.addEventListener('change', function() {
-            const valorSeleccionado =horaSelect.value;
+        horaSelect.addEventListener('change', function () {
+            const valorSeleccionado = horaSelect.value;
             const nombreElemento = elemento[i].nombre;
 
             horaElemento(nombreElemento, elemento, valorSeleccionado);
         });
 
-        visitaSelect.addEventListener('change', function() {
+        visitaSelect.addEventListener('change', function () {
             num--;
             mostrarBotonVisita(i, num, elemento);
         });

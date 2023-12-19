@@ -96,4 +96,9 @@ router.post('/agregarItinerario', turistasController.agregarItinerario);
 router.get('/diasItinerario', turistasController.diasItinerario);
 //Ruta para agrregar datos de historial
 router.get('/itinerarioDia', turistasController.itinerarioDia);
+//Ruta para agrregar datos de historial
+router.get('/consultarItinerario', turistasController.consultarItinerario);
+router.get('/test', turistasController.test)
+router.post('/consultarItinerarioFecha', turistasController.consultarItinerarioFecha)
+
 module.exports = router;
