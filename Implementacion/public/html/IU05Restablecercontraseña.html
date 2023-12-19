@@ -8,6 +8,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/styleIU05Restablecescontraseña.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        
+        .col-12.center-items {
+        position: relative;
+    }
+
+    .error-container {
+        display: block;
+        margin-top: 2.5px;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    </style>
 </head>
 
 <body>
@@ -25,23 +43,27 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="fsesion">
-                    <form action="" method="get">
+                    <form id="Contraseñas">
                         <div class="dtslogin">
                             <br>
                             <br>
                             <br>
                             <br>
-                            <label id="celectronico">Correo electrónico</label><br>
+                            <br>
+                            <br>
+                            <br>
                             <br> 
                             <label for="contraseña">Nueva contraseña</label><br>
-                            <input style="margin-top: 10px;" type="password" name="contraseña" placeholder="Nueva contraseña">
+                            <input id="newPassword" style="margin-top: 10px;" type="password" name="newPassword" placeholder="Nueva contraseña" onchange="validarContraseña()"><br><br>
+                            <div><span id="newPassword-error" class="error-message"></span></div>
                             <br>
                             <br>
                             <label for="contraseconf">Confirma tu contraseña</label><br>
-                            <input style="margin-top: 10px;" type="password" name="contraseconf" placeholder="Confirma tu contraseña">
+                            <input id="confirmPass" style="margin-top: 10px;" type="password" name="confirmPass" placeholder="Confirma tu contraseña" onchange="validarContraseñas()">
+                            <div style="text-align: center;" id="mensajeContraseñas"></div><br>
                             <br>
                             <br>
-                            <button style="margin-bottom: 5px;" type="submit" class="textbutton">Guardar contraseña</button>
+                            <button id="guardar" style="margin-bottom: 5px;" type="submit" class="textbutton">Guardar contraseña</button>
                             <br>
                             <br>
                             <br>
@@ -52,16 +74,113 @@
             </div>
           <div class="return">
             <br><br>
-            <a href="">
-                <img src="../imgs/imgIU05Restablecercontraseña/regresarl.png" alt="" class="regresarl">
-            </a>
           </div>  
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+        <script>
+            function validarContraseñas() {
+            var password = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPass').value;
+            var mensaje = document.getElementById('mensajeContraseñas');
+            var botonRegistro = document.getElementById('guardar');
 
+            if (password === confirmPassword) {
+                mensaje.innerHTML = 'Las contraseñas coinciden';
+                mensaje.style.color = 'green';
+                botonRegistro.disabled = false; // Habilitar el botón
+                return true;
+            } else {
+                mensaje.innerHTML = 'Las contraseñas no coinciden';
+                mensaje.style.color = 'red';
+                botonRegistro.disabled = true; // Deshabilitar el botón
+                return false;
+            }
+        }
+
+        //Función para validar el campo de Contraseña
+        function validarContraseña() {
+            let ContraseñaInput = document.getElementById("newPassword");
+            let ContraseñaValor = ContraseñaInput.value.trim();
+            let ContraseñaRegex = /^(?=.*[A-Z])(?=.*[-@*]).+$/;
+
+            if(ContraseñaValor=== ""){
+                ocultarError("newPassword")
+                return true;
+            }
+            else if (!ContraseñaRegex.test(ContraseñaValor)) {
+                mostrarError("newPassword", "La contraseña debe contener:<br>- Al menos una mayúscula <br>- Al menos un caracter especial (*, @, -)<br>-Debe ser entre 8 y 12 caracteres<br><br>");
+                return false;
+            } else if (ContraseñaValor.length < 8 || ContraseñaValor.length > 12) {
+                mostrarError("newPassword", "Debe ser entre 8 y 12 caracteres. <br><br>");
+                return false;
+            } else {
+                ocultarError("newPassword");
+                return true;
+            }
+        }
+         /*Función que hace aparecer el mensaje de Error en los Inputs del formulario a los que se le haya ingresado un valor no válido */
+         function mostrarError(elementId, message) {
+        var errorElement = document.getElementById(elementId + "-error");
+        errorElement.innerHTML = message;
+        }
+
+        /*Función que oculta el mensaje de Error de la anterior función */
+        function ocultarError(elementId) {
+        var errorElement = document.getElementById(elementId + "-error");
+        errorElement.innerHTML = "";
+        }
+
+        document.getElementById('Contraseñas').addEventListener('submit', async function(event) {
+    event.preventDefault(); 
+
+    var ContraseñaValida = validarContraseña();
+    var ContraseñasIguales = validarContraseñas();
+
+    if (ContraseñaValida && ContraseñasIguales) {
+        const contraInput = document.getElementById('newPassword');
+        const valorContra = contraInput.value;
+
+        try {
+            const response = await fetch('/turistas/nuevaContrasena', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Contraseña: valorContra }),
+            });
+
+
+            if (response.ok) {
+                const data = await response.json();
+                Swal.fire({
+                    icon: 'success',
+                    title: data.message,
+                }).then(() => {
+                    window.location.href = '/turistas/datos';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al actualizar la contraseña',
+                });
+            }
+        } catch (error) {
+            console.error('Error al realizar la solicitud:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al actualizar la contraseña',
+            });
+        }
+    }
+});
+
+            // Agregar eventos input a los campos newPassword y confirmPass
+    document.getElementById('newPassword').addEventListener('input', validarContraseñas);
+    document.getElementById('confirmPass').addEventListener('input', validarContraseñas);
+        </script>
 </body>
 
 </html>

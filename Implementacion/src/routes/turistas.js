@@ -49,7 +49,13 @@ router.post('/usuario', turistasController.usuario);
 //Ruta para eliminar turistas
 router.delete('/eliminar', turistasController.eliminarTurista);
 //Ruta de pantalla de recuperar contraseña
+router.get('/correoRestaurar', turistasController.correoRestaurar);
+//Ruta de pantalla de enviar correo de recuperacion contraseña
+router.post('/enviarCodigoContrasena', turistasController.enviarCodigoContraseña);
+//Ruta de pantalla de recuperar contraseña
 router.get('/recuperar', turistasController.recuperar);
+//Ruta de pantalla de recuperar contraseña
+router.get('/cambiarContra', turistasController.cambiarContra);
 //Ruta de pantalla de Historial
 router.get('/historial', turistasController.historial);
 //Ruta de pantalla de Itinerario
@@ -74,6 +80,8 @@ router.get('/actualizar', turistasController.actualizar);
 router.post('/pref', turistasController.registrarPreferencias);
 //Ruta para enviar correo
 router.get('/enviarCorreo', turistasController.enviarCorreo);
+//Ruta para enviar correo
+router.get('/enviarCorreo2', turistasController.enviarCorreo2);
 //Ruta para obtener datos de historial
 router.get('/consultarPreferencias', turistasController.consultarPreferencias);
 //Ruta para agrregar datos de historial
@@ -86,10 +94,14 @@ router.post('/eliminarFavoritosIndividual', turistasController.eliminarFavoritos
 router.get('/eliminarfavoritos', turistasController.eliminarfavoritos);
 //Ruta para mostrar calendario
 router.get('/calendario', turistasController.calendario);
+//Ruta para mostrar pantalla para ingresar la Nueva contraseña
+router.post('/nuevaContrasena', turistasController.nuevaContrasena);
 //Ruta cambiar foto de perfil
 router.post('/cambiarFoto', upload.single('avatar'), turistasController.cambiarFoto);
 //Ruta para comparar Codigos
 router.post('/compararCodigos', turistasController.compararCodigos)
+//Ruta para comparar Codigos para restablecer contraseña
+router.post('/compararCodigos2', turistasController.compararCodigos2)
 //Ruta para agrregar datos de historial
 router.post('/agregarItinerario', turistasController.agregarItinerario);
 //Ruta para agrregar datos de historial

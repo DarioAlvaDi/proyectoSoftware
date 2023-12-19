@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '120manies',
+  password: 'root',
   database: 'AD_SISTEMAS'
 });
 
@@ -423,9 +423,219 @@ const eliminarTurista = async (req, res, next) => {
   }
 };
 
+//Controlador pantalla correoRestaurarContraseña
+const correoRestaurar = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/correoRestaurarContraseña.html'));
+}
+
+const enviarCodigoContraseña = async (req, res) => {
+  const correo = req.body.correo;
+  console.log(correo)
+  // Realizar la consulta para obtener el Id_Turista asociado al correo
+  const obtenerTuristaIdSql = 'SELECT Id_Turista FROM Turista WHERE Correo = ?';
+  pool.query(obtenerTuristaIdSql, [correo], async (errorObtenerId, resultsObtenerId) => {
+    if (errorObtenerId) {
+      console.error("Error al obtener el Id_Turista:", errorObtenerId);
+      res.status(500).json({ error: 'Error al obtener el Id_Turista de la base de datos' });
+      return;
+    }
+
+    if (resultsObtenerId.length === 0) {
+      console.error("No se encontró el turista con el correo proporcionado");
+      res.status(404).json({ error: 'Turista no encontrado' });
+      return;
+    }
+
+    const turistaId = resultsObtenerId[0].Id_Turista;
+    req.session.Id_Turista= turistaId
+
+    // Generar un código aleatorio
+    const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+
+    // Actualizar el código en la base de datos
+    const updateCodigoSql = 'UPDATE Turista SET Codigo = ? WHERE Id_Turista = ?';
+    pool.query(updateCodigoSql, [codigo, turistaId], async (errorUpdateCodigo, resultsUpdateCodigo) => {
+      if (errorUpdateCodigo) {
+        console.error("Error al actualizar el código en la base de datos:", errorUpdateCodigo);
+        res.status(500).json({ error: 'Error al actualizar el código en la base de datos' });
+        return;
+      }
+
+      if (resultsUpdateCodigo.affectedRows !== 1) {
+        console.error("No se pudo actualizar el código en la base de datos");
+        res.status(500).json({ error: 'Error al actualizar el código en la base de datos' });
+        return;
+      }
+
+      const config = {
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+          user: 'ledesma.ramirez.jose.emiliano@gmail.com',
+          pass: 'fums ozuy asmz lfst'
+        }
+      };
+
+      const mensaje = {
+        from: 'ledesma.ramirez.jose.emiliano@gmail.com',
+        to: correo,
+        subject: 'Reestablecimiento de contraseña',
+        text: 'El código de verificación es ' + codigo + '.'
+      };
+
+      const transport = nodemailer.createTransport(config);
+
+      try {
+        const info = await transport.sendMail(mensaje);
+        console.log("Correo enviado:", info);
+        res.redirect('/turistas/recuperar');
+      } catch (error) {
+        console.error("Error al enviar el correo:", error);
+        res.status(500).json({ error: 'Error al enviar el correo' });
+      }
+    });
+  });
+};
+
+//Controlador pantalla validar correo
+const enviarCorreo2 = async (req, res) => {
+  const turistaId = req.session.Id_Turista;
+
+  // Generar un código aleatorio
+  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+
+  // Actualizar el código en la base de datos
+  const updateCodigoSql = 'UPDATE Turista SET Codigo = ? WHERE Id_Turista = ?';
+  pool.query(updateCodigoSql, [codigo, turistaId], async (errorUpdateCodigo, resultsUpdateCodigo) => {
+    if (errorUpdateCodigo) {
+      console.error("Error al actualizar el código en la base de datos:", errorUpdateCodigo);
+      res.status(500).json({ error: 'Error al actualizar el código en la base de datos' });
+      return;
+    }
+
+    if (resultsUpdateCodigo.affectedRows !== 1) {
+      console.error("No se pudo actualizar el código en la base de datos");
+      res.status(500).json({ error: 'Error al actualizar el código en la base de datos' });
+      return;
+    }
+
+    // Realizar la consulta para obtener el correo del turista
+    const sql = 'SELECT Correo FROM Turista WHERE Id_Turista = ?';
+    pool.query(sql, [turistaId], async (error, results) => {
+      if (error) {
+        console.error("Error al obtener el correo del turista:", error);
+        res.status(500).json({ error: 'Error al obtener el correo del turista' });
+        return;
+      }
+
+      if (results.length === 0) {
+        console.error("No se encontró el turista con el ID proporcionado");
+        res.status(404).json({ error: 'Turista no encontrado' });
+        return;
+      }
+
+      const correo = results[0].Correo;
+
+      const config = {
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+          user: 'ledesma.ramirez.jose.emiliano@gmail.com',
+          pass: 'fums ozuy asmz lfst'
+        }
+      };
+
+      const mensaje = {
+        from: 'ledesma.ramirez.jose.emiliano@gmail.com',
+        to: correo,
+        subject: 'Verificación de Correo',
+        text: 'El código de verificación es ' + codigo + '.'
+      };
+
+      const transport = nodemailer.createTransport(config);
+
+      try {
+        const info = await transport.sendMail(mensaje);
+        console.log("Correo enviado:", info);
+        res.redirect('/turistas/recuperar');
+      } catch (error) {
+        console.error("Error al enviar el correo:", error);
+        res.status(500).json({ error: 'Error al enviar el correo' });
+      }
+    });
+  });
+};
+
+// Controlador para comparar códigos para verificar la cuenta
+const compararCodigos2 = async (req, res) => {
+  const turistaId = req.session.Id_Turista;
+  const CodigoIngresado = req.body.codigo;
+  console.log(CodigoIngresado)
+  const sql = 'SELECT Codigo FROM Turista WHERE Id_Turista= ?';
+
+  pool.query(sql, [turistaId], async (error, results) => {
+    if (error) {
+      console.error("Error al obtener el código del turista:", error);
+      res.status(500).json({ error: 'Error al obtener el código del turista' });
+      return;
+    }
+
+    if (results.length === 0) {
+      console.error("No se encontró el código con el ID proporcionado");
+      res.status(404).json({ error: 'Código no encontrado' });
+      return;
+    }
+
+    const codigo = results[0].Codigo;
+    console.log(codigo)
+
+    if (CodigoIngresado === codigo) {
+        res.status(200).json({ message: "El código ingresado coincide" });
+    } else {
+      res.status(500).json({ message: "Código ingresado no coincide" });
+    }
+  });
+};
 //Controlador pantalla recuperar contraseña
 const recuperar = async (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/html/correoRestaurarContraseña.html'));
+  res.sendFile(path.join(__dirname, '../../public/html/cambiarContraseña.html'));
+}
+
+const cambiarContra = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/IU05Restablecercontraseña.html'));
+}
+
+const nuevaContrasena = async (req, res) => {
+  Contraseña=req.body.Contraseña;
+  const turista_Id=req.session.Id_Turista
+  
+  try {
+    const hashedPass = await bcrypt.hash(Contraseña, saltRounds);
+
+    // Actualizar la contraseña en la base de datos
+    const updatePassSql = 'UPDATE Turista SET pass = ? WHERE Id_Turista = ?';
+    pool.query(updatePassSql, [hashedPass, turista_Id], (errorUpdatePass, resultsUpdatePass) => {
+      if (errorUpdatePass) {
+        console.error('Error al actualizar la contraseña en la base de datos:', errorUpdatePass);
+        res.status(500).json({ error: 'Error al actualizar la contraseña en la base de datos' });
+        return;
+      }
+
+      if (resultsUpdatePass.affectedRows !== 1) {
+        console.error('No se pudo actualizar la contraseña en la base de datos');
+        res.status(500).json({ error: 'Error al actualizar la contraseña en la base de datos' });
+        return;
+      }else{
+        console.log('Contraseña actualizada')
+        res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+      }
+    });
+  } catch (error) {
+    console.error('Error al hashear la contraseña:', error);
+    res.status(500).json({ error: 'Error al procesar la contraseña' });
+  }
+  
+
 }
 
 //Controlador para ruta de historial
@@ -1064,7 +1274,13 @@ module.exports = {
   registrarPreferencias,
   informacionPerfil,
   logout,
+  correoRestaurar,
+  enviarCodigoContraseña,
   recuperar,
+  compararCodigos2,
+  enviarCorreo2,
+  cambiarContra,
+  nuevaContrasena,
   historial,
   itinerario,
   diasItinerario,

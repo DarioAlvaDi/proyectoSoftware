@@ -23,11 +23,11 @@
         <div class="container mt-5"> <!-- Agregamos la clase mt-4 para separación -->
             <div class="row ">
                 <div class="fsesion">
-                    <form action="mapa.html" id="formulario" method="get" onsubmit="return validarCorreo()" novalidate>
+                    <form id="formulario" method="post">
                         <div class="dtslogin">
                             <label for="Correo electrónico">Correo electrónico</label><br>
                             <!-- Agregamos el atributo id al campo de entrada -->
-                            <input type="text" id="correo" placeholder="Escribe tu correo">
+                            <input name="correo" type="email" id="correo" placeholder="Escribe tu correo">
                             <br>
                             <br>
                             <button type="submit" class="textbutton">Enviar correo</button>
@@ -48,22 +48,33 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous">
 </script>
-<script>
-    function validarCorreo() {
-        var correoInput = document.getElementById('correo');
-        var correo = correoInput.value.trim();
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script defer>
+            document.getElementById('formulario').addEventListener('submit', async function(event) {
+        event.preventDefault(); 
     
-        // Expresión regular para validar direcciones de correo de Gmail
-        var regex = /.+@gmail\.com$/;
+        const correo = document.querySelector('input[name="correo"]').value;
     
-        if (!regex.test(correo)) {
-            alert('Por favor, ingresa una dirección de correo de Gmail válida.');
-            return false; // Evita que el formulario se envíe si la validación falla
+        try {
+            const response = await fetch('/turistas/enviarCodigoContrasena', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ correo }),
+            });
+            if (response.ok) {           
+                window.location.href='/turistas/recuperar'
+            } else {
+                Swal.fire({
+                            icon: 'error',
+                            title: 'Correo ingresado no asociado a ninguna cuenta',
+                        })
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
         }
-    
-        return true; // Permite que el formulario se envíe si la validación es exitosa
-    }
-    
-</script>
+    });
+        </script>
 
 </html>
