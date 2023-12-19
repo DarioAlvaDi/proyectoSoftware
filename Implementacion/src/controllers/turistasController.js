@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -447,10 +447,10 @@ const enviarCodigoContraseña = async (req, res) => {
     }
 
     const turistaId = resultsObtenerId[0].Id_Turista;
-    req.session.Id_Turista= turistaId
+    req.session.Id_Turista = turistaId
 
     // Generar un código aleatorio
-    const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+    const codigo = Math.random().toString(36).substring(2, 8).toUpperCase();
 
     // Actualizar el código en la base de datos
     const updateCodigoSql = 'UPDATE Turista SET Codigo = ? WHERE Id_Turista = ?';
@@ -502,7 +502,7 @@ const enviarCorreo2 = async (req, res) => {
   const turistaId = req.session.Id_Turista;
 
   // Generar un código aleatorio
-  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase();
 
   // Actualizar el código en la base de datos
   const updateCodigoSql = 'UPDATE Turista SET Codigo = ? WHERE Id_Turista = ?';
@@ -590,7 +590,7 @@ const compararCodigos2 = async (req, res) => {
     console.log(codigo)
 
     if (CodigoIngresado === codigo) {
-        res.status(200).json({ message: "El código ingresado coincide" });
+      res.status(200).json({ message: "El código ingresado coincide" });
     } else {
       res.status(500).json({ message: "Código ingresado no coincide" });
     }
@@ -606,9 +606,9 @@ const cambiarContra = async (req, res) => {
 }
 
 const nuevaContrasena = async (req, res) => {
-  Contraseña=req.body.Contraseña;
-  const turista_Id=req.session.Id_Turista
-  
+  Contraseña = req.body.Contraseña;
+  const turista_Id = req.session.Id_Turista
+
   try {
     const hashedPass = await bcrypt.hash(Contraseña, saltRounds);
 
@@ -625,7 +625,7 @@ const nuevaContrasena = async (req, res) => {
         console.error('No se pudo actualizar la contraseña en la base de datos');
         res.status(500).json({ error: 'Error al actualizar la contraseña en la base de datos' });
         return;
-      }else{
+      } else {
         console.log('Contraseña actualizada')
         res.status(200).json({ message: 'Contraseña actualizada con éxito' });
       }
@@ -634,7 +634,7 @@ const nuevaContrasena = async (req, res) => {
     console.error('Error al hashear la contraseña:', error);
     res.status(500).json({ error: 'Error al procesar la contraseña' });
   }
-  
+
 
 }
 

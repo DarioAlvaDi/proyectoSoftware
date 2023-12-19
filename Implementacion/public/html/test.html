@@ -15,6 +15,7 @@
         trazarRuta();
       };
       function trazarRuta() {
+        let ubi = JSON.parse(localStorage.getItem("ubi"));
         const urlParams = new URLSearchParams(window.location.search);
 
         const id = urlParams.get("id");
@@ -31,37 +32,45 @@
           })
           .then(function (myJson) {
             console.log(myJson);
-          });
-        var directionsService = new google.maps.DirectionsService();
-        var directionsRenderer = new google.maps.DirectionsRenderer();
-        var map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 10,
-          center: { lat: 37.7749, lng: -122.4194 } // Coordenadas de San Francisco, puedes cambiarlas
-        });
-        directionsRenderer.setMap(map);
-        var request = {
-          origin: { lat: 19.435638888889, lng: -99.141277777778 }, // Coordenadas de San Francisco
-          destination: { lat: 19.440694444444, lng: -99.204722222222 }, // Coordenadas de Los Angeles
-          travelMode: "DRIVING",
-          waypoints: [
-            {
-              location: { lat: 19.437980271929717, lng: -99.15459046378841 },
-              stopover: false
-            },
-            {
-              location: { lat: 19.427891576458027, lng: -99.16713010156829 },
-              stopover: false
+            var request = {
+              origin: ubi, // Coordenadas de San Francisco
+              destination: {
+                lat: parseFloat(myJson[myJson.length - 1].Latitud),
+                lng: parseFloat(myJson[myJson.length - 1].Longitud)
+              },
+              travelMode: "DRIVING",
+              waypoints: []
+            };
+            if (myJson.length >= 2) {
+              for (let i = 0; i < myJson.length - 1; i++) {
+                const element = {
+                  location: {
+                    lat: parseFloat(myJson[i].Latitud),
+                    lng: parseFloat(myJson[i].Longitud)
+                  },
+                  stopover: false
+                };
+                request.waypoints.push(element);
+              }
+              console.log(request);
             }
-          ]
-        };
 
-        directionsService.route(request, function (result, status) {
-          if (status === "OK") {
-            directionsRenderer.setDirections(result);
-          } else {
-            console.error("Error al trazar la ruta:", status);
-          }
-        });
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer();
+            var map = new google.maps.Map(document.getElementById("map"), {
+              zoom: 10,
+              center: { lat: 37.7749, lng: -122.4194 } // Coordenadas de San Francisco, puedes cambiarlas
+            });
+            directionsRenderer.setMap(map);
+
+            directionsService.route(request, function (result, status) {
+              if (status === "OK") {
+                directionsRenderer.setDirections(result);
+              } else {
+                console.error("Error al trazar la ruta:", status);
+              }
+            });
+          });
       }
     </script>
     <style>
