@@ -90,4 +90,6 @@ router.get('/calendario', turistasController.calendario);
 router.post('/cambiarFoto', upload.single('avatar'), turistasController.cambiarFoto);
 //Ruta para comparar Codigos
 router.post('/compararCodigos', turistasController.compararCodigos)
+//Ruta para agrregar datos de historial
+router.post('/agregarItinerario', turistasController.agregarItinerario);
 module.exports = router;

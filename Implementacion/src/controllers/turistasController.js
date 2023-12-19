@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '120manies',
   database: 'AD_SISTEMAS'
 });
 
@@ -927,6 +927,47 @@ const cambiarFoto = async (req, res) => {
 const calendario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/calendario.html'));
 }
+
+const agregarItinerario = async (req, res) => {
+  const turista = req.session.Id_Turista;
+  console.log(req.body)
+  // Si el nombre de usuario no existe, proceder con la inserción en la base de datos
+  const sql = `
+      INSERT INTO Itinerario  (
+        Id_Lugar,
+        Fecha_Itinerario,
+        Hora_Itinerario,
+        Latitud,
+        Longitud,
+        Id_Turista
+      ) VALUES (?, ?, ?, ?, ?, ?)
+    `;
+  const values = [
+    req.body.id,
+    req.body.fecha,
+    req.body.hora,
+    req.body.lat,
+    req.body.lng,
+    turista,
+  ];
+
+  const results = await new Promise((resolve, reject) => {
+    pool.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+
+  if (results.affectedRows > 0) {
+    console.log('Favorito registrado correctamente');
+  } else {
+    res.status(400).json({ error: 'No se pudo registrar en Favoritos' });
+  }
+}
+
 module.exports = {
   bienvenida,
   datos,
@@ -948,6 +989,7 @@ module.exports = {
   recuperar,
   historial,
   itinerario,
+  agregarItinerario,
   validar,
   eliminarHistorialCompleto,
   eliminarHistorialIndividual,

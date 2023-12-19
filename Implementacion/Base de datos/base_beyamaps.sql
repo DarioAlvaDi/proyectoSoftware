@@ -26,9 +26,11 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Itinerario(
 	Id_Itinerario INT AUTO_INCREMENT PRIMARY KEY,
-	Id_Lugar INT NOT NULL,
-	Fecha_Itinerario DATETIME NOT NULL,
-	Hora_Itinerario TIME NOT NULL,
+	Id_Lugar VARCHAR(50) NOT NULL,
+	Fecha_Itinerario VARCHAR(50) NOT NULL,
+	Hora_Itinerario VARCHAR(50) NOT NULL,
+    Latitud VARCHAR(50) NOT NULL,
+    Longitud VARCHAR(50) NOT NULL,
 	Id_Turista INT NOT NULL
 );
 ALTER TABLE Itinerario ADD FOREIGN KEY (Id_Turista) references Turista(Id_Turista) 
@@ -46,11 +48,9 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Lugar(
 	Id_Lugar INT AUTO_INCREMENT PRIMARY KEY,
-    Id_google VARCHAR(50),
+    Id_google VARCHAR(50) NOT NULL,
 	Nombre VARCHAR(50) NOT NULL
 );
-ALTER TABLE Itinerario ADD FOREIGN KEY (Id_Lugar) references Lugar(Id_Lugar) 
-ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Historial_busqueda(
 	Id_Historial INT AUTO_INCREMENT PRIMARY KEY,

@@ -48,7 +48,6 @@
         <script>
             document.getElementById('contraForm').addEventListener('submit', async function(event) {
     event.preventDefault(); 
-
     const pass = document.querySelector('input[name="pass"]').value;
 
     try {
@@ -59,9 +58,7 @@
             },
             body: JSON.stringify({ pass }),
         });
-
         const data = await response.json();
-
         if (response.ok) {
             Swal.fire({
                         icon: 'success',
