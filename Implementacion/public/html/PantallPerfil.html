@@ -1,142 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Perfil Usuario</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../styles/PantallaPerfilStyle.css" />
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navColor">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../styles/PantallaPerfilStyle.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navColor">
         <div class="container-fluid">
-          <div class="col-3 regresar">
-            <a href="/turistas/mapa"
-              ><img src="../imgs/imgPerfil/image 29.png" alt=""
-            /></a>
-          </div>
-          <div class="col-6 titulo">Perfil del Turista</div>
-          <div class="col-3 inicio">
-            <a href="/turistas/mapa"><img src="../imgs/imgPerfil/image 30.png" alt="" /></a>
-          </div>
+            <div class="col-3 regresar">
+                <a href="/turistas/mapa"><img src="../imgs/imgPerfil/image 29.png" alt=""/></a>
+            </div>
+            <div class="col-6 titulo">Perfil del Turista</div>
+            <div class="col-3 inicio">
+                <a href="/turistas/mapa"><img src="../imgs/imgPerfil/image 30.png" alt=""/></a>
+            </div>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-12 foto">
-          <img id="profile-image" src="../imgs/imgPerfil/Ellipse 3.png" alt="" />
+            <img id="profile-image" src="../imgs/imgPerfil/Ellipse 3.png" alt=""/>
         </div>
         <div class="col-12 center-items">
-          <label id="Nombreusuario">Usuario: </label>
+            <label id="Nombreusuario">Usuario: </label>
         </div>
         <div class="col-12 center-items">
-          <label id="Nombre">Nombre: </label>
+            <label id="Nombre">Nombre: </label>
         </div>
         <div class="col-12 center-items">
-          <label id="Correo">Correo: </label>
+            <label id="Correo">Correo: </label>
         </div>
         <div class="col-12 center-items">
-          <label id="Telefono">Teléfono: </label>
+            <label id="Telefono">Teléfono: </label>
         </div>
         <div class="botones">
-          <div class="col-12 center-items">
-            <input
-              type="button"
-              value="Actualizar datos"
-              id="actualizarBtn"
-              onclick="redireccionar('/turistas/validar')"
-            />
-          </div>
+            <div class="col-12 center-items">
+                <input type="button" value="Actualizar datos" id="actualizarBtn" onclick="redireccionar('/turistas/validar')"/>
+            </div>
         </div>
         <div class="botones">
-          <div class="col-12 center-items">
-            <input
-              type="button"
-              value="Historial de visitas"
-              id="historialBtn"
-              onclick="redireccionar('/turistas/historial')"
-            />
-          </div>
+            <div class="col-12 center-items">
+                <input type="button" value="Historial de visitas" id="historialBtn"
+                       onclick="redireccionar('/turistas/historial')"/>
+            </div>
         </div>
         <div class="boton2">
-          <div class="col-12 center-items">
-            <input
-              type="button"
-              value="Log out"
-              id="logoutBtn"
-              onclick="confirmarLogout()"
-            />
-          </div>
+            <div class="col-12 center-items">
+                <input type="button" value="Log out" id="logoutBtn" data-bs-toggle="modal" data-bs-target="#confirmModal"/>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      function redireccionar(url) {
+<!-- Modal -->
+<!-- <div class="modal" tabindex="-1" role="dialog" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar cierre de sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de cerrar sesión?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="cerrarSesion()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!--Ventana de eliminación de cuenta-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-body text-center">
+              <p>¿Está seguro de cerrar sesión?</p>
+              <div class="center-items">
+                  <button type="button" class="btn btn-primary iconConfirm2" id="confirmcerrarsesion" onclick="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>Cerrar sesión</button><!--aqui se guarda la info-->
+              </div>
+              <div class="center-items">
+                  <button type="button" class="btn btn-secondary iconCancel" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                    </svg>Cancelar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script>
+    function redireccionar(url) {
         window.location.href = url;
-      }
+    }
 
-      function confirmarLogout() {
-        var confirmacion = confirm("¿Estás seguro de cerrar sesión?");
-        if (confirmacion) {
-          fetch("/turistas/logout", { method: "GET" })
+    function cerrarSesion() {
+        fetch("/turistas/logout", { method: "GET" })
             .then((response) => {
-              if (response.redirected) {
-                // Redirigir a la página de inicio después de cerrar sesión
-                window.location.href = response.url;
-              }
+              if(response.redirected){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sesion cerrada exitosamente',
+                    }).then(() => {
+                        window.location.href = '/turistas'; 
+                    });
+                }
             })
             .catch((error) => console.error("Error al cerrar sesión:", error));
-        } else {
-          // Si el usuario cancela, no hace nada o puedes mostrar un mensaje
-          // alert("Operación cancelada");
-        }
-      }
-    </script>
-    <script>
-      // Solicitud al servidor para obtener la información del turista
-      fetch("/turistas/informacionPerfil")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error en la solicitud fetch: " + response.status);
-          }
-          return response.json();
-        })
-        .then((turistaInfo) => {
-          // Actualizar el contenido de los contenedores con la información del turista
-          document.getElementById("Nombreusuario").innerHTML += turistaInfo.Usuario;
-          document.getElementById("Nombre").innerHTML +=
-            turistaInfo.Nombre +
-            " " +
-            turistaInfo.A_Paterno +
-            " " +
-            turistaInfo.A_Materno;
-          document.getElementById("Correo").innerHTML += turistaInfo.Correo;
-          document.getElementById("Telefono").innerHTML += turistaInfo.Telefono;
-          console.log('Camino:' + turistaInfo.Foto)
+        // Ocultar el modal después de cerrar sesión
+        var modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        modal.hide();
+    }
+</script>
 
-          // Actualizar la imagen de perfil con la nueva ruta
-          const profileImage = document.getElementById("profile-image");
-          if (turistaInfo.Foto) {
-            profileImage.src = turistaInfo.Foto.replace(/\\/g, '/')
-          }
-        })
-        .catch((error) =>
-          console.error("Error al obtener información del turista:", error)
-        );
-    </script>
-  </body>
+</body>
 </html>
