@@ -838,7 +838,12 @@ const cambiarFoto = async (req, res) => {
 const calendario = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/calendario.html'));
 }
-
+const diasItinerario = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/IU26 Pantalla Dias Itinerario.html'));
+}
+const itinerarioDia = async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/html/itinerarioDia.html'));
+}
 const agregarItinerario = async (req, res) => {
   const turista = req.session.Id_Turista;
   console.log(req.body)
@@ -900,7 +905,9 @@ module.exports = {
   recuperar,
   historial,
   itinerario,
+  diasItinerario,
   agregarItinerario,
+  itinerarioDia,
   validar,
   eliminarHistorialCompleto,
   eliminarHistorialIndividual,

@@ -88,4 +88,8 @@ router.get('/calendario', turistasController.calendario);
 router.post('/cambiarFoto', upload.single('avatar'), turistasController.cambiarFoto);
 //Ruta para agrregar datos de historial
 router.post('/agregarItinerario', turistasController.agregarItinerario);
+//Ruta para agrregar datos de historial
+router.get('/diasItinerario', turistasController.diasItinerario);
+//Ruta para agrregar datos de historial
+router.get('/itinerarioDia', turistasController.itinerarioDia);
 module.exports = router;
