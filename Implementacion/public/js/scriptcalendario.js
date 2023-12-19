@@ -200,7 +200,7 @@ function validar(num_dia, hora, fecha) {
     var request = {
         placeId: id,
         language: "es",
-        fields: ["opening_hours", "geometry"]
+        fields: ["opening_hours", "geometry", "place_id"]
     };
 
     service.getDetails(request, callback);
@@ -232,17 +232,17 @@ function validar(num_dia, hora, fecha) {
 
         if (diaEncontrado) {
             if (horaEncontrada) {
-                let item = [{ id: id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), fecha: fecha }]
+                let data = { id: place.place_id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), fecha: fecha }
                 console.log("Hora y dia disponible")
-                if (localStorage.getItem("itinerario") === null) {
-                    localStorage.setItem("itinerario", JSON.stringify(item));
-                }
-                else {
-                    var itinerario = JSON.parse(localStorage.getItem("itinerario"));
-                    console.log(itinerario);
-                    itinerario.push(item[0]);
-                    localStorage.setItem("itinerario", JSON.stringify(itinerario));
-                }
+                fetch('/turistas/agregarItinerario',
+                    {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }
+                )
             } else {
                 console.log("La hora no esta disponible para ese día ")
             }
