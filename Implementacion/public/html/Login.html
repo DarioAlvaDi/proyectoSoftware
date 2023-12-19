@@ -69,7 +69,15 @@
                     }).then(() => {
                         window.location.href='/turistas/mapa'
                     });
-        } else {
+        }else if(data.message == 'Cuenta no verificada'){
+            Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    }).then(() => {
+                        window.location.href='/turistas/enviarCorreo'
+                    });
+        } 
+        else {
             Swal.fire({
                         icon: 'error',
                         title: data.message,
