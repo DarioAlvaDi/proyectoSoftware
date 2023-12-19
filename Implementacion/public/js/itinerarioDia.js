@@ -4,53 +4,37 @@ function recargar(elemento){
     if(elemento.length === 0){
         contenido.innerHTML='';
         contenido.innerHTML =
-            `<div class="tab-container">
-                <div class="tab-content">
-                    <div class="container d-flex justify-content-center align-items-center">
-                        <div class="col-12 historial-container">
-                            <div class="tab-shadow">
-                                <div class="historial-empty">    
-                                    <p>Itinerario se encuentra vacío</p>
-                                </div>
-                            </div> 
-                        </div>
+            `
+            <div class="tab-container">
+            <div
+              class="tab-content d-flex justify-content-center align-items-center"
+            >
+              <div
+                class="container d-flex justify-content-center align-items-center"
+              >
+                <div class="col-12 favoritos-container">
+                  <div class="tab-shadow">
+                    <div class="favoritos-empty">
+                      <p style="margin-left: 20px">
+                        Itinerario vacío
+                      </p>
                     </div>
-                </div> 
-            </div>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
             <div style="height: 10rem"></div>
         <footer class="fixed-bottom navColor">
             <!--Opciones de agregar y borrar-->
             <div class="container-fluid" style="margin-bottom: 1.5rem">
-                <div class="row">
+                <div class="text-center">
                     <button type="button" class="btn ">
                         <img src="../imgs/itinerarioDia/Agregar.png" alt="agregar">
                     </button>
+                    
                 </div>
 
-                <div class="row m-2">
-
-                    <div class="col text-center">
-                        <button type="button" class="btn btn-danger rounded-4" data-bs-toggle="modal" data-bs-target="#modalItinerarios" id="eliminarbtn">
-                            <div class="row">
-                            <div>
-                                <img src="../imgs/itinerarioDia/BoteBasura.png" alt="eliminar">
-                    </div>
-                    </div>
-                            <div class="row">
-                                Eliminar Itinerario
-                            </div>
-                        </button>
-                    </div>
-
-
-                    <div class="col text-center">
-                        <button type="button" onclick="mostrarMensaje()" class="btn btn-dark rounded-4">
-                            Generar ruta
-                        </button>
-
-                    </div>
-
-                </div>
             </div>
             
         </footer> 
@@ -68,24 +52,19 @@ function recargar(elemento){
         <footer class="fixed-bottom navColor">
             <!--Opciones de agregar y borrar-->
             <div class="container-fluid" style="margin-bottom: 1.5rem">
-                <div class="row">
+                <div class="text-center">
                     <button type="button" class="btn ">
                         <img src="../imgs/itinerarioDia/Agregar.png" alt="agregar">
                     </button>
+                    
                 </div>
 
-                <div class="row m-2">
+                <div class="row">
 
                     <div class="col text-center">
                         <button type="button" class="btn btn-danger rounded-4" data-bs-toggle="modal" data-bs-target="#modalItinerarios" id="eliminarbtn">
-                            <div class="row">
-                            <div>
                                 <img src="../imgs/itinerarioDia/BoteBasura.png" alt="eliminar">
-                    </div>
-                    </div>
-                            <div class="row">
                                 Eliminar Itinerario
-                            </div>
                         </button>
                     </div>
 
@@ -150,7 +129,6 @@ function sort(elementos){
 function mostrarBotonVisita(indice, num, elemento){
     document.getElementById(`lugar${indice}`).innerHTML = '';
     elemento.splice(indice, 1);
-    num--;
 
     if(num == 0){
         elemento.length = 0;
@@ -189,7 +167,7 @@ function imprimir(elemento){
 
 
         nuevoElemento.innerHTML = `
-        <div class="container border border-3 border-dark p-3 m-3 mx-auto navColor" style="border-radius: 24px">
+        <div class="container border border-3 border-dark p-3 m-3 mx-auto sitioColor" style="border-radius: 24px">
                 <div class="row">
                     <div class="col text-center">
                         <img src="../imgs/itinerarioDia/FotoLugar.png" alt="busqueda">
@@ -300,6 +278,7 @@ function imprimir(elemento){
         });
 
         visitaSelect.addEventListener('change', function() {
+            num--;
             mostrarBotonVisita(i, num, elemento);
         });
     }
