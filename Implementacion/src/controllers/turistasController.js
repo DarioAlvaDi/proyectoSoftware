@@ -787,6 +787,37 @@ const validar = async (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/html/validarcontraseña.html'));
 }
 
+const eliminarItinerarioIndividual = async (req, res, next) => {
+  const turistaId = req.session.Id_Turista;
+  const Fecha = req.body.id;
+  console.log(turistaId);
+  console.log(Fecha)
+  const sql = `
+    DELETE FROM Itinerario
+    WHERE Id_Turista = ? 
+    AND Fecha_Itinerario = ?
+  `;
+
+  try {
+    await new Promise((resolve, reject) => {
+      pool.query(sql, [turistaId, Fecha], (error, results) => {
+        if (error) {
+          console.error('Error al eliminar registro del itinerario:', error);
+          reject(error);
+        } else {
+          console.log('Registro del itinerario eliminado con éxito');
+          resolve(results);
+        }
+      });
+    });
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error en la conexión con la base de datos:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+};
+
 //Controlador para eliminar Favoritos
 const eliminarfavoritos = async (req, res) => {
   const turistaId = req.session.Id_Turista;
@@ -1291,6 +1322,7 @@ module.exports = {
   validar,
   eliminarHistorialCompleto,
   eliminarHistorialIndividual,
+  eliminarItinerarioIndividual,
   consultarHistorial,
   agregarHistorial,
   eliminarfavoritos,

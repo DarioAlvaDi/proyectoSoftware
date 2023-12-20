@@ -70,6 +70,8 @@ router.post('/agregarHistorial', turistasController.agregarHistorial);
 router.get('/consultarHistorial', turistasController.consultarHistorial);
 //Ruta para eliminar registros de historial
 router.post('/eliminarHistorialIndividual', turistasController.eliminarHistorialIndividual);
+//Ruta para eliminar registros de Itinerario
+router.post('/eliminarItinerarioIndividual', turistasController.eliminarItinerarioIndividual);
 //Ruta eliminar un historial completo
 router.get('/eliminarHistorialCompleto', turistasController.eliminarHistorialCompleto);
 //Ruta para validar contraseña
