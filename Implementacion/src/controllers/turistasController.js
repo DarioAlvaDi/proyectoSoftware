@@ -475,16 +475,47 @@ const enviarCodigoContraseña = async (req, res) => {
           pass: 'fums ozuy asmz lfst'
         }
       };
-
+      
       const mensaje = {
         from: 'ledesma.ramirez.jose.emiliano@gmail.com',
         to: correo,
         subject: 'Reestablecimiento de contraseña',
-        text: 'El código de verificación es ' + codigo + '.'
+        html: `
+          <html>
+            <head>
+              <style>
+                body {
+                  font-family: 'Arial', sans-serif;
+                  background-color: #f4f4f4;
+                  color: #333;
+                }
+                .container {
+                  max-width: 600px;
+                  margin: 0 auto;
+                  padding: 20px;
+                  background-color: #fff;
+                  border-radius: 5px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                h1 {
+                  color: #007bff;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Reestablecimiento de Contraseña</h1>
+                <p>Estimado usuario,</p>
+                <p>El código de verificación es <strong>${codigo}</strong>.</p>
+                <p>Por favor, utilice este código para restablecer su contraseña.</p>
+              </div>
+            </body>
+          </html>
+        `
       };
-
+      
       const transport = nodemailer.createTransport(config);
-
+      
       try {
         const info = await transport.sendMail(mensaje);
         console.log("Correo enviado:", info);
@@ -497,7 +528,7 @@ const enviarCodigoContraseña = async (req, res) => {
   });
 };
 
-//Controlador pantalla validar correo
+//Controlador pantalla recuperación de contraseña
 const enviarCorreo2 = async (req, res) => {
   const turistaId = req.session.Id_Turista;
 
@@ -544,16 +575,48 @@ const enviarCorreo2 = async (req, res) => {
           pass: 'fums ozuy asmz lfst'
         }
       };
-
+      
       const mensaje = {
         from: 'ledesma.ramirez.jose.emiliano@gmail.com',
         to: correo,
-        subject: 'Verificación de Correo',
-        text: 'El código de verificación es ' + codigo + '.'
+        subject: 'Recuperación de Contraseña',
+        html: `
+          <html>
+            <head>
+              <style>
+                body {
+                  font-family: 'Arial', sans-serif;
+                  background-color: #f4f4f4;
+                  color: #333;
+                }
+                .container {
+                  max-width: 600px;
+                  margin: 0 auto;
+                  padding: 20px;
+                  background-color: #fff;
+                  border-radius: 5px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                h1 {
+                  color: #007bff;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Recuperación de Contraseña</h1>
+                <p>Estimado usuario,</p>
+                <p>Recibió este correo porque solicitó la recuperación de contraseña.</p>
+                <p>El código de verificación es <strong>${codigo}</strong>.</p>
+                <p>Utilice este código para restablecer su contraseña.</p>
+              </div>
+            </body>
+          </html>
+        `
       };
-
+      
       const transport = nodemailer.createTransport(config);
-
+      
       try {
         const info = await transport.sendMail(mensaje);
         console.log("Correo enviado:", info);
@@ -562,6 +625,7 @@ const enviarCorreo2 = async (req, res) => {
         console.error("Error al enviar el correo:", error);
         res.status(500).json({ error: 'Error al enviar el correo' });
       }
+      
     });
   });
 };
@@ -940,16 +1004,47 @@ const enviarCorreo = async (req, res) => {
           pass: 'fums ozuy asmz lfst'
         }
       };
-
+      
       const mensaje = {
         from: 'ledesma.ramirez.jose.emiliano@gmail.com',
         to: correo,
         subject: 'Verificación de Correo',
-        text: 'El código de verificación es ' + codigo + '.'
+        html: `
+          <html>
+            <head>
+              <style>
+                body {
+                  font-family: 'Arial', sans-serif;
+                  background-color: #f4f4f4;
+                  color: #333;
+                }
+                .container {
+                  max-width: 600px;
+                  margin: 0 auto;
+                  padding: 20px;
+                  background-color: #fff;
+                  border-radius: 5px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                h1 {
+                  color: #007bff;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Verificación de Correo</h1>
+                <p>Estimado usuario,</p>
+                <p>El código de verificación es <strong>${codigo}</strong>.</p>
+                <p>Utilice este código para verificar su cuenta.</p>
+              </div>
+            </body>
+          </html>
+        `
       };
-
+      
       const transport = nodemailer.createTransport(config);
-
+      
       try {
         const info = await transport.sendMail(mensaje);
         console.log("Correo enviado:", info);
@@ -958,6 +1053,7 @@ const enviarCorreo = async (req, res) => {
         console.error("Error al enviar el correo:", error);
         res.status(500).json({ error: 'Error al enviar el correo' });
       }
+      
     });
   });
 };

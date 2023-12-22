@@ -132,18 +132,35 @@ window.onload = function () {
 
 }
 function eliminar(id) {
-    let data = { id: id }
-    fetch('/turistas/eliminarFavoritosIndividual',
-        {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¡Está acción no se podrá revertir!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, quiero borrarlo!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let data = { id: id }
+            fetch('/turistas/eliminarFavoritosIndividual',
+            {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }
-        }
-    ).then(function () {
-        mostrarFavoritos();
-    });
+        ).then(function () {
+            mostrarFavoritos();
+        });
+            Swal.fire({
+                title: "Borrado!",
+                text: "Tu elemento de favoritos ha sido eliminado.",
+                icon: "success"
+            });
+            }
+        });
 }
 
 function eliminarTodo() {

@@ -74,18 +74,35 @@ function mostrarItinerario() {
 }
 
 function borrarUnico(fecha) {
-    let data = {id:fecha}
-    fetch('/turistas/eliminarItinerarioIndividual',
-        {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¡Está acción no se podrá revertir!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, quiero borrarlo!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let data = {id:fecha}
+            fetch('/turistas/eliminarItinerarioIndividual',
+                {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            ).then(function () {
+                mostrarItinerario();
+            });
+            Swal.fire({
+                title: "Borrado!",
+                text: "Tu itinerario ha sido eliminado.",
+                icon: "success"
+            });
             }
-        }
-    ).then(function () {
-        mostrarItinerario();
-    });
+        });
 }
 
 const deleteBtn = document.getElementById('deleteBtn');

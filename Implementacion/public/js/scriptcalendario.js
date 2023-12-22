@@ -163,102 +163,118 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmHourButton = document.getElementById("confirmHourButton");
 
     confirmHourButton.addEventListener("click", function () {
-        const selectedHour = document.getElementById("selectedHour").value;
-        let numDia = ((new Date(currentYear + "-" + (parseInt(currentMonth) + 1) + "-" + selectedDay).getDay()) + 1) % 7;
+        let selectedHour = document.getElementById("selectedHour").value;
+        let num_dia = ((new Date(currentYear + "-" + (parseInt(currentMonth) + 1) + "-" + selectedDay).getDay()) + 1) % 7;
         let fecha = currentYear + "-" + (parseInt(currentMonth) + 1) + "-" + selectedDay;
-        validar(numDia, parseInt(selectedHour), fecha)
-        const selectedDateInfo = `Día seleccionado: ${selectedDay} de ${getMonthName(currentMonth)} de ${currentYear}`;
-        const selectedHourInfo = `Hora seleccionada: ${selectedHour}`;
+        hora = parseInt(selectedHour)
+        const urlParams = new URLSearchParams(window.location.search);
 
-        showInfoModal(selectedDateInfo, selectedHourInfo);
-
-        // Cerrar el modal de selección de hora
-        $("#hourModal").modal("hide");
-
-        // Señalar la fecha en el calendario con color rojo
-        const selectedDayElement = document.querySelector(`.day[data-day="${selectedDay}"]`);
-        selectedDayElement.classList.add("selected-day");
-    });
-
-    function showInfoModal(dateInfo, hourInfo) {
-        const infoModal = document.getElementById("infoModal");
-        const infoModalBody = document.getElementById("infoModalBody");
-
-        infoModalBody.innerHTML = `${dateInfo}<br>${hourInfo}`;
-        $(infoModal).modal("show");
-    }
-
-});
-
-function validar(num_dia, hora, fecha) {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const id = urlParams.get('id')
-    service = new google.maps.places.PlacesService(
-        document.createElement("div")
-    );
-    var request = {
-        placeId: id,
-        language: "es",
-        fields: ["opening_hours", "geometry", "place_id"]
-    };
-
-    service.getDetails(request, callback);
-
-    function callback(place, status) {
-        console.log(place);
-        let diaEncontrado = false;
-        let horaEncontrada = false;
-        if (place.opening_hours == undefined) {
-            diaEncontrado == true;
-            horaEncontrada == true;
-        } else {
-            let periodos = place.opening_hours.periods
-            periodos.forEach(item => {
-                let dia = item.close.day
-                let abre = item.open.time
-                let cierra = item.close.time
-
-                if (num_dia == dia) {
-                    diaEncontrado = true;
-                    if (abre > cierra) {
-                        if (hora >= cierra && hora <= abre) {
-                            horaEncontrada = true;
-                        }
-                    } else {
-                        if (hora >= abre && hora <= cierra) {
-                            horaEncontrada = true;
-                        }
-                    }
-
-                }
-            });
-        }
-
-
-        if (diaEncontrado) {
-            if (horaEncontrada) {
-                let data = { id: place.place_id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), fecha: fecha }
-                console.log("Hora y dia disponible")
-                fetch('/turistas/agregarItinerario',
-                    {
-                        method: "POST",
-                        body: JSON.stringify(data),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    }
-                )
+        const id = urlParams.get('id')
+        service = new google.maps.places.PlacesService(
+            document.createElement("div")
+        );
+        var request = {
+            placeId: id,
+            language: "es",
+            fields: ["opening_hours", "geometry", "place_id"]
+        };
+    
+        service.getDetails(request, callback);
+    
+        function callback(place, status) {
+            console.log(place);
+            console.log(place.opening_hours)
+            let diaEncontrado = false;
+            let horaEncontrada = false;
+            if (place.opening_hours === undefined) {              
+                diaEncontrado = true;
+                horaEncontrada = true;
             } else {
-                console.log("La hora no esta disponible para ese día ")
+                let periodos = place.opening_hours.periods
+                periodos.forEach(item => {
+                    let dia, abre, cierra;
+                    if(item.open.time == "0000"){
+                        diaEncontrado = true;
+                        horaEncontrada = true;
+                    }else{
+                        dia = item.close.day
+                        abre = item.open.time
+                        cierra = item.close.time
+                    }
+
+    
+                    if (num_dia == dia) {
+                        diaEncontrado = true;
+                        if (abre > cierra) {
+                            if (hora >= cierra && hora <= abre) {
+                                horaEncontrada = true;
+                            }
+                        } else {
+                            if (hora >= abre && hora <= cierra) {
+                                horaEncontrada = true;
+                            }
+                        }
+    
+                    }
+                });
             }
-        } else {
-            console.log("Ese dia no esta disponible")
+    
+    
+            if (diaEncontrado) {
+                if (horaEncontrada) {
+                    let data = { id: place.place_id, dia: num_dia, hora: convertTime(hora), lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), fecha: fecha }
+                    console.log("Hora y dia disponible")
+                    fetch('/turistas/agregarItinerario',
+                        {
+                            method: "POST",
+                            body: JSON.stringify(data),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        }
+                    )
+                    const selectedDateInfo = `Día seleccionado: ${selectedDay} de ${getMonthName(currentMonth)} de ${currentYear}
+                    `;
+                    selectedHour= `${selectedHour.slice(0, 2)}:${selectedHour.slice(2)}`
+                    const selectedHourInfo = `Hora seleccionada: ${selectedHour}`;
+        
+                    // showInfoModal(selectedDateInfo, selectedHourInfo);
+        
+                    // Cerrar el modal de selección de hora
+                    $("#hourModal").modal("hide");
+        
+                    //Señalar la fecha en el calendario con color rojo
+                    const selectedDayElement = document.querySelector(`.day[data-day="${selectedDay}"]`);
+                    selectedDayElement.classList.add("selected-day");
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Lugar agregado a itinerario',
+                        html: `${selectedDateInfo}<br>${selectedHourInfo}`,
+                    }).then(() => {
+                        window.location.href='/turistas/diasItinerario'
+                    });
+                } else {
+                    console.log("La hora no esta disponible para ese día ")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'El lugar está cerrado a la hora seleccionada',
+                    })
+                }
+            } else {
+                console.log("Ese dia no esta disponible")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'El lugar está cerrado el día seleccionado',
+                })
+            }
+    
+    
         }
-
-
-    }
-}
+        
+        
+    });
+});
 
 function convertTime(num) {
     // Ensure the number is treated as a four-digit string

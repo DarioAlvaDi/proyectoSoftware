@@ -133,16 +133,31 @@ window.onload = function () {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
 
             document.getElementById("nombre").innerHTML = place.name;
-            document.getElementById("calificacion").innerHTML = place.rating + ' ☆';
+            if(place.rating != undefined){
+                document.getElementById("calificacion").innerHTML = place.rating + ' ☆';
+            }else{
+                document.getElementById("calificacion").innerHTML = 'No hay calificación disponible ';
+            }
             document.getElementById("nombre").innerHTML = place.name;
             if (place.opening_hours != undefined) {
-                document.getElementById("lunes").innerHTML = place.opening_hours.weekday_text[0];
-                document.getElementById("martes").innerHTML = place.opening_hours.weekday_text[1];
-                document.getElementById("miercoles").innerHTML = place.opening_hours.weekday_text[2];
-                document.getElementById("jueves").innerHTML = place.opening_hours.weekday_text[3];
-                document.getElementById("viernes").innerHTML = place.opening_hours.weekday_text[4];
-                document.getElementById("sabado").innerHTML = place.opening_hours.weekday_text[5];
-                document.getElementById("domingo").innerHTML = place.opening_hours.weekday_text[6];
+                // document.getElementById("lunes").innerHTML = place.opening_hours.weekday_text[0];
+                // document.getElementById("martes").innerHTML = place.opening_hours.weekday_text[1];
+                // document.getElementById("miercoles").innerHTML = place.opening_hours.weekday_text[2];
+                // document.getElementById("jueves").innerHTML = place.opening_hours.weekday_text[3];
+                // document.getElementById("viernes").innerHTML = place.opening_hours.weekday_text[4];
+                // document.getElementById("sabado").innerHTML = place.opening_hours.weekday_text[5];
+                // document.getElementById("domingo").innerHTML = place.opening_hours.weekday_text[6];
+                var ulElement= document.getElementById("Horarios");
+                for (var i = 0; i < place.opening_hours.weekday_text.length; i++) {
+                    var liElement = document.createElement("li");
+                    liElement.textContent = place.opening_hours.weekday_text[i];
+                    ulElement.appendChild(liElement);
+                }
+            }else{
+                var ulElement= document.getElementById("Horarios");
+                var liElement = document.createElement("li");
+                liElement.textContent = 'No hay horarios disponibles';
+                ulElement.appendChild(liElement);
             }
             if (place.photos != undefined) {
                 for (let i = 0; i < place.photos.length; i++) {

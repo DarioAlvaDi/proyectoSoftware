@@ -104,18 +104,35 @@ function mostrarHistorial() {
     });
 }
 function eliminar(id) {
-    let data = { id: id }
-    fetch('/turistas/eliminarHistorialIndividual',
-        {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¡Está acción no se podrá revertir!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, quiero borrarlo!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let data = { id: id }
+            fetch('/turistas/eliminarHistorialIndividual',
+                {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            ).then(function () {
+                mostrarHistorial();
+            });
+            Swal.fire({
+                title: "Borrado!",
+                text: "Tu elemento del historial ha sido eliminado.",
+                icon: "success"
+            });
             }
-        }
-    ).then(function () {
-        mostrarHistorial();
-    });
+        });
 }
 
 function eliminarTodo() {
