@@ -9,9 +9,9 @@ const nodemailer = require("nodemailer");
 // Configuración de la conexión a MySQL con piscina de conexiones
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: 'localhost',
+  host: '108.59.85.77',
   user: 'root',
-  password: 'root',
+  password: 'bellakitos',
   database: 'AD_SISTEMAS'
 });
 
@@ -226,7 +226,7 @@ const logout = async (req, res) => {
       res.status(500).send('Error interno del servidor');
     } else {
       console.log('Sesion destruida')
-      res.status(200).json({ message:'Sesión cerrada éxitosamente'});
+      res.status(200).json({ message: 'Sesión cerrada éxitosamente' });
     }
   });
 }
@@ -475,7 +475,7 @@ const enviarCodigoContraseña = async (req, res) => {
           pass: 'fums ozuy asmz lfst'
         }
       };
-      
+
       const mensaje = {
         from: 'ledesma.ramirez.jose.emiliano@gmail.com',
         to: correo,
@@ -513,9 +513,9 @@ const enviarCodigoContraseña = async (req, res) => {
           </html>
         `
       };
-      
+
       const transport = nodemailer.createTransport(config);
-      
+
       try {
         const info = await transport.sendMail(mensaje);
         console.log("Correo enviado:", info);
@@ -575,7 +575,7 @@ const enviarCorreo2 = async (req, res) => {
           pass: 'fums ozuy asmz lfst'
         }
       };
-      
+
       const mensaje = {
         from: 'ledesma.ramirez.jose.emiliano@gmail.com',
         to: correo,
@@ -614,9 +614,9 @@ const enviarCorreo2 = async (req, res) => {
           </html>
         `
       };
-      
+
       const transport = nodemailer.createTransport(config);
-      
+
       try {
         const info = await transport.sendMail(mensaje);
         console.log("Correo enviado:", info);
@@ -625,7 +625,7 @@ const enviarCorreo2 = async (req, res) => {
         console.error("Error al enviar el correo:", error);
         res.status(500).json({ error: 'Error al enviar el correo' });
       }
-      
+
     });
   });
 };
@@ -1004,7 +1004,7 @@ const enviarCorreo = async (req, res) => {
           pass: 'fums ozuy asmz lfst'
         }
       };
-      
+
       const mensaje = {
         from: 'ledesma.ramirez.jose.emiliano@gmail.com',
         to: correo,
@@ -1042,9 +1042,9 @@ const enviarCorreo = async (req, res) => {
           </html>
         `
       };
-      
+
       const transport = nodemailer.createTransport(config);
-      
+
       try {
         const info = await transport.sendMail(mensaje);
         console.log("Correo enviado:", info);
@@ -1053,7 +1053,7 @@ const enviarCorreo = async (req, res) => {
         console.error("Error al enviar el correo:", error);
         res.status(500).json({ error: 'Error al enviar el correo' });
       }
-      
+
     });
   });
 };
